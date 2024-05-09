@@ -1,0 +1,27 @@
+.readOnlyScreen {
+    display: flex;
+    justify-content: space-evenly;
+}
+.detailsForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    label {
+        padding-right: 10px;
+    }
+}
+
+form > div  {
+    margin: 20px;
+}
+
+form :nth-child(4) {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

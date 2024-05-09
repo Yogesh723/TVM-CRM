@@ -1,0 +1,264 @@
+{
+  "edit": [
+    {
+      "id": "0",
+      "formFields": {
+        "General": [
+          {
+            "label": "Team Name",
+            "name": "TeamName",
+            "type": "String"
+          },
+          {
+            "label": "Lead Name",
+            "name": "LeadName",
+            "type": "String"
+          },
+          {
+            "label": "Team Size",
+            "name": "TeamSize",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    {
+      "id": "20bc",
+      "formFields": {
+        "General": [
+          {
+            "label": "Team Name",
+            "name": "TeamName",
+            "value": "Team A",
+            "type": "String"
+          },
+          {
+            "label": "Lead Name",
+            "name": "LeadName",
+            "value": "Thobica",
+            "type": "String"
+          },
+          {
+            "label": "Team Size",
+            "name": "TeamSize",
+            "value": "5",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fd35",
+      "formFields": {
+        "General": [
+          {
+            "label": "Team Name",
+            "name": "TeamName",
+            "value": "Team F",
+            "type": "String"
+          },
+          {
+            "label": "Lead Name",
+            "name": "LeadName",
+            "value": "Arun",
+            "type": "String"
+          },
+          {
+            "label": "Team Size",
+            "name": "TeamSize",
+            "value": "6",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    {
+      "id": "189c",
+      "formFields": {
+        "General": [
+          {
+            "label": "Team Name",
+            "name": "TeamName",
+            "value": "Team C",
+            "type": "String"
+          },
+          {
+            "label": "Lead Name",
+            "name": "LeadName",
+            "value": "Arun",
+            "type": "String"
+          },
+          {
+            "label": "Team Size",
+            "name": "TeamSize",
+            "value": "43",
+            "type": "Numeric"
+          }
+        ]
+      }
+    },
+    {
+      "id": "00d0",
+      "formFields": {
+        "General": [
+          {
+            "label": "Team Name",
+            "name": "TeamName",
+            "value": "678",
+            "type": "String"
+          },
+          {
+            "label": "Lead Name",
+            "name": "LeadName",
+            "value": "67890",
+            "type": "String"
+          },
+          {
+            "label": "Team Size",
+            "name": "TeamSize",
+            "value": "56789op",
+            "type": "Numeric"
+          }
+        ]
+      }
+    }
+  ],
+  "teamdetails": [
+    {
+      "id": "20bc",
+      "TeamName": "Team A",
+      "LeadName": "Thobica",
+      "TeamSize": "5"
+    },
+    {
+      "id": "fd35",
+      "TeamName": "Team F",
+      "LeadName": "Arun",
+      "TeamSize": "6"
+    },
+    {
+      "id": "189c",
+      "TeamName": "Team C",
+      "LeadName": "Arun",
+      "TeamSize": "43"
+    },
+    {
+      "id": "00d0",
+      "TeamName": "678",
+      "LeadName": "67890",
+      "TeamSize": "56789op"
+    }
+  ],
+  "assetdetails": [
+    {
+      "id": "1",
+      "profileName": "Manju",
+      "charger": "Dell",
+      "laptop": "Dell"
+    },
+    {
+      "id": "2",
+      "profileName": "Thobica",
+      "charger": "Asus",
+      "laptop": "Asus"
+    },
+    {
+      "id": "31ea",
+      "profileName": "Priya",
+      "laptop": "Dell",
+      "charger": "Dell"
+    },
+    {
+      "id": "7ecd",
+      "profileName": "Anitha",
+      "laptop": "Dell",
+      "charger": "dell"
+    }
+  ],
+  "projectdetails": [
+    {
+      "id": "ca0a",
+      "profile": "Rathi priya",
+      "voice": "Thobica",
+      "developer": "Yogesh",
+      "state": true,
+      "parent": "test",
+      "client": "don't know",
+      "mail": "@.com",
+      "password": "12345",
+      "manager": "df",
+      "contact": "234345678",
+      "joining": "2023-02-12T18:30:00.000Z",
+      "relieving": null
+    },
+    {
+      "id": "18b2",
+      "profile": "Rathi priya",
+      "voice": "Thobica",
+      "developer": "Yogesh",
+      "state": true,
+      "parent": "test",
+      "client": "Upshop",
+      "mail": "@.com",
+      "password": "12345",
+      "manager": "df",
+      "contact": "234345678",
+      "joining": "02/13/2023",
+      "relieving": null
+    },
+    {
+      "id": "dc7f",
+      "profile": "Rathi priya",
+      "voice": "Thobica",
+      "developer": "Yogesh",
+      "state": true,
+      "parent": "test",
+      "client": "Upshop",
+      "mail": "@.com",
+      "password": "12345",
+      "manager": "df",
+      "contact": "234345678",
+      "joining": "02/13/2023",
+      "relieving": null
+    },
+    {
+      "id": "0f18",
+      "profile": "Rathi priya",
+      "voice": "Thobica",
+      "developer": "Yogesh",
+      "state": true,
+      "parent": "test",
+      "client": "Upshop",
+      "mail": "@.com",
+      "password": "12345",
+      "manager": "df",
+      "contact": "234345678",
+      "joining": "02/13/2023",
+      "relieving": null
+    },
+    {
+      "id": "269d",
+      "profile": "Rathi priya",
+      "voice": "Thobica",
+      "developer": "Yogesh",
+      "state": true,
+      "parent": "test",
+      "client": "Upshop",
+      "mail": "@.com",
+      "password": "12345",
+      "manager": "df",
+      "contact": "234345678",
+      "joining": "02/13/2023",
+      "relieving": null
+    }
+  ],
+  "employeedetails": [
+    {
+      "id": "91c1",
+      "Employee": "test",
+      "JoiningDate": "2023-01-01T18:30:00.000Z",
+      "Experienceyear": "2",
+      "Specifications": "dummy"
+    }
+  ]
+}

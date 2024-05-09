@@ -1,0 +1,16 @@
+<div class="navBarDiv">
+    <nav class="navBar">
+        <ul id="id_topNavMenuItems" class="navbar-nav">
+            <li *ngFor="let menu of topNavMenu; index as i" id="id_topNavMenuItem_{{ menu.code }}"
+            class="nav-item">
+                <a id="id_topNavMenu_{{ menu.code }}" class="nav-link"
+                    routerLink="{{ menu.routerLink }}"
+                    [innerHTML]="menu.name">
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="container-fluid">
+    <router-outlet></router-outlet>
+</div>

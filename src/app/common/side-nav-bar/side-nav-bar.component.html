@@ -1,0 +1,18 @@
+<div id="sideNavBarDiv" class="mainSideNavBar">
+    <nav id="SubSideNav" class="sidenav">
+        <section id="SubSideNavContent" class="sidenav-content">
+          <section class="nav-group collapsible">
+            <ul id="SubSideNavItems" class="nav-list">
+              <li *ngFor="let item of subSideNav">
+                <a id="sideNavItem_{{item.section}}" class="nav-link" [ngClass]="{'required' : item?.mandatory}"
+                  (click)="setActiveTabAndGo(item)" [class.active]="selectedMenuItem === 'item.label' || selectedMenuItem == item.section">  
+                  <span class="subSideNav-icon-holder" [ngClass]="{'hasDataFalse' : item.hasData == false}" >          
+                    <i class="fa-solid fa-tick icon-green subSideNav-icon" *ngIf="item.hasData == true"></i>
+                  </span>
+                  {{item.label}}</a>
+              </li>
+            </ul>
+          </section>
+        </section>
+      </nav>
+</div>

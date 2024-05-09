@@ -1,0 +1,10 @@
+<app-table-generator
+  [_listInfo]="projectListInfo"
+  [listColumns]="projectColumns"
+  Pageheader="Project Details"
+  [listObservable]="listObservable"
+  (addNew)="addNew($event)"
+  (goToDetails)="rowClicked($event)"
+  (deleteclicked)="delete($event)"
+>
+</app-table-generator>

@@ -1,0 +1,51 @@
+<ng-container *ngIf="activeId == 0; else existingRecord">
+    <div class="mainDiv">
+        <!-- <div *ngIf="activeId == 0" class="mb-4 mt-4" style="display: flex;justify-content: center;">Create Team</div>
+        <div class="card" style="width: fit-content;display: flex;flex-direction: row;">
+            <div class="card-body" style="display: flex;align-items: center;flex-direction: column;">
+                <form [formGroup]="appForm" (ngSubmit)="saveForm(appForm.value)">
+                    <div>
+                        <label [innerHTML]="'Team Name'" style="color: #333;padding-right: 8px;"></label>
+                        <input [formControlName]="'TeamName'" style="width: auto" autocomplete="off"/></div>
+                    <div>
+                        <label [innerHTML]="'Lead Name'" style="color: #333;padding-right: 11px;"></label>
+                        <input [formControlName]="'LeadName'" style="width: auto" autocomplete="off"/></div>
+                    <div>
+                        <label [innerHTML]="'Team Size'" style="color: #333;padding-right: 21px;"></label>
+                        <input [formControlName]="'TeamSize'" style="width: auto" autocomplete="off"/>
+                    </div>
+                    <div>
+                        <button type="submit">Save</button>
+                        <button type="button" (click)="clear()">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+        <app-form-generator
+            [Pageheader]="'Create Team'"
+            (saveFormClicked)="saveForm($event)"
+            [formObject]="formObject"
+        >
+        </app-form-generator>
+    </div>
+</ng-container>
+
+<ng-template #existingRecord>
+    <div class="material-container">
+        <h3 class="materialHeader mt-0 mb-3" style="margin-left: 36px;" id="materialDetails_header"><b id="materialDetails_header_b">{{teamName + ' Details'}}</b></h3>
+        <div class="content-container row">
+          <div class="col-md-2 widthMax">
+            <app-side-nav-bar 
+                [selectedMenuItem]="selectedMenuItem"
+                [subSideNav]="subSideNav"
+                (goToPath)="sideNavClick($event)"
+            ></app-side-nav-bar>
+          </div>
+          <div class="col-md-10 content-area" style="overflow-x: auto">
+            <!-- views injected -->
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+    </div>
+</ng-template>
+  

@@ -1,0 +1,151 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+.sidenav .nav-group .nav-list .nav-link {
+    /* line-height: .666667rem; */
+    padding: 10px;
+    font-size: 10pt; //dropped 2pt
+}
+
+.sidenav .nav-group .nav-list .nav-link:hover,
+.sidenav .sidenav-content > .nav-link:hover {
+  background: #eee;
+}
+
+.sidenav .sidenav-content .nav-link {
+    display: inline-block;
+    border-radius: 0.125rem 0 0 0.125rem;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+}
+
+.sidenav .nav-group .nav-list {
+    list-style: none;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+.sidenav {
+    line-height: 1rem;
+    // max-width: 13rem;
+    min-width: 9rem;
+    width: 100%;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    min-height: 81vh;
+    height: 100%;
+}
+
+.active {
+    color: orange !important;
+}
+
+#table-gen-tbody .virtual-viewport {
+    height: 900px;
+}
+
+#orgUnitsTableR .table-expand-row td:first-child + td {
+    padding-left: calc(39px + (32px * 1));
+}
+
+.switch {
+    position: relative;
+    display: inline-block !important;
+    width: 53px;
+    height: 26px;
+    background-color: #bfbdbda1;
+    border-radius: 14px;
+    margin-right: 136px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: '';
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked+.slider {
+  background-color: #4b2b7b;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #4b2b7b;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.slider.disabled {
+  pointer-events: none;
+  background-color: #aaa;
+
+  &:before {
+    background-color: #ddd;
+  }
+}
+
+.p-calendar .p-datepicker {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.p-datepicker td > span {
+  padding: 10px;
+}
+
+.p-datepicker-prev, .p-datepicker-next {
+  border: none;
+  background-color: white;
+}
+
+.p-datepicker-month, .p-datepicker-year {
+  border: none;
+  background-color: white;
+}
+
+.p-datepicker-header {
+  margin: 5px;
+}
+
+.p-datepicker-group {
+  margin: 12px;
+}

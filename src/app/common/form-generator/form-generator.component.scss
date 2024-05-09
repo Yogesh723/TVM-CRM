@@ -1,0 +1,36 @@
+.readOnlyScreen {
+    display: flex;
+    justify-content: space-evenly;
+}
+.detailsForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    label {
+        padding-right: 10px;
+    }
+}
+
+form {
+    margin: 20px;
+}
+
+.formBtn {
+    display: flex;
+    justify-content: space-around;
+}
+
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkBoxStyles {
+    margin-top: 15px;
+}

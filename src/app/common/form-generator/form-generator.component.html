@@ -1,0 +1,91 @@
+<div class="mainDiv">
+    <div class="mb-4 mt-4" style="display: flex;justify-content: center;">{{Pageheader}}</div>
+    <div class="card" style="width: fit-content;display: flex;flex-direction: row;">
+        <div class="card-body" style="display: flex;align-items: center;flex-direction: column;">
+            <form [formGroup]="appForm" (ngSubmit)="saveForm(appForm.value)">
+                <ng-container *ngFor="let section of _formObject">
+                    <div [hidden]="activeSection != section.Name" class="fadeIn">
+                        <ng-container *ngFor="let row of section.FormFields; index as i">
+                            <div *ngIf="!row.hidden" class="inputDiv m-3">
+                                <label [innerHTML]="row.label" style="color: #333;padding-right: 8px;"></label>
+                                <ng-container *ngIf="row.type == 'Toggle';else dateInput">
+                                    <span>
+                                        <label
+                                          id="{{ row?.label }}"
+                                          class="switch"
+                                        >
+                                          <input
+                                            id="{{ row?.label }}"
+                                            class="checkBoxStyles"
+                                            type="checkbox"
+                                            [formControlName]="row.name"
+                                            [(ngModel)]="row.value"
+                                          />
+                                          <span
+                                            id="{{ row?.value }}"
+                                            class="slider round"
+                                          ></span>
+                                        </label>
+                                    </span>
+                                </ng-container>
+                                <ng-template #dateInput>
+                                    <ng-container *ngIf="row.type == 'Date';else normalInput">
+                                        <span
+                                            *ngIf="row.readonly === false"
+                                        >
+                                            <p-calendar
+                                                id="{{ i }}_{{
+                                                    row.name
+                                                }}"
+                                                [formControlName]="row.name"
+                                                #Date
+                                                [inputStyle]="inputStyle"
+                                                [maxDate]="row?.maxDate"
+                                                [minDate]="row?.minDate"
+                                                name="{{ row.name }}"
+                                                [locale]="enUS"
+                                                [dateFormat]="enUS.dateFormat"
+                                                [style]="{
+                                                    position: 'relative',
+                                                    overflow: 'visible',
+                                                    'z-index': '999'
+                                                }"
+                                            >
+                                            </p-calendar>
+                                        </span>
+                                        <label 
+                                            *ngIf="row.readonly === true"
+                                            [innerHTML]="row.value"
+                                        ></label>
+                                    </ng-container>
+                                    <ng-template #normalInput>
+                                        <input [formControlName]="row.name" style="width: auto" autocomplete="off"/>
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <div class="formBtn">
+                    <button 
+                        type="submit"
+                        class="btn btn-success"
+                        title="Save changes"
+                        [disabled]="!appForm.valid || !appForm.dirty"
+                    >
+                        Save
+                    </button>
+                    <button 
+                        type="button"
+                        (click)="clear()"
+                        class="btn btn-warning"
+                        title="Clear changes"
+                        [disabled]="!appForm.dirty"
+                    >
+                        Clear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
