@@ -9,8 +9,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./employees-details.component.scss']
 })
 export class EmployeesDetailsComponent {
-  projectColumns: any = []
-  projectListInfo: any = [];
+  employeeColumns: any = []
+  employeeListInfo: any = [];
   listObservable: any;
 
   constructor(
@@ -22,7 +22,7 @@ export class EmployeesDetailsComponent {
 
   ngOnInit(): void {
     this.getAssets();
-    this.projectColumns = [
+    this.employeeColumns = [
       {
         "name": "Employee",
         "label": "Employee Name",
@@ -51,8 +51,8 @@ export class EmployeesDetailsComponent {
   }
   getAssets() {
     this.teamService.getEmployeeDetails().subscribe((result: any) => {
-      this.projectListInfo = result;
-      this.listObservable = new BehaviorSubject(this.projectListInfo);
+      this.employeeListInfo = result;
+      this.listObservable = new BehaviorSubject(this.employeeListInfo);
     });
   }
 
@@ -64,7 +64,7 @@ export class EmployeesDetailsComponent {
   rowClicked(id: any) {
     this.addNew(id);
   }
- 
+
   delete(id: any) {
     this.teamService.deleteemployee(id).subscribe((res: any) => {
       this.getAssets();

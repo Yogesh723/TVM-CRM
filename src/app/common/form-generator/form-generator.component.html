@@ -29,7 +29,7 @@
                                     </span>
                                 </ng-container>
                                 <ng-template #dateInput>
-                                    <ng-container *ngIf="row.type == 'Date';else normalInput">
+                                    <ng-container *ngIf="row.type == 'Date';else numberInput">
                                         <span
                                             *ngIf="row.readonly === false"
                                         >
@@ -44,7 +44,6 @@
                                                 [minDate]="row?.minDate"
                                                 name="{{ row.name }}"
                                                 [locale]="enUS"
-                                                [dateFormat]="enUS.dateFormat"
                                                 [style]="{
                                                     position: 'relative',
                                                     overflow: 'visible',
@@ -53,13 +52,33 @@
                                             >
                                             </p-calendar>
                                         </span>
-                                        <label 
+                                        <label
                                             *ngIf="row.readonly === true"
                                             [innerHTML]="row.value"
                                         ></label>
                                     </ng-container>
-                                    <ng-template #normalInput>
-                                        <input [formControlName]="row.name" style="width: auto" autocomplete="off"/>
+                                    <ng-template #numberInput>
+                                      <ng-container *ngIf="row.type == 'number';else normalInput">
+                                        <input
+                                          type="number"
+                                          [formControlName]="row.name"
+                                          style="width: auto"
+                                          autocomplete="off"
+                                        />
+                                      </ng-container>
+                                      <ng-template #emailInput>
+                                        <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else normalInput">
+                                            <input
+                                              type="email"
+                                              [formControlName]="row.name"
+                                              style="width: auto"
+                                              autocomplete="off"
+                                            />
+                                        </ng-container>
+                                    </ng-template>
+                                      <ng-template #normalInput>
+                                          <input [formControlName]="row.name" style="width: auto" autocomplete="off"/>
+                                      </ng-template>
                                     </ng-template>
                                 </ng-template>
                             </div>
@@ -67,7 +86,7 @@
                     </div>
                 </ng-container>
                 <div class="formBtn">
-                    <button 
+                    <button
                         type="submit"
                         class="btn btn-success"
                         title="Save changes"
@@ -75,7 +94,7 @@
                     >
                         Save
                     </button>
-                    <button 
+                    <button
                         type="button"
                         (click)="clear()"
                         class="btn btn-warning"

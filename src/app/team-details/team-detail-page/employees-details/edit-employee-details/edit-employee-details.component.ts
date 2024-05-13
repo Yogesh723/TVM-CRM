@@ -19,12 +19,6 @@ export class EditEmployeeDetailsComponent {
         type: "String"
       },
       {
-        "name": "JoiningDate",
-        "label": "Date of Joining",
-        type: "Date",
-        readonly: false
-      },
-      {
         "name": "Experienceyear",
         "label": "Year of Experience",
         type: "String"
@@ -32,6 +26,42 @@ export class EditEmployeeDetailsComponent {
       {
         "name": "Specifications",
         "label": "Specifications",
+        type: "String"
+      },
+      {
+        "name": "Qualifications",
+        "label": "Qualifications",
+        type: "String"
+      },
+      {
+        "name": "Emergency contacts",
+        "label": "Emergency contacts",
+        type: "number"
+      },
+      {
+        "name": "Job information",
+        "label": "Job information",
+        type: "String"
+      },
+      {
+        "name": "Contact number",
+        "label": "Contact number",
+        type: "number"
+      },
+      {
+        "name": "Email address",
+        "label": "Email address",
+        type: "email"
+      },
+      {
+        "name": "JoiningDate",
+        "label": "Date of Joining",
+        type: "Date",
+        readonly: false
+      },
+      {
+        "name": "Home address",
+        "label": "Home address",
         type: "String"
       },
     ]
