@@ -4,7 +4,7 @@
         <h3 id="itemHeading" class="d-inline" *ngIf="showHeader">{{Pageheader}}</h3>
         <button
           id="addBtn"
-          class="btn btn-success"
+          class="btn btn-success add-create"
           style="margin-top: -8px;float: right;"
           type="submit"
           (click)="createNew(0)"
@@ -40,7 +40,7 @@
             class="col-2"
             style="text-align: center"
           >
-            <app-card-table-view-controller 
+            <app-card-table-view-controller
               [isCardView]="isCardView"
               (cardView)="cardView($event)"
             ></app-card-table-view-controller>
@@ -53,7 +53,7 @@
                     <table id="listTableHdr" class="table table-responsive">
                         <thead>
                             <tr>
-                                <th 
+                                <th
                                     *ngFor="let col of listColumns; index as j"
                                     id="col{{ col.name }}"
                                     [style.width.%]="col.widthPct"
@@ -83,7 +83,7 @@
                               </ng-container>
                               <ng-container>
                                 <td [style.width.%]="10">
-                                  <button class="btn btn-danger" (click)="deleteRow(info
+                                  <button class="btn btn-danger aligedelete" (click)="deleteRow(info
                                   .id)">Delete</button>
                                 </td>
                               </ng-container>
@@ -117,7 +117,7 @@
                         </div>
                       </div>
                     </div>
-    
+
                     <div
                       class="card-body"
                       style="cursor: pointer"

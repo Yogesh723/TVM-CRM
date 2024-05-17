@@ -1,33 +1,35 @@
-/* styles.css (or your component-specific CSS file) */
 
-/* Table */
 #listTableHdr {
-  width: 100%; /* Ensure the table spans the full width */
+  width: 100%;
 }
 
-/* Table header */
 #listTableHdr th {
-  /* Add styling for table header cells */
-  padding: 8px; /* Add padding for better spacing */
-  text-align: left; /* Align text to the left */
-  font-weight: bold; /* Apply bold font weight */
-  background-color: #f2f2f2; /* Add background color */
-  border-bottom: 1px solid #ddd; /* Add bottom border */
+  padding: 8px;
+  text-align: left;
+  font-weight: bold;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Table rows */
 #listTableHdr td {
-  /* Add styling for table data cells */
-  padding: 8px; /* Add padding for better spacing */
-  border-bottom: 1px solid #ddd; /* Add bottom border */
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Alternate row background color */
 #listTableHdr tbody tr:nth-child(even) {
-  background-color: #f2f2f2; /* Apply alternate background color */
+  background-color: #f2f2f2;
 }
 
-/* Responsive table */
+
 .table-responsive {
-  overflow-x: auto; /* Add horizontal scroll for small screens */
+  overflow-x: auto;
+}
+ .aligedelete{
+  cursor: pointer;
+    position: relative;
+    right: 5rem;
+}
+.add-create{
+  position: relative;
+    right: 5rem;
 }
