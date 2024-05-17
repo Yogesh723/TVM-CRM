@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamDetailServiceService } from '../team-detail-service.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { CommunicationService } from 'src/app/common/communication.service';
 
 @Component({
   selector: 'app-team-list',
@@ -15,6 +16,7 @@ export class TeamListComponent implements OnInit {
   listObservable: any;
 
   constructor(
+    private communicationService: CommunicationService,
     private detailService: TeamDetailServiceService,
     private route: Router
   ) {}
@@ -44,7 +46,7 @@ export class TeamListComponent implements OnInit {
   }
 
   getTeamdetails() {
-    this.detailService.getTeamDetails().subscribe((result) => {
+    this.detailService.getTeamDetails().subscribe((result: any) => {
       this.listInfo = result;
       this.listObservable = new BehaviorSubject(this.listInfo);
     });
@@ -52,5 +54,6 @@ export class TeamListComponent implements OnInit {
 
   add(id: any) {
     this.route.navigateByUrl('tvm/team/teamdetail/'+id);
+    this.communicationService.goBackClick(false);
   }
 }
