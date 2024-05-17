@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TeamDetailServiceService } from '../../team-detail-service.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { CommunicationService } from 'src/app/common/communication.service';
 
 @Component({
   selector: 'app-employees-details',
@@ -14,6 +15,7 @@ export class EmployeesDetailsComponent {
   listObservable: any;
 
   constructor(
+    private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
     private route: Router
   ) {
@@ -59,6 +61,7 @@ export class EmployeesDetailsComponent {
   addNew(id: any) {
     let path = this.route.routerState.snapshot.url;
     this.route.navigateByUrl(path+'/'+id);
+    this.communicationService.goBackClick(false);
   }
 
   rowClicked(id: any) {

@@ -86,4 +86,8 @@ export class FormGeneratorComponent implements OnInit {
   clear() {
     this.appForm.reset();
   }
+
+  processFile(imageInput: any) {
+
+  }
 }

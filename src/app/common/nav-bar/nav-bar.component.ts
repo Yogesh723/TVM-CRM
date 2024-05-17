@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NavigationServiceService } from '../services/navigation-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,4 +8,14 @@ import { Component, Input } from '@angular/core';
 })
 export class NavBarComponent {
   @Input() topNavMenu: any = [];
+
+  constructor(
+    private navService: NavigationServiceService
+  ) {
+
+  }
+
+  goBack(event: any) {
+    this.navService.back();
+  }
 }

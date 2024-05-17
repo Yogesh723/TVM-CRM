@@ -176,5 +176,32 @@
     }
   ],
   "projectdetails": [],
-  "employeedetails": []
+  "employeedetails": [
+    {
+      "id": "dd8c",
+      "Employee": "Yogesh",
+      "Experienceyear": "1",
+      "Specifications": "Angular",
+      "Qualifications": "Software Engineer",
+      "Emergency contacts": 7904106664,
+      "Job information": "Angular Dev",
+      "Contact number": 7368372822,
+      "Email address": "yogesh@gmail.com",
+      "JoiningDate": "2023-05-24T18:30:00.000Z",
+      "Home address": "Ariyalur"
+    },
+    {
+      "id": "12c1",
+      "Employee": "Naveen",
+      "Experienceyear": "2",
+      "Specifications": "Angular",
+      "Qualifications": "Software Engineer",
+      "Emergency contacts": 7463893639,
+      "Job information": "Angular Developer",
+      "Contact number": 847654567,
+      "Email address": "naveen@gmail.com",
+      "JoiningDate": "2023-12-25T18:30:00.000Z",
+      "Home address": "Tiruvannamalai"
+    }
+  ]
 }

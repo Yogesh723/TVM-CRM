@@ -108,12 +108,22 @@
                     >
                       <div class="row" id="tbl-row-{{ i }}">
                         <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                          <p
-                            ellipsisTooltip
-                            class="card-title"
-                            id="tbl-header-{{ i }}"
-                            [innerHTML]="info[listColumns[0].name]"
-                          ></p>
+                          <div class="row">
+                            <div class="col-6">
+                              <label
+                                style="font-weight:bold;"
+                                [innerHTML]="listColumns[0].label"
+                              ></label>
+                            </div>
+                            <div class="col-4">
+                              <p
+                                ellipsisTooltip
+                                class="card-title"
+                                id="tbl-header-{{ i }}"
+                                [innerHTML]="info[listColumns[0].name]"
+                              ></p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -124,12 +134,22 @@
                     >
                       <ng-container *ngFor="let col of listColumns; index as j">
                         <div *ngIf="j != 0">
-                          <p
-                            *ngIf="col?.fieldType !== 'number'"
-                            class="card-text"
-                            id="col{{ col.name }}{{ j }}{{ i }}"
-                            [innerHTML]="info[col.name]"
-                          ></p>
+                          <div class="row">
+                            <div class="col-6">
+                              <label
+                                style="font-weight:bold;"
+                                [innerHTML]="col.label"
+                              ></label>
+                            </div>
+                            <div class="col-4">
+                              <p
+                                *ngIf="col?.fieldType !== 'number'"
+                                class="card-text"
+                                id="col{{ col.name }}{{ j }}{{ i }}"
+                                [innerHTML]="info[col.name]"
+                              ></p>
+                            </div>
+                          </div>
                         </div>
                       </ng-container>
                     </div>

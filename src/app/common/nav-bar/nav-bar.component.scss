@@ -1,7 +1,11 @@
-.navbar-nav .nav-item a {
-  padding: 10px;
-  color: #fff;
-  margin-left: 20px;
+.navbar-nav  {
+  display: flex;
+  flex-direction: row;
+  .nav-item a {
+    padding: 10px;
+    color: #fff;
+    margin-left: 20px;
+  }
 }
 
 .navbar-nav .nav-item a:hover {
@@ -10,5 +14,12 @@
 }
 
 .navBarDiv {
+  display: flex;
+  justify-content: space-between;
   background-color: #4b2b7b;
+}
+
+.back-button {
+    margin-right: 12px;
+    font-size: x-large;
 }

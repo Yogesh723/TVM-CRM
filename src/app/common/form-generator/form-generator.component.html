@@ -58,7 +58,7 @@
                                         ></label>
                                     </ng-container>
                                     <ng-template #numberInput>
-                                      <ng-container *ngIf="row.type == 'number';else normalInput">
+                                      <ng-container *ngIf="row.type == 'number';else emailInput">
                                         <input
                                           type="number"
                                           [formControlName]="row.name"
@@ -67,7 +67,7 @@
                                         />
                                       </ng-container>
                                       <ng-template #emailInput>
-                                        <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else normalInput">
+                                        <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else imageInput">
                                             <input
                                               type="email"
                                               [formControlName]="row.name"
@@ -75,9 +75,20 @@
                                               autocomplete="off"
                                             />
                                         </ng-container>
-                                    </ng-template>
+                                        <ng-template #imageInput>
+                                            <ng-container *ngIf="row.type === 'image'; else normalInput">
+                                                <input 
+                                                    style="width: 187px;" 
+                                                    type="file" id="file" 
+                                                    accept="image/*" 
+                                                    (change)="processFile(imageInput)"
+                                                    required
+                                                >
+                                            </ng-container>
+                                        </ng-template>
+                                      </ng-template>
                                       <ng-template #normalInput>
-                                          <input [formControlName]="row.name" style="width: auto" autocomplete="off"/>
+                                        <input [formControlName]="row.name" style="width: auto" autocomplete="off"/>
                                       </ng-template>
                                     </ng-template>
                                 </ng-template>
