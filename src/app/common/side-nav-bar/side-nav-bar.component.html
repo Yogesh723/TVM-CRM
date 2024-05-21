@@ -3,10 +3,13 @@
         <section id="SubSideNavContent" class="sidenav-content">
           <section class="nav-group collapsible">
             <ul id="SubSideNavItems" class="nav-list">
+              <i class="fas fa-info-circle details" aria-hidden="false" aria-label="Details icon"></i>
+              <i class="fas fa-briefcase projectiocn" aria-hidden="false" aria-label="Project icon"></i>
+              <i class="fas fa-user employeedetails" aria-hidden="false" aria-label="Employee icon"></i>
               <li *ngFor="let item of subSideNav">
                 <a id="sideNavItem_{{item.section}}" class="nav-link" [ngClass]="{'required' : item?.mandatory}"
-                  (click)="setActiveTabAndGo(item)" [class.active]="selectedMenuItem === 'item.label' || selectedMenuItem == item.section">  
-                  <span class="subSideNav-icon-holder" [ngClass]="{'hasDataFalse' : item.hasData == false}" >          
+                  (click)="setActiveTabAndGo(item)" [class.active]="selectedMenuItem === 'item.label' || selectedMenuItem == item.section">
+                  <span class="subSideNav-icon-holder" [ngClass]="{'hasDataFalse' : item.hasData == false}" >
                     <i class="fa-solid fa-tick icon-green subSideNav-icon" *ngIf="item.hasData == true"></i>
                   </span>
                   {{item.label}}</a>
@@ -15,4 +18,7 @@
           </section>
         </section>
       </nav>
-</div>
+
+    </div>
+
+
