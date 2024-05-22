@@ -175,7 +175,23 @@
       "charger": "dell"
     }
   ],
-  "projectdetails": [],
+  "projectdetails": [
+    {
+      "id": "55ac",
+      "profile": "Yogesh",
+      "voice": "Yogesh",
+      "developer": "Yogesh",
+      "state": true,
+      "parent": "Google",
+      "client": "Google",
+      "mail": "yogi@google.com",
+      "password": "123455678",
+      "manager": "Sundar Pichai",
+      "contact": "9999999999",
+      "joining": "2023-05-14T18:30:00.000Z",
+      "relieving": null
+    }
+  ],
   "employeedetails": [
     {
       "id": "dd8c",
@@ -189,19 +205,6 @@
       "Email address": "yogesh@gmail.com",
       "JoiningDate": "2023-05-24T18:30:00.000Z",
       "Home address": "Ariyalur"
-    },
-    {
-      "id": "12c1",
-      "Employee": "Naveen",
-      "Experienceyear": "2",
-      "Specifications": "Angular",
-      "Qualifications": "Software Engineer",
-      "Emergency contacts": 7463893639,
-      "Job information": "Angular Developer",
-      "Contact number": 847654567,
-      "Email address": "naveen@gmail.com",
-      "JoiningDate": "2023-12-25T18:30:00.000Z",
-      "Home address": "Tiruvannamalai"
     }
   ]
 }

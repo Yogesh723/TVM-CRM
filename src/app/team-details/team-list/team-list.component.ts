@@ -14,6 +14,8 @@ export class TeamListComponent implements OnInit {
   listColumns: any = []
   listInfo: any = [];
   listObservable: any;
+  selectedMenuItem: string = 'Teams';
+  subSideNav: any = [];
 
   constructor(
     private communicationService: CommunicationService,
@@ -23,6 +25,13 @@ export class TeamListComponent implements OnInit {
 
   ngOnInit() {
     this.getTeamdetails();
+    this.subSideNav = [
+      {
+        section: 'Teams',
+        name: 'teams',
+        label: 'Team Details'
+      }
+    ];
     this.listColumns = [
       {
         "name": "TeamName",
@@ -55,5 +64,10 @@ export class TeamListComponent implements OnInit {
   add(id: any) {
     this.route.navigateByUrl('tvm/team/teamdetail/'+id);
     this.communicationService.goBackClick(false);
+  }
+
+  sideNavClick(event: any) {
+    this.selectedMenuItem = event.section;
+    this.route.navigateByUrl('');
   }
 }
