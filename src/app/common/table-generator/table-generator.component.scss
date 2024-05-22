@@ -35,6 +35,6 @@
     right: 5rem;
 }
 
-.deleteRow {
-  border: none;
+::ng-deep .deleteRow {
+  border: none !important;
 }
