@@ -1,143 +1,96 @@
 <div class="container-fluid" id="tableId">
-    <div id="itemsmainrow" class="row">
-      <div id="itemHeadingDiv" class="col-md-12 mt-2 mb-3 d-inline">
-        <h3 id="itemHeading" class="d-inline" *ngIf="showHeader">{{Pageheader}}</h3>
-        <button
-          id="addBtn"
-          class="btn btn-success add-create"
-          style="margin-top: -8px;float: right;"
-          type="submit"
-          (click)="createNew(0)"
-        >
-            Add
+  <div id="itemsmainrow" class="row">
+    <div id="itemHeadingDiv" class="col-md-12 mt-2 mb-3 d-inline">
+      <h3 id="itemHeading" class="d-inline" *ngIf="showHeader">{{Pageheader}}</h3>
+    </div>
+  </div>
+  <ng-container>
+    <!-- Search bar Start -->
+    <div class="row" #searchBar>
+      <div class="col-9 my-2">
+        <app-search *ngIf="_listInfo.length > 0" id="listSearch" #listSearch (search)="filterTable($event)"
+          (searchByItemSelected)="filterTable($event)" placeHolder="{{placeHolder}}"
+          [searchDropDownItems]="searchDropDownItems"></app-search>
+      </div>
+      <div class="col-1">
+        <button id="addBtn" class="btn btn-success add-create" type="submit" (click)="createNew(0)">
+          <i class="fa-solid fa-plus"></i>
+           Add
         </button>
       </div>
+      <div *ngIf="showCardView == true" class="col-1" style="text-align: center">
+        <app-card-table-view-controller *ngIf="_listInfo.length > 0" [isCardView]="isCardView"
+          (cardView)="cardView($event)"></app-card-table-view-controller>
+      </div>
     </div>
-    <ng-container>
-        <!-- Search bar Start -->
-        <div
-          class="row"
-          #searchBar
-          *ngIf="_listInfo.length > 0"
-        >
-          <div
-            [ngClass]="{
-              'col-12 my-2': showCardView != true,
-              'col-10 my-2': showCardView == true
-            }"
-          >
-            <app-search
-              id="listSearch"
-              #listSearch
-              (search)="filterTable($event)"
-              (searchByItemSelected)="filterTable($event)"
-              placeHolder="{{placeHolder}}"
-              [searchDropDownItems]="searchDropDownItems"
-            ></app-search>
-          </div>
-          <div
-            *ngIf="showCardView == true"
-            class="col-2"
-            style="text-align: center"
-          >
-            <app-card-table-view-controller
-              [isCardView]="isCardView"
-              (cardView)="cardView($event)"
-            ></app-card-table-view-controller>
-          </div>
-        </div>
-        <!-- Search bar End -->
-        <!-- list view -->
-            <ng-container *ngIf="!isCardView || showCardView != true">
-                <div *ngIf="_listInfo?.length != 0">
-                    <table id="listTableHdr" class="table table-responsive">
-                        <thead>
-                            <tr>
-                                <th [style.width.%]="10"
-                                    *ngFor="let col of listColumns; index as j"
-                                    id="col{{ col.name }}"
-                                    [style.width.%]="col.widthPct"
-                                >
-                                    {{ col.label }}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          <ng-container>
-                            <tr
-                              *ngFor="
-                                let info of listObservable | async;
-                                index as i;
-                              "
-                              id="listObservable{{ i }}"
-                              class="table-expand-row"
-                            >
-                              <ng-container *ngFor="let col of listColumns; index as j">
-                                <td
-                                  [style.width.%]="col.widthPct"
-                                  [innerHTML]="info[col.name]"
-                                  id="col{{ col.name }}{{ j }}{{ i }}"
-                                (click)="rowClick(info.id)"
-                                >
-                                </td>
-                              </ng-container>
-                              <ng-container>
-                                <td [style.width.%]="10" class="deleteRow">
-                                  <button class="btn btn-danger aligedelete" (click)="deleteRow(info
-                                  .id)">Delete</button>
-                                </td>
-                              </ng-container>
-                            </tr>
-                          </ng-container>
-                          <ng-content></ng-content>
-                        </tbody>
-                    </table>
-                </div>
+    <!-- Search bar End -->
+    <!-- list view -->
+    <ng-container *ngIf="!isCardView || showCardView != true">
+      <div *ngIf="_listInfo?.length !== 0; else noRecords">
+        <table id="listTableHdr" class="table table-responsive">
+          <thead>
+            <tr>
+              <th *ngFor="let col of listColumns; index as j" id="col{{ col.name }}" [style.width.%]="col.widthPct">
+                {{ col.label }}
+              </th>
+              <th style="width: 4%;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container>
+              <tr *ngFor="let info of listObservable | async; index as i" id="listObservable{{ i }}" class="table-expand-row">
+                <ng-container *ngFor="let col of listColumns; index as j">
+                  <td [innerHTML]="info[col.name]" id="col{{ col.name }}{{ j }}{{ i }}" (click)="rowClick(info.id)">
+                  </td>
+                </ng-container>
+                <ng-container>
+                  <td class="deleteRow">
+                    <button class="btn btn-danger aligedelete" (click)="deleteRow(info.id)">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </td>
+                </ng-container>
+              </tr>
             </ng-container>
-        <!-- list view -->
-        <!-- card view -->
-          <ng-container *ngIf="isCardView && showCardView == true">
-            <ng-container *ngIf="_listInfo?.length != 0">
-              <div class="row">
-                <div *ngFor="let info of listObservable | async; index as i" class="col-md-4 px-0">
-                  <div class="card" (click)="rowClick(info.id)"  style="margin: 10px;" id="tbl-card-{{ i }}">
-                    <div
-                      class="card-header"
-                      style="cursor: pointer"
-                      id="tbl-header-{{ i }}"
-                    >
-                      <div class="row" id="tbl-row-{{ i }}">
-                        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                          <p
-                            ellipsisTooltip
-                            class="card-title"
-                            id="tbl-header-{{ i }}"
-                            [innerHTML]="info[listColumns[0].name]"
-                          ></p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="card-body"
-                      style="cursor: pointer"
-                    >
-                      <ng-container *ngFor="let col of listColumns; index as j">
-                        <div *ngIf="j != 0">
-                          <p
-                            *ngIf="col?.fieldType !== 'number'"
-                            class="card-text"
-                            id="col{{ col.name }}{{ j }}{{ i }}"
-                            [innerHTML]="info[col.name]"
-                          ></p>
-                        </div>
-                      </ng-container>
-                    </div>
+            <ng-content></ng-content>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noRecords>
+        <div class="no-records-container">
+          <p>No rows to show</p>
+        </div>
+      </ng-template>
+    </ng-container>
+    <!-- list view -->
+    <!-- card view -->
+    <ng-container *ngIf="isCardView && showCardView == true">
+      <ng-container *ngIf="_listInfo?.length != 0">
+        <div class="row">
+          <div *ngFor="let info of listObservable | async; index as i" class="col-md-4 px-0">
+            <div class="card" (click)="rowClick(info.id)" style="margin: 10px;" id="tbl-card-{{ i }}">
+              <div class="card-header" style="cursor: pointer" id="tbl-header-{{ i }}">
+                <div class="row" id="tbl-row-{{ i }}">
+                  <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                    <p ellipsisTooltip class="card-title" id="tbl-header-{{ i }}"
+                      [innerHTML]="info[listColumns[0].name]"></p>
                   </div>
                 </div>
               </div>
-            </ng-container>
-          </ng-container>
-        <!-- card view -->
+
+              <div class="card-body" style="cursor: pointer">
+                <ng-container *ngFor="let col of listColumns; index as j">
+                  <div *ngIf="j != 0">
+                    <p *ngIf="col?.fieldType !== 'number'" class="card-text" id="col{{ col.name }}{{ j }}{{ i }}"
+                      [innerHTML]="info[col.name]"></p>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </ng-container>
+    <!-- card view -->
+  </ng-container>
 </div>

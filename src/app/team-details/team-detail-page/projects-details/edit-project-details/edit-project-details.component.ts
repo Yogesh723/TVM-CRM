@@ -66,7 +66,7 @@ export class EditProjectDetailsComponent implements OnInit {
       {
         name: "contact",
         label: "Contact Number",
-        type: "Number"
+        type: "number"
       },
       {
         name: "joining",

@@ -1,10 +1,20 @@
-<div class="container mt-3">
-    <app-table-generator
-        [_listInfo]="listInfo"
-        [listColumns]="listColumns"
-        [listObservable]="listObservable"
-        Pageheader="Team List"
-        (addNew)="add($event)"
-        (goToDetails)="add($event)"
-    ></app-table-generator>
+<h3 class="materialHeader mt-3 mb-3" id="materialDetails_header"><b id="materialDetails_header_b">{{'Team Details'}}</b></h3>
+<div class="content-container row">
+    <div class="col-md-2 widthMax">
+      <app-side-nav-bar 
+          [selectedMenuItem]="selectedMenuItem"
+          [subSideNav]="subSideNav"
+          (goToPath)="sideNavClick($event)"
+      ></app-side-nav-bar>
+    </div>
+    <div class="col-md-10 content-area" style="overflow-x: auto">
+        <app-table-generator
+            [_listInfo]="listInfo"
+            [listColumns]="listColumns"
+            [listObservable]="listObservable"
+            Pageheader="Team List"
+            (addNew)="add($event)"
+            (goToDetails)="add($event)"
+        ></app-table-generator>
+    </div>
 </div>

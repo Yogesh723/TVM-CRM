@@ -27,14 +27,17 @@
 }
  .aligedelete{
   cursor: pointer;
-    position: relative;
-    right: 5rem;
 }
 .add-create{
-  position: relative;
-    right: 5rem;
+    position: relative;
+    top: 16%;
+    left: 30%;
+    width: 90%;
 }
-
-::ng-deep .deleteRow {
-  border: none !important;
+.no-records-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 517px;
+  text-align: center;
 }
