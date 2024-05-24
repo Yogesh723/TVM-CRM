@@ -8,7 +8,7 @@ import { TeamDetailServiceService } from 'src/app/team-details/team-detail-servi
   templateUrl: './edit-employee-details.component.html',
   styleUrl: './edit-employee-details.component.scss'
 })
-export class EditEmployeeDetailsComponent {
+export class EditEmployeeDetailsComponent implements OnInit {
   Pageheader = 'Edit Employee Details';
   projectDetails: any;
   formObject = {
@@ -54,7 +54,7 @@ export class EditEmployeeDetailsComponent {
         type: "email"
       },
       {
-        "name": "JoiningDate",
+        "name": "joining",
         "label": "Date of Joining",
         type: "Date",
         readonly: false
@@ -108,10 +108,9 @@ export class EditEmployeeDetailsComponent {
   }
 
   save(formValue: any) {
-    this.teamService.saveEmployeeDetails(formValue).subscribe((result: any) => {
-      let url: string = this.route.routerState.snapshot.url;
-      let modifiedUrl: string = url.slice(0, url.lastIndexOf('/0'));
-      this.route.navigateByUrl(modifiedUrl);
+    this.teamService.saveEmployeeDetails(formValue, this.activeId).subscribe((result: any) => {
+      
+      this.route.navigateByUrl('/tvm/team/teamdetail/20bc/Employees');
     });
   }
 

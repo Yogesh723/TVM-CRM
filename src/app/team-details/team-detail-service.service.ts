@@ -48,8 +48,13 @@ export class TeamDetailServiceService {
     return this.http.get('http://localhost:3000/employeedetails');
   }
 
-  saveEmployeeDetails(requestBody: any) {
-    return this.http.post('http://localhost:3000/employeedetails', requestBody);
+  saveEmployeeDetails(requestBody: any, recordId: any) {
+    if (recordId == 0) {
+      return this.http.post('http://localhost:3000/employeedetails', requestBody);
+    } else {
+      // requestBody = { ...requestBody, ...{ id: recordId} };
+      return this.http.put('http://localhost:3000/employeedetails/'+recordId, requestBody);
+    }
   }
 
   deleteemployee(id: any) {
@@ -58,5 +63,13 @@ export class TeamDetailServiceService {
 
   deleteProjects(id: any) {
     return this.http.delete('http://localhost:3000/projectdetails/'+ id);
+  }
+
+  deleteAssets(id: any) {
+    return this.http.delete('http://localhost:3000/assetdetails/'+ id);
+  }
+
+  deleteTeamList(id: any) {
+    return this.http.delete('http://localhost:3000/teamdetails/'+ id);
   }
 }

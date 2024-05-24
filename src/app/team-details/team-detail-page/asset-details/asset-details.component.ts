@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { TeamDetailServiceService } from '../../team-detail-service.service';
+import { CommunicationService } from 'src/app/common/communication.service';
 
 @Component({
   selector: 'app-asset-details',
@@ -15,6 +16,7 @@ export class AssetDetailsComponent implements OnInit{
   listObservable: any;
 
   constructor(
+    private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
     private route: Router
   ) {
@@ -54,5 +56,14 @@ export class AssetDetailsComponent implements OnInit{
   addNew(id: any) {
     let path = this.route.routerState.snapshot.url;
     this.route.navigateByUrl(path+'/'+id);
+    this.communicationService.goBackClick(false);
+  }
+  rowClicked(id: any) {
+    this.addNew(id);
+  }
+ delete(id: any) {
+    this.teamService.deleteAssets(id).subscribe((res: any) => {
+      this.getAssets();
+    })
   }
 }

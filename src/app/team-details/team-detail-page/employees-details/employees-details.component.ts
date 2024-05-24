@@ -3,6 +3,7 @@ import { TeamDetailServiceService } from '../../team-detail-service.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { CommunicationService } from 'src/app/common/communication.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-employees-details',
@@ -32,7 +33,7 @@ export class EmployeesDetailsComponent {
         "hidden": false
       },
       {
-        "name": "JoiningDate",
+        "name": "joining",
         "label": "Date of Joining",
         "widthPct": 10,
         "hidden": false
@@ -54,8 +55,11 @@ export class EmployeesDetailsComponent {
   getAssets() {
     this.teamService.getEmployeeDetails().subscribe((result: any) => {
       this.employeeListInfo = result;
-      this.listObservable = new BehaviorSubject(this.employeeListInfo);
-    });
+      this.employeeListInfo.forEach((element: any) => {
+        element.state = element.state == true ? 'Yes' : 'No';
+        element.joining = new DatePipe('en-US').transform(element.joining, 'MM/dd/yyyy');
+      });
+      this.listObservable = new BehaviorSubject(this.employeeListInfo);    });
   }
 
   addNew(id: any) {
