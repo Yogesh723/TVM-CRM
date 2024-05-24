@@ -70,4 +70,10 @@ export class TeamListComponent implements OnInit {
     this.selectedMenuItem = event.section;
     this.route.navigateByUrl('');
   }
+
+ delete(id: any) {
+    this.detailService.deleteTeamList(id).subscribe((res: any) => {
+      this.getTeamdetails();
+    })
+  }
 }

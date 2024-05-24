@@ -16,6 +16,10 @@ export class FormGeneratorComponent implements OnInit {
   @Output() saveFormClicked = new EventEmitter();
   @Output() formGenerated = new EventEmitter();
   enUS: any;
+  mobileNumber: string = '';
+  isValidMobileNumber: boolean = false;
+  isButtonDisabled: boolean = true;
+  mobileNumberError: string = '';
 
   constructor(
     private formbuilder: FormBuilder,
@@ -59,16 +63,16 @@ export class FormGeneratorComponent implements OnInit {
   }
 
   generateReactiveForm(formObject: any) {
-    const formModel: any = [];
+    const formModel: any = {};
 
     if (formObject) {
       // outer sections
       formObject.forEach((section: any) => {
-        const sectionields = section.FormFields;
-        sectionields.forEach((element: any) => {
+        const sectionFields = section.FormFields;
+        sectionFields.forEach((element: any) => {
           if (element.value !== undefined) {
             formModel[element.name] = new FormControl(element.value);
-          } else if (element.value === undefined) {
+          } else {
             formModel[element.name] = new FormControl(null, Validators.required);
           }
         });
@@ -79,6 +83,7 @@ export class FormGeneratorComponent implements OnInit {
       }
     }
   }
+
   saveForm(event: any) {
     this.saveFormClicked.emit(this.appForm.value);
   }
@@ -88,6 +93,28 @@ export class FormGeneratorComponent implements OnInit {
   }
 
   processFile(imageInput: any) {
+    // Handle file input
+  }
 
+  validateMobileNumber(): void {
+    this.isValidMobileNumber = /^\d{10}$/.test(this.mobileNumber);
+    this.isButtonDisabled = !this.isValidMobileNumber;
+    const regex = /^[6-9]\d{9}$/;
+    if (this.mobileNumber && !regex.test(this.mobileNumber)) {
+      this.mobileNumberError = 'Enter valid Mobile number';
+    } else {
+      this.mobileNumberError = '';
+    }
+  }
+
+  blockNonNumericalInput(event: KeyboardEvent): void {
+    const charCode = event.charCode;
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
+
+  get email() {
+    return this.appForm.get('Email address');
   }
 }

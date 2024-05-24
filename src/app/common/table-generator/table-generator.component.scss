@@ -30,10 +30,22 @@
 }
 .add-create{
     position: relative;
-    top: 16%;
-    left: 30%;
-    width: 90%;
+    top: 9px;
+    left: 5px;
+    // width: 90px;
+    min-width: 90px;
+    max-width: 90px;
+    height: 40px;
 }
+// @media (max-width: 600px) {
+//   .add-create {
+//       top: 9px;
+//       left: 22px;
+//       width: 90px; 
+//       height: 40px; 
+//       font-size: 12px; 
+//   }
+// }
 .no-records-container {
   display: flex;
   justify-content: center;

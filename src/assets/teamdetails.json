@@ -131,42 +131,18 @@
       "TeamSize": "5"
     },
     {
-      "id": "fd35",
-      "TeamName": "Team F",
-      "LeadName": "Arun",
-      "TeamSize": "6"
-    },
-    {
       "id": "189c",
       "TeamName": "Team C",
       "LeadName": "Arun",
       "TeamSize": "43"
-    },
-    {
-      "id": "00d0",
-      "TeamName": "678",
-      "LeadName": "67890",
-      "TeamSize": "56789op"
     }
   ],
   "assetdetails": [
-    {
-      "id": "1",
-      "profileName": "Manju",
-      "charger": "Dell",
-      "laptop": "Dell"
-    },
     {
       "id": "2",
       "profileName": "Thobica",
       "charger": "Asus",
       "laptop": "Asus"
-    },
-    {
-      "id": "31ea",
-      "profileName": "Priya",
-      "laptop": "Dell",
-      "charger": "Dell"
     },
     {
       "id": "7ecd",
@@ -190,21 +166,62 @@
       "contact": "9999999999",
       "joining": "2023-05-14T18:30:00.000Z",
       "relieving": null
+    },
+    {
+      "id": "69be",
+      "profile": "Thobica",
+      "voice": "Thobica",
+      "developer": "Thobica",
+      "state": true,
+      "parent": "Thobica infotech",
+      "client": "Thobica infotech",
+      "mail": "thobi@thobica.com",
+      "password": "1234567890",
+      "manager": "No one",
+      "contact": "2333232323",
+      "joining": "2024-02-03T18:30:00.000Z",
+      "relieving": null
     }
   ],
   "employeedetails": [
     {
-      "id": "dd8c",
       "Employee": "Yogesh",
       "Experienceyear": "1",
       "Specifications": "Angular",
-      "Qualifications": "Software Engineer",
-      "Emergency contacts": 7904106664,
-      "Job information": "Angular Dev",
-      "Contact number": 7368372822,
-      "Email address": "yogesh@gmail.com",
-      "JoiningDate": "2023-05-24T18:30:00.000Z",
-      "Home address": "Ariyalur"
+      "Qualifications": "BE",
+      "Emergency contacts": "9897787998",
+      "Job information": "Developer",
+      "Contact number": "8898989888",
+      "Email address": "yogiyogesh@gmail.com",
+      "joining": "05/23/2022",
+      "Home address": "Ariyalur",
+      "id": "e848"
+    },
+    {
+      "id": "9639",
+      "Employee": "Hari",
+      "Experienceyear": "2",
+      "Specifications": "Angular",
+      "Qualifications": "BE",
+      "Emergency contacts": "7788989888",
+      "Job information": "Developer",
+      "Contact number": "7373368847",
+      "Email address": "harideveloper@gmail.com",
+      "joining": "2022-05-22T18:30:00.000Z",
+      "Home address": "Coimbatore"
+    },
+    {
+      "Employee": "Arun",
+      "Experienceyear": "1",
+      "Specifications": "Angular",
+      "Qualifications": "FE",
+      "Emergency contacts": "9897787998",
+      "Job information": "Developer",
+      "Contact number": "8898989888",
+      "Email address": "yogiyogesh@gmail.com",
+      "joining": "05/28/2023",
+      "Home address": "Pudhukottai",
+      "id": "3a45"
     }
   ]
 }
