@@ -149,6 +149,12 @@
       "profileName": "Anitha",
       "laptop": "Dell",
       "charger": "dell"
+    },
+    {
+      "id": "f88c",
+      "profileName": "RathiPriya",
+      "laptop": "Dell",
+      "charger": "Dell"
     }
   ],
   "projectdetails": [
@@ -220,7 +226,7 @@
       "Contact number": "8898989888",
       "Email address": "yogiyogesh@gmail.com",
       "joining": "05/28/2023",
-      "Home address": "Pudhukottai",
+      "Home address": "Pudukkottai",
       "id": "3a45"
     }
   ]

@@ -24,6 +24,7 @@ export class ProjectsDetailsComponent {
   }
 
   ngOnInit(): void {
+    this.communicationService.confirmActiveSection('Projects');
     this.getAssets();
     this.projectColumns = [
       {

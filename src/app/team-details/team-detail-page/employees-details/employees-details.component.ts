@@ -24,6 +24,7 @@ export class EmployeesDetailsComponent {
   }
 
   ngOnInit(): void {
+    this.communicationService.confirmActiveSection('Employees');
     this.getAssets();
     this.employeeColumns = [
       {

@@ -1,24 +1,25 @@
-<div id="sideNavBarDiv" class="mainSideNavBar">
-    <nav id="SubSideNav" class="sidenav">
-        <section id="SubSideNavContent" class="sidenav-content">
-          <section class="nav-group collapsible">
-            <ul id="SubSideNavItems" class="nav-list">
-              <i class="fas fa-info-circle details" aria-hidden="false" aria-label="Details icon"></i>
-              <i class="fas fa-briefcase projectiocn" aria-hidden="false" aria-label="Project icon"></i>
-              <i class="fas fa-user employeedetails" aria-hidden="false" aria-label="Employee icon"></i>
-              <li *ngFor="let item of subSideNav">
-                <a id="sideNavItem_{{item.section}}" class="nav-link" [ngClass]="{'required' : item?.mandatory}"
-                  (click)="setActiveTabAndGo(item)" [class.active]="selectedMenuItem === 'item.label' || selectedMenuItem == item.section">
-                  <span class="subSideNav-icon-holder" [ngClass]="{'hasDataFalse' : item.hasData == false}" >
-                    <i class="fa-solid fa-tick icon-green subSideNav-icon" *ngIf="item.hasData == true"></i>
-                  </span>
-                  {{item.label}}</a>
-              </li>
-            </ul>
-          </section>
-        </section>
-      </nav>
-
-    </div>
-
+<div class="sidebar" [ngClass]="sideNavStatus ? 'open' : 'close'">
+  <div class="toggle-icon" (click)="toggleSideNav()">
+    <i
+      class="fa-solid fa-angles"
+      [ngClass]="sideNavStatus ? 'fa-solid fa-angles-left' : 'fa-solid fa-angles-right'" 
+    ></i>
+  </div>
+  <ul class="nav-list">
+    <li *ngFor="let item of subSideNav">
+      <a id="sideNavItem_{{item.section}}" class="nav-link" [ngClass]="{'required' : item?.mandatory}"
+         (click)="setActiveTabAndGo(item)" [class.active]="selectedMenuItem === item.label || selectedMenuItem == item.section"
+         [routerLink]="item.link">
+        <span class="subSideNav-icon-holder" [ngClass]="{'hasDataFalse' : item.hasData == false}">
+          <i class="fa-solid fa-tick icon-green subSideNav-icon" *ngIf="item.hasData == true"></i>
+        </span>
+        <i [ngClass]="item.iconClass" [class.active]="selectedMenuItem === item.label || selectedMenuItem == item.section"
+        [routerLink]="item.link" aria-hidden="false" [attr.aria-label]="item.ariaLabel"></i>
+        <span class="links_name" [class.active]="selectedMenuItem === item.label || selectedMenuItem == item.section"
+        [routerLink]="item.link">{{item.label}}</span>
+        <span class="tooltip">{{item.tooltip}}</span>
+      </a>
+    </li>
+  </ul>
+  </div>
 

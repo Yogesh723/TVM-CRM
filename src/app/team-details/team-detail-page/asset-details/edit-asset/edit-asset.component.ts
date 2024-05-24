@@ -23,11 +23,11 @@ export class EditAssetComponent implements OnInit {
         name: "charger",
         label: "Charger"
       },
-      {
-        name: 'lapImg',
-        label: 'Laptop Image',
-        type: 'image'
-      }
+      // {
+      //   name: 'lapImg',
+      //   label: 'Laptop Image',
+      //   type: 'image'
+      // }
     ]
   };
 

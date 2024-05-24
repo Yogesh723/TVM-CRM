@@ -29,8 +29,17 @@ export class TeamListComponent implements OnInit {
       {
         section: 'Teams',
         name: 'teams',
-        label: 'Team Details'
-      }
+        label: 'Team Details',
+        iconClass: "fa-solid fa-users"
+
+      },
+      {
+        section: 'Jira',
+        name: 'jira',
+        label: 'Jira',
+        iconClass: "fa-brands fa-jira"
+
+      },
     ];
     this.listColumns = [
       {
@@ -62,13 +71,19 @@ export class TeamListComponent implements OnInit {
   }
 
   add(id: any) {
-    this.route.navigateByUrl('tvm/team/teamdetail/'+id);
+    let path;
+    if (id == 0) {
+      path = 'tvm/team/teamdetail/' + id;
+    } else {
+      path = 'tvm/team/teamdetail/' + id + '/Asset';
+    }
+    this.route.navigateByUrl(path);
     this.communicationService.goBackClick(false);
   }
 
   sideNavClick(event: any) {
-    this.selectedMenuItem = event.section;
-    this.route.navigateByUrl('');
+    // this.selectedMenuItem = event.section;
+    // this.route.navigateByUrl('');
   }
 
  delete(id: any) {

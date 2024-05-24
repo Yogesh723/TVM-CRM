@@ -24,6 +24,7 @@ export class AssetDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.communicationService.confirmActiveSection('Asset');
     this.getAssets();
     this.listColumns = [
       {
