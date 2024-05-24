@@ -16,6 +16,7 @@ export class TeamListComponent implements OnInit {
   listObservable: any;
   selectedMenuItem: string = 'Teams';
   subSideNav: any = [];
+  sideNavStatus: boolean = true;
 
   constructor(
     private communicationService: CommunicationService,
@@ -90,5 +91,9 @@ export class TeamListComponent implements OnInit {
     this.detailService.deleteTeamList(id).subscribe((res: any) => {
       this.getTeamdetails();
     })
+  }
+
+  sideNavToggleStatus(event: any) {
+    this.sideNavStatus = event;
   }
 }

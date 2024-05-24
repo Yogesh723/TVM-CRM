@@ -61,5 +61,6 @@ export class SideNavBarComponent implements OnInit, OnDestroy{
   
   toggleSideNav() {
     this.sideNavStatus = !this.sideNavStatus;
+    this.sideNavToggleStatus.emit(this.sideNavStatus);
   }
 }

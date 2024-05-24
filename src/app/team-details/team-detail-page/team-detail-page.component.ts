@@ -19,6 +19,7 @@ export class TeamDetailPageComponent implements OnInit {
   appForm!: FormGroup;
   selectedMenuItem: string = '';
   subSideNav: any = [];
+  sideNavStatus: boolean = true;
 
   constructor(
     private detailService: TeamDetailServiceService,
@@ -53,52 +54,39 @@ export class TeamDetailPageComponent implements OnInit {
         tooltip: 'Employees'
       }
     ];
-
-    this.getTeamDetail();
-  }
-
-  getTeamDetail() {
-    this.detailService.edit(this.activeId).subscribe((result: any) => {
-      let res = result.filter((item: any) => item.id == this.activeId)[0];
-      this.formObject = res.formFields;
-    });
+    this.formObject = {
+      General: [
+        {
+          label: "Team Name",
+          name: "TeamName",
+          type: "String"
+        },
+        {
+          label: "Lead Name",
+          name: "LeadName",
+          type: "String"
+        },
+        {
+          label: "Team Size",
+          name: "TeamSize",
+          type: "Numeric"
+        }
+      ]
+    };
   }
 
   saveForm(formValue: any) {
     this.detailService.save(formValue).subscribe((result: any) => {
-      let saveForDetailPage = {
-        "id": result.id,
-        "formFields": {
-          "General": [
-            {
-              "label": "Team Name",
-              "name": "TeamName",
-              "value": formValue.TeamName,
-              "type": "String"
-            },
-            {
-              "label": "Lead Name",
-              "name": "LeadName",
-              "value": formValue.LeadName,
-              "type": "String"
-            },
-            {
-              "label": "Team Size",
-              "name": "TeamSize",
-              "value": formValue.TeamSize,
-              "type": "Numeric"
-            }
-          ]
-        }
-      };
-      this.detailService.saveForDetail(saveForDetailPage).subscribe((result) => {
-        this.route.navigateByUrl('tvm/team');
-      });
+      this.route.navigateByUrl('tvm/team');
     });
   }
 
   clear() {
     this.appForm.reset();
+  }
+
+  sideNavToggleStatus(event: any) {
+    this.sideNavStatus = event;
   }
 
   sideNavClick(event: any) {
