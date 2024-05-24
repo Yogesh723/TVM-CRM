@@ -58,15 +58,25 @@
                                         ></label>
                                     </ng-container>
                                     <ng-template #numberInput>
-                                      <ng-container *ngIf="row.type == 'number';else emailInput">
+                                      <ng-container *ngIf="row.type == 'number'; else emailInput">
                                         <input
-                                          type="number"
+                                          type="text"
                                           [formControlName]="row.name"
-                                          style="width: auto"
+                                          (input)="validateMobileNumber()"
+                                          maxlength="10"
+                                          (keypress)="blockNonNumericalInput($event)"
                                           autocomplete="off"
                                         />
-                                      </ng-container>
+                                      </ng-container >
                                       <ng-template #emailInput>
+                                        <!-- <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else imageInput">
+                                            <input
+                                              type="email"
+                                              [formControlName]="row.name"
+                                              style="width: auto"
+                                              autocomplete="off"
+                                            />
+                                        </ng-container> -->
                                         <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else imageInput">
                                             <input
                                               type="email"
@@ -74,16 +84,15 @@
                                               style="width: auto"
                                               autocomplete="off"
                                             />
-                                        </ng-container>
+                                            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                                                <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                                                <div *ngIf="email?.errors?.['email']">Please enter a valid email address.</div>
+                                              </div>
+                                          </ng-container>
+                                          
                                         <ng-template #imageInput>
                                             <ng-container *ngIf="row.type === 'image'; else normalInput">
-                                                <input 
-                                                    style="width: 187px;" 
-                                                    type="file" id="file" 
-                                                    accept="image/*" 
-                                                    (change)="processFile(imageInput)"
-                                                    required
-                                                >
+                                                <app-upload-images></app-upload-images>
                                             </ng-container>
                                         </ng-template>
                                       </ng-template>
