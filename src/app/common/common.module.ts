@@ -12,6 +12,8 @@ import { CardTableViewControllerComponent } from './card-table-view-controller/c
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
 import { TableGeneratorComponent } from './table-generator/table-generator.component';
 import { CalendarModule } from 'primeng/calendar';
+import { UploadImagesComponent } from './upload-image/upload-image.component';
+import { FileUploadService } from '../Serviceimage/file-upload.Services';
 @NgModule({
   declarations: [
     WaterMarkPageComponent,
@@ -21,7 +23,8 @@ import { CalendarModule } from 'primeng/calendar';
     SearchComponent,
     CardTableViewControllerComponent,
     FormGeneratorComponent,
-    TableGeneratorComponent
+    TableGeneratorComponent,
+    UploadImagesComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +40,11 @@ import { CalendarModule } from 'primeng/calendar';
     SearchComponent,
     CardTableViewControllerComponent,
     FormGeneratorComponent,
-    TableGeneratorComponent
+    TableGeneratorComponent,
+    UploadImagesComponent
+  ],
+  providers: [
+    FileUploadService
   ]
 })
 export class CommonTvmModule { }

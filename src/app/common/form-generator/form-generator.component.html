@@ -92,13 +92,7 @@
                                           
                                         <ng-template #imageInput>
                                             <ng-container *ngIf="row.type === 'image'; else normalInput">
-                                                <input 
-                                                    style="width: 187px;" 
-                                                    type="file" id="file" 
-                                                    accept="image/*" 
-                                                    (change)="processFile(imageInput)"
-                                                    required
-                                                >
+                                                <app-upload-images></app-upload-images>
                                             </ng-container>
                                         </ng-template>
                                       </ng-template>
