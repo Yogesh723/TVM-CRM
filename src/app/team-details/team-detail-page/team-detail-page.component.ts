@@ -34,21 +34,23 @@ export class TeamDetailPageComponent implements OnInit {
       {
         section: 'Asset',
         name: 'asset',
-        label: 'Asset Details',
+        label: 'Assets',
         iconClass: 'fas fa-info-circle details',
+        tooltip: 'Assets'
       },
       {
         section: 'Projects',
         name: 'projects',
         label: 'Projects',
         iconClass: 'fas fa-briefcase projectiocn',
-
+        tooltip: 'Projects'
       },
       {
         section: 'Employees',
         name: 'employee',
         label: 'Employees',
         iconClass: 'fas fa-user employeedetails',
+        tooltip: 'Employees'
       }
     ];
 

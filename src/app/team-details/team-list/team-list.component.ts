@@ -30,15 +30,15 @@ export class TeamListComponent implements OnInit {
         section: 'Teams',
         name: 'teams',
         label: 'Team Details',
-        iconClass: "fa-solid fa-users"
-
+        iconClass: "fa-solid fa-users",
+        tooltip: 'Team Details'
       },
       {
         section: 'Jira',
         name: 'jira',
         label: 'Jira',
-        iconClass: "fa-brands fa-jira"
-
+        iconClass: "fa-brands fa-jira",
+        tooltip: 'Jira'
       },
     ];
     this.listColumns = [
