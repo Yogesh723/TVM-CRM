@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { TeamDetailServiceService } from '../../team-detail-service.service';
 import { CommunicationService } from 'src/app/common/communication.service';
+import { BreadcrumbService } from 'src/app/bread-crumb/bread-crumb.service';
 
 @Component({
   selector: 'app-asset-details',
@@ -18,7 +19,8 @@ export class AssetDetailsComponent implements OnInit{
   constructor(
     private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
-    private route: Router
+    private route: Router,
+    private breadcrumbService: BreadcrumbService
   ) {
 
   }
@@ -46,6 +48,11 @@ export class AssetDetailsComponent implements OnInit{
         "hidden": false
       }
     ];
+    this.breadcrumbService.setBreadcrumbs([
+      { label: 'Home', url: '/' },
+      { label: 'Assets', url: '/assets' },
+      { label: 'Asset Details', url: this.route.url }
+    ]);
   }
   getAssets() {
     this.teamService.getAssetDetails().subscribe((result: any) => {

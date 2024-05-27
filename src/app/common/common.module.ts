@@ -14,6 +14,8 @@ import { TableGeneratorComponent } from './table-generator/table-generator.compo
 import { CalendarModule } from 'primeng/calendar';
 import { UploadImagesComponent } from './upload-image/upload-image.component';
 import { FileUploadService } from '../Serviceimage/file-upload.Services';
+import { BreadcrumbComponent } from '../bread-crumb/bread-crumb.component';
+
 @NgModule({
   declarations: [
     WaterMarkPageComponent,
@@ -24,7 +26,8 @@ import { FileUploadService } from '../Serviceimage/file-upload.Services';
     CardTableViewControllerComponent,
     FormGeneratorComponent,
     TableGeneratorComponent,
-    UploadImagesComponent
+    UploadImagesComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +44,8 @@ import { FileUploadService } from '../Serviceimage/file-upload.Services';
     CardTableViewControllerComponent,
     FormGeneratorComponent,
     TableGeneratorComponent,
-    UploadImagesComponent
+    UploadImagesComponent,
+    BreadcrumbComponent
   ],
   providers: [
     FileUploadService

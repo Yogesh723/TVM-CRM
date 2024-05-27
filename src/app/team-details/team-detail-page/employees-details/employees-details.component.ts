@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { CommunicationService } from 'src/app/common/communication.service';
 import { DatePipe } from '@angular/common';
+import { BreadcrumbService } from 'src/app/bread-crumb/bread-crumb.service';
 
 @Component({
   selector: 'app-employees-details',
@@ -18,7 +19,8 @@ export class EmployeesDetailsComponent {
   constructor(
     private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
-    private route: Router
+    private route: Router,
+    private breadcrumbService: BreadcrumbService,
   ) {
 
   }
@@ -52,6 +54,11 @@ export class EmployeesDetailsComponent {
         "hidden": false
       }
     ];
+    this.breadcrumbService.setBreadcrumbs([
+      { label: 'Home', url: '/' },
+      { label: 'Employee', url: '/Employee' },
+      { label: 'Employee Details', url: this.route.url }
+    ]);
   }
   getAssets() {
     this.teamService.getEmployeeDetails().subscribe((result: any) => {
