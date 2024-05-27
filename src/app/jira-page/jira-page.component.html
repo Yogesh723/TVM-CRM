@@ -1,0 +1,40 @@
+<h1>Office Status Daily Report</h1>
+<button (click)="addRow()">Add Row</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Team</th>
+        <th>Employee Name</th>
+        <th>Task Details</th>
+        <th>Status</th>
+        <th>Scrum with timing</th>
+        <th>9.30 AM to 11.30 AM</th>
+        <th>11.30 AM to 1.00 PM</th>
+        <th>2.00 PM to 4.00 PM</th>
+        <th>4.00 PM to 6.30 PM</th>
+        <th>Non Billable Hrs</th>
+        <th>Non Billable Status</th>
+        <th>Daily Score</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows; let i = index">
+        <td contenteditable="true">{{ row.team }}</td>
+        <td contenteditable="true">{{ row.employeeName }}</td>
+        <td contenteditable="true">{{ row.taskDetails }}</td>
+        <td contenteditable="true">{{ row.status }}</td>
+        <td contenteditable="true">{{ row.scrumTiming }}</td>
+        <td contenteditable="true">{{ row.morningSession }}</td>
+        <td contenteditable="true">{{ row.middaySession }}</td>
+        <td contenteditable="true">{{ row.afternoonSession }}</td>
+        <td contenteditable="true">{{ row.eveningSession }}</td>
+        <td contenteditable="true">{{ row.nonBillableHrs }}</td>
+        <td contenteditable="true">{{ row.nonBillableStatus }}</td>
+        <td contenteditable="true">{{ row.dailyScore }}</td>
+        <td contenteditable="true" (keydown.enter)="addNewRow($event, i)">{{ row.comments }}</td>
+
+      </tr>
+      
+    </tbody>
+  </table>

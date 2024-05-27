@@ -10,7 +10,7 @@ export class InterstoreComponent {
     {
       code: 1,
       name: 'TVM Infotech',
-      routerLink: '/tvm/team'
+      routerLink: '/tvm/team/teamlist'
     }
   ];
 }

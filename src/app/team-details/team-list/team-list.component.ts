@@ -16,7 +16,6 @@ export class TeamListComponent implements OnInit {
   listObservable: any;
   selectedMenuItem: string = 'Teams';
   subSideNav: any = [];
-  sideNavStatus: boolean = true;
 
   constructor(
     private communicationService: CommunicationService,
@@ -26,22 +25,6 @@ export class TeamListComponent implements OnInit {
 
   ngOnInit() {
     this.getTeamdetails();
-    this.subSideNav = [
-      {
-        section: 'Teams',
-        name: 'teams',
-        label: 'Team Details',
-        iconClass: "fa-solid fa-users",
-        tooltip: 'Team Details'
-      },
-      {
-        section: 'Jira',
-        name: 'jira',
-        label: 'Jira',
-        iconClass: "fa-brands fa-jira",
-        tooltip: 'Jira'
-      },
-    ];
     this.listColumns = [
       {
         "name": "TeamName",
@@ -82,18 +65,9 @@ export class TeamListComponent implements OnInit {
     this.communicationService.goBackClick(false);
   }
 
-  sideNavClick(event: any) {
-    // this.selectedMenuItem = event.section;
-    // this.route.navigateByUrl('');
-  }
-
  delete(id: any) {
     this.detailService.deleteTeamList(id).subscribe((res: any) => {
       this.getTeamdetails();
     })
-  }
-
-  sideNavToggleStatus(event: any) {
-    this.sideNavStatus = event;
   }
 }

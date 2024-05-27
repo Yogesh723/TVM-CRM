@@ -12,6 +12,7 @@ import { EmployeesDetailsComponent } from './team-detail-page/employees-details/
 import { EditAssetComponent } from './team-detail-page/asset-details/edit-asset/edit-asset.component';
 import { EditProjectDetailsComponent } from './team-detail-page/projects-details/edit-project-details/edit-project-details.component';
 import { EditEmployeeDetailsComponent } from './team-detail-page/employees-details/edit-employee-details/edit-employee-details.component';
+import { MaintenanceComponent } from '../maintenance/maintenance.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { EditEmployeeDetailsComponent } from './team-detail-page/employees-detai
     EmployeesDetailsComponent,
     EditAssetComponent,
     EditProjectDetailsComponent,
-    EditEmployeeDetailsComponent
+    EditEmployeeDetailsComponent,
+    MaintenanceComponent
   ],
   imports: [
     CommonModule,
