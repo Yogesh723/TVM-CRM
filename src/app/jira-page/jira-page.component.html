@@ -1,5 +1,11 @@
+<app-bread-crumb></app-bread-crumb>
 <h1>Office Status Daily Report</h1>
-<button (click)="addRow()">Add Row</button>
+<div class="col-1">
+  <button id="addBtn" class="btn btn-success add-create" type="submit" (click)="addRow()">
+    <i class="fa-solid fa-plus"></i>
+     Add
+  </button>
+</div>
   <table>
     <thead>
       <tr>
@@ -7,7 +13,6 @@
         <th>Employee Name</th>
         <th>Task Details</th>
         <th>Status</th>
-        <th>Scrum with timing</th>
         <th>9.30 AM to 11.30 AM</th>
         <th>11.30 AM to 1.00 PM</th>
         <th>2.00 PM to 4.00 PM</th>
@@ -24,7 +29,6 @@
         <td contenteditable="true">{{ row.employeeName }}</td>
         <td contenteditable="true">{{ row.taskDetails }}</td>
         <td contenteditable="true">{{ row.status }}</td>
-        <td contenteditable="true">{{ row.scrumTiming }}</td>
         <td contenteditable="true">{{ row.morningSession }}</td>
         <td contenteditable="true">{{ row.middaySession }}</td>
         <td contenteditable="true">{{ row.afternoonSession }}</td>
@@ -35,6 +39,5 @@
         <td contenteditable="true" (keydown.enter)="addNewRow($event, i)">{{ row.comments }}</td>
 
       </tr>
-      
     </tbody>
   </table>

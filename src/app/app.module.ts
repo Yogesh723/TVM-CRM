@@ -8,12 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { jiraPageComponent } from './jira-page/jira-page.component';
+import { JiraPageComponent } from './jira-page/jira-page.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,jiraPageComponent
+    AppComponent,JiraPageComponent
   ],
   imports: [
     BrowserModule,

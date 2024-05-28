@@ -12,5 +12,5 @@ interface Row {
     nonBillableStatus: string;
     dailyScore: string;
     comments: string;
-    [key: string]: string; // Index signature
+    [key: string]: string;
   }

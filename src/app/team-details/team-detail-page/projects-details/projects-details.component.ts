@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CommunicationService } from 'src/app/common/communication.service';
-import { BreadcrumbService } from 'src/app/bread-crumb/bread-crumb.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-projects-details',
@@ -19,9 +19,7 @@ export class ProjectsDetailsComponent {
   constructor(
     private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
-    private route: Router,
-    private breadcrumbService: BreadcrumbService
-
+    private route: Router
   ) {
 
   }
@@ -67,11 +65,6 @@ export class ProjectsDetailsComponent {
         "hidden": false 
       }
     ];
-    this.breadcrumbService.setBreadcrumbs([
-      { label: 'Home', url: '/' },
-      { label: 'Project', url: '/Project' },
-      { label: 'Project Details', url: this.route.url }
-    ]);
   }
   getAssets() {
     this.teamService.getProjectDetails().subscribe((result: any) => {
@@ -98,5 +91,21 @@ export class ProjectsDetailsComponent {
     this.teamService.deleteProjects(id).subscribe((res: any) => {
       this.getAssets();
     })
+  }
+  exportToExcel() {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.projectListInfo);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveExcelFile(excelBuffer, 'project_details');
+  }
+
+  saveExcelFile(buffer: any, fileName: string) {
+    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    const downloadLink = document.createElement('a');
+    downloadLink.href = window.URL.createObjectURL(data);
+    downloadLink.download = `${fileName}_${new Date().getTime()}.xlsx`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
 }

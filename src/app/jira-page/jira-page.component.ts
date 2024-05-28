@@ -1,4 +1,6 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { BreadcrumbService } from '../bread-crumb/bread-crumb.service';
+import { Router } from '@angular/router';
 
 interface Row {
   team: string;
@@ -22,7 +24,7 @@ interface Row {
   templateUrl: './jira-page.component.html',
   styleUrls: ['./jira-page.component.scss']
 })
-export class jiraPageComponent {
+export class JiraPageComponent implements OnInit { 
   rows: Row[] = [
     {
       team: 'Team A',
@@ -40,8 +42,22 @@ export class jiraPageComponent {
       comments: 'Good progress'
     }
   ];
-  constructor(private cdr: ChangeDetectorRef) {}
-  addRow(): void { debugger
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private route: Router,
+    private breadcrumbService: BreadcrumbService,
+  ) {}
+
+  ngOnInit(): void {
+    this.breadcrumbService.setBreadcrumbs([
+      { label: 'Home', url: '/' },
+      { label: 'JIRA', url: '/jira' },
+      { label: 'JIRA Page', url: this.route.url }
+    ]);
+  }
+
+  addRow(): void {
     this.rows.push({
       team: '',
       employeeName: '',
@@ -59,13 +75,10 @@ export class jiraPageComponent {
     });
     this.cdr.detectChanges();
   }
+
   addNewRow(event: any, index: number): void {
     if (event.key === 'Enter' && index === this.rows.length - 1) {
       this.addRow();
     }
   }
-  
-  
-  
-  
 }

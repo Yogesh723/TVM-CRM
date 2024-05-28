@@ -48,6 +48,26 @@ body {
 
   td[contenteditable="true"]:focus {
     outline: none;
-    border: 1px solid blue; /* Add border when in focus */
+    border: 1px solid blue; 
 }
   
+
+table thead th {
+  background-color: #f2f2f2; 
+  padding: 10px;
+  text-align: left;
+}
+
+
+table tbody tr:nth-child(odd) {
+  background-color: white; 
+}
+
+table tbody tr:nth-child(even) {
+  background-color: white;
+}
+
+// table tbody td {
+//   padding: 10px;
+//   border: 1px solid #ddd; 
+// }

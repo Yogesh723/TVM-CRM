@@ -117,4 +117,5 @@ export class FormGeneratorComponent implements OnInit {
   get email() {
     return this.appForm.get('Email address');
   }
+  
 }

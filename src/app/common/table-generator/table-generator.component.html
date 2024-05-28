@@ -18,7 +18,7 @@
            Add
         </button>
       </div>
-      <div *ngIf="showCardView == true" class="col-1" style="text-align: center">
+      <div *ngIf="showCardView == true" class="col-1">
         <app-card-table-view-controller *ngIf="_listInfo.length > 0" [isCardView]="isCardView"
           (cardView)="cardView($event)"></app-card-table-view-controller>
       </div>

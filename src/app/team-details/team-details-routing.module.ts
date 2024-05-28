@@ -9,7 +9,7 @@ import { EditAssetComponent } from './team-detail-page/asset-details/edit-asset/
 import { EditProjectDetailsComponent } from './team-detail-page/projects-details/edit-project-details/edit-project-details.component';
 import { EditEmployeeDetailsComponent } from './team-detail-page/employees-details/edit-employee-details/edit-employee-details.component';
 import { MaintenanceComponent } from '../maintenance/maintenance.component';
-import { jiraPageComponent } from '../jira-page/jira-page.component';
+import { JiraPageComponent } from '../jira-page/jira-page.component';
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'jira',
-        component:jiraPageComponent
+        component:JiraPageComponent
       }
     ]
   },
