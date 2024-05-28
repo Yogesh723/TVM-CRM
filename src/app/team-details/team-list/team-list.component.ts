@@ -65,9 +65,9 @@ export class TeamListComponent implements OnInit {
   add(id: any) {
     let path;
     if (id == 0) {
-      path = 'tvm/team/teamdetail/' + id;
+      path = 'tvm/team/teamlist/' + id;
     } else {
-      path = 'tvm/team/teamdetail/' + id + '/Asset';
+      path = 'tvm/team/teamdetail/' + 'Asset/' + id;
     }
     this.route.navigateByUrl(path);
     this.communicationService.goBackClick(false);
@@ -75,8 +75,14 @@ export class TeamListComponent implements OnInit {
 
  delete(id: any) {
     this.detailService.deleteTeamList(id).subscribe((res: any) => {
-      this.getTeamdetails();
-    })
+      this.detailService.deleteAssets(id).subscribe((assetres: any) => {
+        this.detailService.deleteProjects(id).subscribe((prjctres: any) => {
+          this.detailService.deleteemployee(id).subscribe((empres: any) => {
+            this.getTeamdetails();
+          });
+        });
+      });
+    });
   }
   exportToExcel() {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.listInfo);

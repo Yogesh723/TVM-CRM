@@ -83,6 +83,8 @@ export class EditProjectDetailsComponent implements OnInit {
     ]
   };
   activeId: any = 0;
+  teamId: any = 0;
+
   @ViewChild(FormGeneratorComponent, { static: true }) formGenerationComponent!: FormGeneratorComponent;
 
   constructor(
@@ -92,7 +94,9 @@ export class EditProjectDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activeId = this.activeRoute.snapshot.paramMap.get('id');
+    this.activeId = this.activeRoute.snapshot.paramMap.get('prcjtId');
+    this.teamId = this.activeRoute.snapshot.paramMap.get('teamId');
+
     if (this.activeId != 0) {
       this.getProjectDetail();
     } else {
@@ -101,11 +105,12 @@ export class EditProjectDetailsComponent implements OnInit {
   }
 
   getProjectDetail() {
-    this.teamService.getProjectDetails().subscribe((result: any) => {
-      let res = result.filter((e: any) => e.id == this.activeId)[0];
-      for (const section in res) {
+    this.teamService.getProjectsById(this.teamId, this.activeId).forEach((result: any) => {debugger
+      // let res = result.filter((e: any) => e.id == this.activeId)[0];
+      for (const section in result[0]) {
+        if (section !== 'id')
         this.formObject.General.map((element: any) => {
-          let ele = res[section];
+          let ele = result[0][section];
           if (element.name == section) {
             if (element.type == 'Date') {
               let datePipe: DatePipe = new DatePipe('en-US');
@@ -139,10 +144,12 @@ export class EditProjectDetailsComponent implements OnInit {
   }
 
   save(formValue: any) {
-    this.teamService.saveProjectDetails(formValue).subscribe((result: any) => {
-      let url: string = this.route.routerState.snapshot.url;
-      let modifiedUrl: string = url.slice(0, url.lastIndexOf('/0'));
-      this.route.navigateByUrl(modifiedUrl);
+    this.teamService.addProject(this.teamId, formValue).subscribe((result: any) => {
+      result.subscribe((res: any) => {
+        let url: string = this.route.routerState.snapshot.url;
+        let modifiedUrl: string = url.slice(0, url.lastIndexOf('/0'));
+        this.route.navigateByUrl(modifiedUrl);
+      });
     });
   }
 

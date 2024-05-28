@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TeamDetailServiceService } from '../../team-detail-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CommunicationService } from 'src/app/common/communication.service';
@@ -15,18 +15,22 @@ export class ProjectsDetailsComponent {
   projectColumns: any = []
   projectListInfo: any = [];
   listObservable: any;
+  activeId: any = '';
 
   constructor(
     private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
+    private activeRoute: ActivatedRoute,
     private route: Router
   ) {
 
   }
 
   ngOnInit(): void {
+    this.activeId = this.activeRoute.snapshot.paramMap.get('teamId');
+    this.communicationService.confirmActiveId(this.activeId);
     this.communicationService.confirmActiveSection('Projects');
-    this.getAssets();
+    this.getProjects();
     this.projectColumns = [
       {
         "name": "profile",
@@ -66,9 +70,9 @@ export class ProjectsDetailsComponent {
       }
     ];
   }
-  getAssets() {
-    this.teamService.getProjectDetails().subscribe((result: any) => {
-      this.projectListInfo = result;
+  getProjects() {
+    this.teamService.getProjectDetailById(this.activeId).subscribe((result: any) => {
+      this.projectListInfo = result.projects;
       this.projectListInfo.forEach((element: any) => {
         element.state = element.state == true ? 'Yes' : 'No';
         element.joining = new DatePipe('en-US').transform(element.joining, 'MM/dd/yyyy');
@@ -88,9 +92,9 @@ export class ProjectsDetailsComponent {
   }
 
   delete(id: any) {
-    this.teamService.deleteProjects(id).subscribe((res: any) => {
-      this.getAssets();
-    })
+    this.teamService.deleteProject(this.activeId, id).subscribe((res: any) => {
+      this.getProjects();
+    });
   }
   exportToExcel() {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.projectListInfo);

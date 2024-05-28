@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamDetailServiceService } from 'src/app/team-details/team-detail-service.service';
 
 @Component({
@@ -30,21 +30,25 @@ export class EditAssetComponent implements OnInit {
       // }
     ]
   };
+  teamId: any = 0;
 
   constructor(
     private teamService: TeamDetailServiceService,
+    private activeRoute: ActivatedRoute,
     private route: Router
   ) {}
 
   ngOnInit(): void {
-    
+    this.teamId = this.activeRoute.snapshot.paramMap.get('teamId');
   }
 
   save(formValue: any) {
-    this.teamService.saveAssetDetails(formValue).subscribe((result: any) => {
-      let url: string = this.route.routerState.snapshot.url;
-      let modifiedUrl: string = url.slice(0, url.lastIndexOf('/0'));
-      this.route.navigateByUrl(modifiedUrl);
+    this.teamService.addAsset(this.teamId, formValue).subscribe((result: any) => {
+      result.subscribe((res: any) => {
+        let url: string = this.route.routerState.snapshot.url;
+        let modifiedUrl: string = url.slice(0, url.lastIndexOf('/0'));
+        this.route.navigateByUrl(modifiedUrl);
+      }); 
     });
   }
 }

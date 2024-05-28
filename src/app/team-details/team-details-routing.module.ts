@@ -10,6 +10,7 @@ import { EditProjectDetailsComponent } from './team-detail-page/projects-details
 import { EditEmployeeDetailsComponent } from './team-detail-page/employees-details/edit-employee-details/edit-employee-details.component';
 import { MaintenanceComponent } from '../maintenance/maintenance.component';
 import { JiraPageComponent } from '../jira-page/jira-page.component';
+import { TeamDetailsMaintenanceComponent } from './team-detail-page/team-details-maintenance/team-details-maintenance.component';
 const routes: Routes = [
   {
     path: '',
@@ -17,7 +18,16 @@ const routes: Routes = [
     children: [
       {
         path: 'teamlist',
-        component: TeamListComponent
+        children: [
+          {
+            path: '',
+            component: TeamListComponent
+          },
+          {
+            path: ':id',
+            component: TeamDetailPageComponent,
+          }
+        ]
       },
       {
         path: 'jira',
@@ -26,31 +36,31 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'teamdetail/:id',
-    component: TeamDetailPageComponent,
+    path: 'teamdetail',
+    component: TeamDetailsMaintenanceComponent,
     children: [
       {
-        path: 'Asset',
+        path: 'Asset/:teamId',
         component: AssetDetailsComponent
       },
       {
-        path: 'Projects',
+        path: 'Projects/:teamId',
         component: ProjectsDetailsComponent
       },
       {
-        path: 'Employees',
+        path: 'Employees/:teamId',
         component: EmployeesDetailsComponent
       },
       {
-        path: 'Asset/:id',
+        path: 'Asset/:teamId/:aasetId',
         component: EditAssetComponent
       },
       {
-        path: 'Projects/:id',
+        path: 'Projects/:teamId/:prcjtId',
         component: EditProjectDetailsComponent
       },
       {
-        path: 'Employees/:id',
+        path: 'Employees/:teamId/:empId',
         component: EditEmployeeDetailsComponent
       }
     ]
