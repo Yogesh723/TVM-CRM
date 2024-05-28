@@ -15,6 +15,8 @@ export class FormGeneratorComponent implements OnInit {
   @Input() inputStyle: any = { width: '188px' };
   @Output() saveFormClicked = new EventEmitter();
   @Output() formGenerated = new EventEmitter();
+  @Output() singleSelectionChanged = new EventEmitter();
+
   enUS: any;
   mobileNumber: string = '';
   isValidMobileNumber: boolean = false;
@@ -118,4 +120,7 @@ export class FormGeneratorComponent implements OnInit {
     return this.appForm.get('Email address');
   }
   
+  onSelectChange(selectedValue: any) {debugger
+    this.singleSelectionChanged.emit(selectedValue)
+  }
 }

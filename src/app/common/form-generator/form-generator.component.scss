@@ -34,3 +34,18 @@ form {
 .checkBoxStyles {
     margin-top: 15px;
 }
+
+.ng-select.custom {
+    border:0px;
+    min-height: 0px;
+    border-radius: 0;
+}
+::ng-deep .ng-select {            
+    min-width: 75% !important;
+    border-radius: 0;
+}
+
+.ng-option.add-new-option {
+    font-weight: bold;
+    color: blue;
+}

@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommunicationService } from 'src/app/common/communication.service';
 import { FormGeneratorComponent } from 'src/app/common/form-generator/form-generator.component';
 import { TeamDetailServiceService } from 'src/app/team-details/team-detail-service.service';
 @Component({
@@ -72,6 +73,7 @@ export class EditEmployeeDetailsComponent implements OnInit {
   @ViewChild(FormGeneratorComponent, { static: true }) formGenerationComponent!: FormGeneratorComponent;
 
   constructor(
+    private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
     private activeRoute: ActivatedRoute,
     private route: Router
@@ -80,6 +82,8 @@ export class EditEmployeeDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activeId = this.activeRoute.snapshot.paramMap.get('empId');
     this.teamId = this.activeRoute.snapshot.paramMap.get('teamId');
+    this.communicationService.confirmActiveSection('Employees');
+
     this.getEmployeeDetail();
   }
 

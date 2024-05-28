@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { UploadImagesComponent } from './upload-image/upload-image.component';
 import { FileUploadService } from '../Serviceimage/file-upload.Services';
 import { BreadcrumbComponent } from '../bread-crumb/bread-crumb.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BreadcrumbComponent } from '../bread-crumb/bread-crumb.component';
     CommonTvmRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    CalendarModule
+    CalendarModule,
+    NgSelectModule
   ],
   exports: [
     NavBarComponent,

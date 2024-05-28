@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommunicationService } from 'src/app/common/communication.service';
 import { FormGeneratorComponent } from 'src/app/common/form-generator/form-generator.component';
 import { TeamDetailServiceService } from 'src/app/team-details/team-detail-service.service';
 
@@ -17,8 +18,9 @@ export class EditProjectDetailsComponent implements OnInit {
       {
         name: "profile",
         label: "Profile",
-        type: "String",
-        readonlyProp: true
+        type: "singleSelect",
+        readonlyProp: true,
+        pickList: [ ]
       },
       {
         name: "voice",
@@ -28,7 +30,8 @@ export class EditProjectDetailsComponent implements OnInit {
       {
         name: "developer",
         label: "Developer",
-        type: "String"
+        type: "singleSelect",
+        pickList: [ ]
       },
       {
         name: "state",
@@ -88,6 +91,7 @@ export class EditProjectDetailsComponent implements OnInit {
   @ViewChild(FormGeneratorComponent, { static: true }) formGenerationComponent!: FormGeneratorComponent;
 
   constructor(
+    private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
     private activeRoute: ActivatedRoute,
     private route: Router
@@ -96,11 +100,30 @@ export class EditProjectDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.activeId = this.activeRoute.snapshot.paramMap.get('prcjtId');
     this.teamId = this.activeRoute.snapshot.paramMap.get('teamId');
+    this.communicationService.confirmActiveSection('Projects');
+
+    this.teamService.getEmployeeDetailById(this.teamId).subscribe((result: any) => {
+      this.formObject.General.forEach((element: any) => {
+        if (element.type == 'singleSelect') {
+          element.pickList = result.employees.map((i: any, index: any) => { return {"label": i.Employee, "value": index} });
+          element.pickList = [
+            {'label': 'Add a New Employee', 'value': -1},
+            ...element.pickList
+          ]
+        }
+      });
+    });
 
     if (this.activeId != 0) {
       this.getProjectDetail();
     } else {
       this.projectDetails = this.formObject;
+    }
+  }
+
+  selectionChange(event: any) {
+    if (event.value == -1) {
+      this.route.navigateByUrl('tvm/team/teamdetail/Employees/' + this.teamId + '/0')
     }
   }
 

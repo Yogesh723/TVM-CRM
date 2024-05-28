@@ -13,7 +13,9 @@ export class EditAssetComponent implements OnInit {
     General: [
       {
         name: "profileName",
-        label: "Profile Name"
+        label: "Profile Name",
+        type: "singleSelect",
+        pickList: [ ]
       },
       {
         name: "laptop",
@@ -40,6 +42,23 @@ export class EditAssetComponent implements OnInit {
 
   ngOnInit(): void {
     this.teamId = this.activeRoute.snapshot.paramMap.get('teamId');
+    this.teamService.getProjectDetailById(this.teamId).subscribe((result: any) => {
+      this.formObject.General.forEach((element: any) => {
+        if (element.type == 'singleSelect') {
+          element.pickList = result.projects.map((i: any, index: any) => { return {"label": i.profile, "value": index} });
+          element.pickList = [
+            {'label': 'Add a New Project', 'value': -1},
+            ...element.pickList
+          ]
+        }
+      });
+    });
+  }
+
+  selectionChange(event: any) {
+    if (event.value == -1) {
+      this.route.navigateByUrl('tvm/team/teamdetail/Projects/' + this.teamId + '/0')
+    }
   }
 
   save(formValue: any) {

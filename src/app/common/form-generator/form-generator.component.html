@@ -91,13 +91,44 @@
                                           </ng-container>
                                           
                                         <ng-template #imageInput>
-                                            <ng-container *ngIf="row.type === 'image'; else normalInput">
+                                            <ng-container *ngIf="row.type === 'image'; else dropdownSingleSelection">
                                                 <app-upload-images></app-upload-images>
                                             </ng-container>
+                                            <ng-template #dropdownSingleSelection>
+                                                <ng-container *ngIf="row.type == 'singleSelect'; else normalInput">
+                                                    <ng-select 
+                                                        clearAllText="Clear"
+                                                        [bindLabel]="
+                                                            row.bindLabel == undefined
+                                                            ? 'label'
+                                                            : row.bindLabel
+                                                        "
+                                                        dropdownPosition="auto"
+                                                        [bindValue]="
+                                                            row.bindValue == undefined
+                                                            ? 'label'
+                                                            : row.bindValue
+                                                        "
+                                                        [items]="row.pickList"
+                                                        dropdownPosition="auto"
+                                                        [placeholder]="'select'"
+                                                        dropdownPosition="auto"
+                                                        [formControlName]="row.name"
+                                                        (change)="onSelectChange($event)"
+                                                        id="select_{{ row.label }}"
+                                                    >
+                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                                                            <div [ngClass]="{'add-new-option': item.value == -1}">
+                                                                {{ item.label }}
+                                                            </div>
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </ng-container>
+                                                <ng-template #normalInput>
+                                                    <input class="col-6" [formControlName]="row.name" style="width: auto" autocomplete="off"/>
+                                                </ng-template>
+                                            </ng-template>
                                         </ng-template>
-                                      </ng-template>
-                                      <ng-template #normalInput>
-                                        <input [formControlName]="row.name" style="width: auto" autocomplete="off"/>
                                       </ng-template>
                                     </ng-template>
                                 </ng-template>
