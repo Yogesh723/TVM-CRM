@@ -15,6 +15,7 @@ export class EditAssetComponent implements OnInit {
         name: "profileName",
         label: "Profile Name",
         type: "singleSelect",
+        width: '75%',
         pickList: [ ]
       },
       {

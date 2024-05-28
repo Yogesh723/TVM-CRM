@@ -97,6 +97,7 @@
                                             <ng-template #dropdownSingleSelection>
                                                 <ng-container *ngIf="row.type == 'singleSelect'; else normalInput">
                                                     <ng-select 
+                                                        [ngStyle]="{'min-width': row.width ? row.width : '50%'}"
                                                         clearAllText="Clear"
                                                         [bindLabel]="
                                                             row.bindLabel == undefined

@@ -20,6 +20,7 @@ export class EditProjectDetailsComponent implements OnInit {
         label: "Profile",
         type: "singleSelect",
         readonlyProp: true,
+        width: '57%',
         pickList: [ ]
       },
       {
@@ -31,6 +32,7 @@ export class EditProjectDetailsComponent implements OnInit {
         name: "developer",
         label: "Developer",
         type: "singleSelect",
+        width: '57%',
         pickList: [ ]
       },
       {
