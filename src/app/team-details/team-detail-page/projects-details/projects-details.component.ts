@@ -98,6 +98,12 @@ export class ProjectsDetailsComponent {
     this.addNew(id);
   }
 
+  saveImorteddetails(event: any) {
+    this.teamService.addProject(this.activeId, event, 'importSave').subscribe((result: any) => {
+      // this.route.navigateByUrl('/tvm/team/teamdetail/Employees/' + this.activeId);
+    });
+  }
+
   delete(id: any) {
     this.teamService.deleteProject(this.activeId, id).subscribe((res: any) => {
       this.getProjects();

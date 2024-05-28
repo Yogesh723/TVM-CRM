@@ -85,6 +85,12 @@ export class EmployeesDetailsComponent {
     this.addNew(id);
   }
 
+  saveImorteddetails(event: any) {
+    this.teamService.addEmployee(this.activeId, event, 'importSave').subscribe((result: any) => {
+      // this.route.navigateByUrl('/tvm/team/teamdetail/Employees/' + this.activeId);
+    });
+  }
+
   delete(id: any) {
     this.teamService.deleteEmployee(this.activeId, id).subscribe((res: any) => {
       this.getAssets();

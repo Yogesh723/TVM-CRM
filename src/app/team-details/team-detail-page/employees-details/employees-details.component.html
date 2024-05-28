@@ -7,6 +7,8 @@
   (addNew)="addNew($event)"
   (goToDetails)="rowClicked($event)"
   (deleteclicked)="delete($event)"
+  [filename]="'employee_details'"
+  (importSave)="saveImorteddetails($event)"
 >
 </app-table-generator>
 

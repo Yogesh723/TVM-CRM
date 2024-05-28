@@ -81,4 +81,12 @@ export class AssetDetailsComponent implements OnInit{
       this.getAssets();
     });
   }
+
+  saveImorteddetails(event: any) {
+    this.teamService.addAsset(this.activeId, event, 'importSave').subscribe((result: any) => {
+      let url: string = this.route.routerState.snapshot.url;
+      let modifiedUrl: string = url.slice(0, url.lastIndexOf('/0'));
+      this.route.navigateByUrl(modifiedUrl);
+    });
+  }
 }

@@ -9,7 +9,6 @@
   ],
   "assetdetails": [
     {
-      "id": "20bc",
       "assets": [
         {
           "id": "yw71",
@@ -17,34 +16,47 @@
           "charger": "Asus",
           "laptop": "Asus"
         }
-      ]
+      ],
+      "id": "20bc"
     }
   ],
   "projectdetails": [
     {
-      "id": "20bc",
       "projects": [
         {
           "id": "68yt",
           "profile": "Yogesh",
           "voice": "Yogesh",
           "developer": "Yogesh",
-          "state": true,
+          "state": "Yes",
           "parent": "Google",
           "client": "Google",
           "mail": "yogi@google.com",
           "password": "123455678",
           "manager": "Sundar Pichai",
           "contact": "9999999999",
-          "joining": "2023-05-14T18:30:00.000Z",
-          "relieving": null
+          "joining": "05/15/2023"
+        },
+        {
+          "id": 2,
+          "profile": "Arun",
+          "voice": "Arun",
+          "developer": "Arun",
+          "state": "Yes",
+          "parent": "Google",
+          "client": "Google",
+          "mail": "arun",
+          "password": 456789,
+          "manager": "dfghjk",
+          "contact": 456789,
+          "joining": "05/15/2023"
         }
-      ]
+      ],
+      "id": "20bc"
     }
   ],
   "employeedetails": [
     {
-      "id": "20bc",
       "employees": [
         {
           "id": "48by",
@@ -57,9 +69,25 @@
           "Contact number": "8898989888",
           "Email address": "yogiyogesh@gmail.com",
           "joining": "05/23/2022",
-          "Home address": "Ariyalur"
+          "Home address": "Ariyalur",
+          "state": "No"
+        },
+        {
+          "id": "3vz3ovu16",
+          "Employee": "asdfgh",
+          "Experienceyear": "dfghn",
+          "Specifications": "vbhnm",
+          "Qualifications": "fghj",
+          "Emergency contacts": "56789",
+          "Job information": "rtghjk",
+          "Contact number": "345678",
+          "Email address": "dfghj",
+          "joining": "05/15/2024",
+          "Home address": "wertyghuj",
+          "state": "No"
         }
-      ]
+      ],
+      "id": "20bc"
     }
   ]
 }

@@ -33,16 +33,20 @@ export class TeamDetailServiceService {
     return this.http.post('http://localhost:3000/assetdetails', requestBody);
   }
 
-  addAsset(teamId: string, newAsset: any): Observable<any> {
-    return this.http.get(`${'http://localhost:3000/assetdetails'}/${teamId}`).pipe(
-      map((response: any) => {
-        const assets = response.assets || [];
-        const existingIds = assets.map((asset: any) => asset.id);
-        newAsset.id = this.generateUniqueId(existingIds);
-        assets.push(newAsset);
-        return this.http.put(`${'http://localhost:3000/assetdetails'}/${teamId}`, { assets });
-      })
-    );
+  addAsset(teamId: string, newAsset: any, saveType?: any): Observable<any> {
+    if (saveType == 'importSave') {
+      return this.http.put(`${'http://localhost:3000/assetdetails'}/${teamId}`, { assets: newAsset });
+    } else {
+      return this.http.get(`${'http://localhost:3000/assetdetails'}/${teamId}`).pipe(
+        map((response: any) => {
+          const assets = response.assets || [];
+          const existingIds = assets.map((asset: any) => asset.id);
+          newAsset.id = this.generateUniqueId(existingIds);
+          assets.push(newAsset);
+          return this.http.put(`${'http://localhost:3000/assetdetails'}/${teamId}`, { assets });
+        })
+      );
+    }
   }
 
   getAssetDetailById(id: string) {
@@ -79,28 +83,36 @@ export class TeamDetailServiceService {
     return this.http.post('http://localhost:3000/employeedetails', requestBody);
   }
 
-  addEmployee(teamId: string, newEmployee: any): Observable<any> {
-    return this.http.get(`${'http://localhost:3000/employeedetails'}/${teamId}`).pipe(
-      map((response: any) => {
-        const employees = response.employees || [];
-        const existingIds = employees.map((emp: any) => emp.id);
-        newEmployee.id = this.generateUniqueId(existingIds);
-        employees.push(newEmployee);
-        return this.http.put(`${'http://localhost:3000/employeedetails'}/${teamId}`, { employees });
-      })
-    );
+  addEmployee(teamId: string, newEmployee: any, saveType?:any): Observable<any> {
+    if (saveType == 'importSave') {
+      return this.http.put(`${'http://localhost:3000/employeedetails'}/${teamId}`, { employees: newEmployee });
+    } else {
+      return this.http.get(`${'http://localhost:3000/employeedetails'}/${teamId}`).pipe(
+        map((response: any) => {
+          const employees = response.employees || [];
+          const existingIds = employees.map((emp: any) => emp.id);
+          newEmployee.id = this.generateUniqueId(existingIds);
+          employees.push(newEmployee);
+          return this.http.put(`${'http://localhost:3000/employeedetails'}/${teamId}`, { employees });
+        })
+      );
+    }
   }
 
-  addProject(teamId: string, newProject: any): Observable<any> {
-    return this.http.get(`${'http://localhost:3000/projectdetails'}/${teamId}`).pipe(
-      map((response: any) => {
-        const projects = response.projects || [];
-        const existingIds = projects.map((prj: any) => prj.id);
-        newProject.id = this.generateUniqueId(existingIds);
-        projects.push(newProject);
-        return this.http.put(`${'http://localhost:3000/projectdetails'}/${teamId}`, { projects });
-      })
-    );
+  addProject(teamId: string, newProject: any, saveType?:any): Observable<any> {
+    if (saveType == 'importSave') {
+      return this.http.put(`${'http://localhost:3000/projectdetails'}/${teamId}`, { projects: newProject });
+    } else {
+      return this.http.get(`${'http://localhost:3000/projectdetails'}/${teamId}`).pipe(
+        map((response: any) => {
+          const projects = response.projects || [];
+          const existingIds = projects.map((prj: any) => prj.id);
+          newProject.id = this.generateUniqueId(existingIds);
+          projects.push(newProject);
+          return this.http.put(`${'http://localhost:3000/projectdetails'}/${teamId}`, { projects });
+        })
+      );
+    }
   }
   
   private generateUniqueId(existingIds: string[]): string {

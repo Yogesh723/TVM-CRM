@@ -33,20 +33,10 @@
     position: relative;
     top: 9px;
     left: 5px;
-    // width: 90px;
     min-width: 90px;
     max-width: 90px;
     height: 40px;
 }
-// @media (max-width: 600px) {
-//   .add-create {
-//       top: 9px;
-//       left: 22px;
-//       width: 90px; 
-//       height: 40px; 
-//       font-size: 12px; 
-//   }
-// }
 .no-records-container {
   display: flex;
   justify-content: center;
@@ -54,10 +44,19 @@
   height: 517px;
   text-align: center;
 }
-
-  .excel{
-    position: fixed;
-    top: 175px;
-    left: 1530px;
+@media (min-width: 768px) {
+      .upload{
+        position: relative;
+        float: inline-end;
+        top: 11px;
+        right: 155px;
+        width: 65px;
+    }
+    .download{
+    position: relative;
+    float: inline-end;  
+    top: 11px;
+    width: 65px;
+    right: 18px;
+  }
 }
-

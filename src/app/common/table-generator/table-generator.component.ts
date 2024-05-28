@@ -22,10 +22,14 @@ export class TableGeneratorComponent implements OnInit {
   @Input() Pageheader: any = '';
   @Input() showHeader: boolean = true;
   @Input() listObservable: any;
+  @Input() filename: any = '';
+  @Input() Showexportbutton: boolean =true;
   @Input() hasDetailsPage: boolean = true;
   @Output() goToDetails = new EventEmitter();
   @Output() addNew = new EventEmitter();
   @Output() deleteclicked = new EventEmitter();
+  @Output() importSave = new EventEmitter();
+
   listInfo: any = [];
 
 
@@ -119,11 +123,11 @@ export class TableGeneratorComponent implements OnInit {
   deleteRow(id: any) {
     this.deleteclicked.emit(id);
   }  
-  exportToExcel() {debugger
+  exportToExcel() {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this._listInfo);
     const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveExcelFile(excelBuffer, 'asset_details');
+    this.saveExcelFile(excelBuffer, this.filename);
   }
 
   saveExcelFile(buffer: any, fileName: string) {
@@ -134,5 +138,45 @@ export class TableGeneratorComponent implements OnInit {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
+  }
+  importFromExcel() {debugger
+    const inputElement: HTMLInputElement = document.createElement('input');
+    inputElement.type = 'file';
+    inputElement.accept = '.xlsx';
+    
+    inputElement.addEventListener('change', (event: any) => {
+      const file: File = event.target.files[0];
+      const reader: FileReader = new FileReader();
+
+      reader.onload = (e: any) => {
+        const data: string = e.target.result;
+        const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
+        const worksheetName: string = workbook.SheetNames[0];
+        const worksheet: XLSX.WorkSheet = workbook.Sheets[worksheetName];
+        const importedData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+        // Assign the imported data to _listInfo
+        let tempArr: any = [];
+        importedData.forEach((element, index) => {
+          if (index > 0) {
+            let obj: any = {};
+            let i = 0;
+            for (const section of importedData[0]) {
+              obj[section] = element[i];
+              i += 1;
+            }
+            tempArr.push(obj);
+          }
+        });
+        this._listInfo = [...tempArr]; // Skip header row if it exists
+        // Emit the updated data through the observable
+        this.importSave.emit(this._listInfo);
+        this.listObservable.next(this._listInfo);
+      };
+
+      reader.readAsBinaryString(file);
+    });
+
+    inputElement.click();
   }
 }
