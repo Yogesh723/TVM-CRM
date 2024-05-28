@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CommunicationService } from 'src/app/common/communication.service';
 import { BreadcrumbService } from 'src/app/bread-crumb/bread-crumb.service';
-import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-projects-details',
@@ -72,6 +71,7 @@ export class ProjectsDetailsComponent {
       }
     ];
     this.breadcrumbService.setBreadcrumbs([
+      { active: 'Project Details'},
       { label: 'Home', url: '/' },
       { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Project Details', url: this.route.url }
@@ -102,21 +102,5 @@ export class ProjectsDetailsComponent {
     this.teamService.deleteProject(this.activeId, id).subscribe((res: any) => {
       this.getProjects();
     });
-  }
-  exportToExcel() {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.projectListInfo);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveExcelFile(excelBuffer, 'project_details');
-  }
-
-  saveExcelFile(buffer: any, fileName: string) {
-    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-    const downloadLink = document.createElement('a');
-    downloadLink.href = window.URL.createObjectURL(data);
-    downloadLink.download = `${fileName}_${new Date().getTime()}.xlsx`;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
   }
 }

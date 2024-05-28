@@ -4,6 +4,15 @@
       <h3 id="itemHeading" class="d-inline" *ngIf="showHeader">{{Pageheader}}</h3>
     </div>
   </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="excel">
+        <button (click)="exportToExcel()">
+          <i class="fa-solid fa-file-export icon"></i> Export
+        </button>  
+      </div>
+    </div>
+  </div>
   <ng-container>
     <!-- Search bar Start -->
     <div class="row" #searchBar>

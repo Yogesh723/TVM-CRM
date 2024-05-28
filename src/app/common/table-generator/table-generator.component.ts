@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-table-generator',
@@ -25,6 +26,8 @@ export class TableGeneratorComponent implements OnInit {
   @Output() goToDetails = new EventEmitter();
   @Output() addNew = new EventEmitter();
   @Output() deleteclicked = new EventEmitter();
+  listInfo: any = [];
+
 
   constructor() { 
   }
@@ -115,5 +118,21 @@ export class TableGeneratorComponent implements OnInit {
   }
   deleteRow(id: any) {
     this.deleteclicked.emit(id);
+  }  
+  exportToExcel() {debugger
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this._listInfo);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveExcelFile(excelBuffer, 'asset_details');
+  }
+
+  saveExcelFile(buffer: any, fileName: string) {
+    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    const downloadLink = document.createElement('a');
+    downloadLink.href = window.URL.createObjectURL(data);
+    downloadLink.download = `${fileName}_${new Date().getTime()}.xlsx`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
 }

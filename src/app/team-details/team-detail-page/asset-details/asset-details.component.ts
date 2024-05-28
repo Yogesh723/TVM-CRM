@@ -4,7 +4,6 @@ import { BehaviorSubject, of } from 'rxjs';
 import { TeamDetailServiceService } from '../../team-detail-service.service';
 import { CommunicationService } from 'src/app/common/communication.service';
 import { BreadcrumbService } from 'src/app/bread-crumb/bread-crumb.service';
-import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-asset-details',
@@ -54,13 +53,14 @@ export class AssetDetailsComponent implements OnInit{
       }
     ];
     this.breadcrumbService.setBreadcrumbs([
+      { active: 'Asset Details'},
       { label: 'Home', url: '/' },
       { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Asset Details', url: this.route.url }
     ]);
   }
   getAssets() {
-    this.teamService.getAssetDetailById(this.activeId).subscribe((result: any) => {
+    this.teamService.getAssetDetailById(this.activeId).subscribe((result: any) => {debugger
       this.listInfo = result.assets;
       this.listObservable = new BehaviorSubject(this.listInfo);
     });
@@ -80,21 +80,5 @@ export class AssetDetailsComponent implements OnInit{
     this.teamService.deleteAsset(this.activeId, id).subscribe((res: any) => {
       this.getAssets();
     });
-  }
-  exportToExcel() {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.listInfo);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveExcelFile(excelBuffer, 'asset_details');
-  }
-
-  saveExcelFile(buffer: any, fileName: string) {
-    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-    const downloadLink = document.createElement('a');
-    downloadLink.href = window.URL.createObjectURL(data);
-    downloadLink.download = `${fileName}_${new Date().getTime()}.xlsx`;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
   }
 }

@@ -51,6 +51,7 @@ export class JiraPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadcrumbService.setBreadcrumbs([
+      { active: 'JIRA'},
       { label: 'Home', url: '/' },
       { label: 'JIRA', url: '/jira' },
       { label: 'JIRA Page', url: this.route.url }
