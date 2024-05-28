@@ -1,7 +1,14 @@
 <nav *ngIf="breadcrumbs.length" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <ng-container *ngFor="let breadcrumb of breadcrumbs; let last = last">
-      <li class="breadcrumb-item" style="font-size:20px;">
+      <li class="breadcrumb-item" [ngClass]="{
+        'home-breadcrumb': breadcrumb.label === 'Home', 
+        'team-details-breadcrumb': breadcrumb.label === 'Team Details',
+        'orange-breadcrumb': breadcrumb.label === 'Asset Details',
+        'Project-breadcrumb': breadcrumb.label === 'Project Details',
+        'Employee-breadcrumb': breadcrumb.label === 'Employee Details'
+
+      }" style="font-size:20px;">
         <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
       </li>
       <ng-container *ngIf="!last">

@@ -57,7 +57,7 @@ export class EmployeesDetailsComponent {
     ];
     this.breadcrumbService.setBreadcrumbs([
       { label: 'Home', url: '/' },
-      { label: 'Employee', url: '/Employee' },
+      { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Employee Details', url: this.route.url }
     ]);
   }

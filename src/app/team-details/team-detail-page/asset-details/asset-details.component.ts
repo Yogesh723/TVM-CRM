@@ -51,7 +51,7 @@ export class AssetDetailsComponent implements OnInit{
     ];
     this.breadcrumbService.setBreadcrumbs([
       { label: 'Home', url: '/' },
-      { label: 'Team Details', url: '/assets' },
+      { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Asset Details', url: this.route.url }
     ]);
   }
