@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TeamDetailServiceService } from '../../team-detail-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { CommunicationService } from 'src/app/common/communication.service';
 import { DatePipe } from '@angular/common';
@@ -16,10 +16,12 @@ export class EmployeesDetailsComponent {
   employeeColumns: any = []
   employeeListInfo: any = [];
   listObservable: any;
+  activeId: any = '';
 
   constructor(
     private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
+    private activeRoute: ActivatedRoute,
     private route: Router,
     private breadcrumbService: BreadcrumbService,
   ) {
@@ -27,6 +29,8 @@ export class EmployeesDetailsComponent {
   }
 
   ngOnInit(): void {
+    this.activeId = this.activeRoute.snapshot.paramMap.get('teamId');
+    this.communicationService.confirmActiveId(this.activeId);
     this.communicationService.confirmActiveSection('Employees');
     this.getAssets();
     this.employeeColumns = [
@@ -62,8 +66,8 @@ export class EmployeesDetailsComponent {
     ]);
   }
   getAssets() {
-    this.teamService.getEmployeeDetails().subscribe((result: any) => {
-      this.employeeListInfo = result;
+    this.teamService.getEmployeeDetailById(this.activeId).subscribe((result: any) => {
+      this.employeeListInfo = result.employees;
       this.employeeListInfo.forEach((element: any) => {
         element.state = element.state == true ? 'Yes' : 'No';
         element.joining = new DatePipe('en-US').transform(element.joining, 'MM/dd/yyyy');
@@ -82,9 +86,9 @@ export class EmployeesDetailsComponent {
   }
 
   delete(id: any) {
-    this.teamService.deleteemployee(id).subscribe((res: any) => {
+    this.teamService.deleteEmployee(this.activeId, id).subscribe((res: any) => {
       this.getAssets();
-    })
+    });
   }
   exportToExcel() {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.employeeListInfo);

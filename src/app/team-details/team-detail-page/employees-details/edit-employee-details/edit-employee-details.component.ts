@@ -67,6 +67,8 @@ export class EditEmployeeDetailsComponent implements OnInit {
     ]
   };
   activeId: any = 0;
+  teamId: any = 0;
+
   @ViewChild(FormGeneratorComponent, { static: true }) formGenerationComponent!: FormGeneratorComponent;
 
   constructor(
@@ -76,13 +78,14 @@ export class EditEmployeeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activeId = this.activeRoute.snapshot.paramMap.get('id');
+    this.activeId = this.activeRoute.snapshot.paramMap.get('empId');
+    this.teamId = this.activeRoute.snapshot.paramMap.get('teamId');
     this.getEmployeeDetail();
   }
 
   getEmployeeDetail() {
-    this.teamService.getEmployeeDetails().subscribe((result: any) => {
-      let res = result.filter((e: any) => e.id == this.activeId)[0];
+    this.teamService.getEmployeeById(this.teamId, this.activeId).subscribe((result: any) => {
+      let res = result[0];
       for (const section in res) {
         this.formObject.General.map((element: any) => {
           let ele = res[section];
@@ -108,9 +111,10 @@ export class EditEmployeeDetailsComponent implements OnInit {
   }
 
   save(formValue: any) {
-    this.teamService.saveEmployeeDetails(formValue, this.activeId).subscribe((result: any) => {
-      
-      this.route.navigateByUrl('/tvm/team/teamdetail/20bc/Employees');
+    this.teamService.addEmployee(this.teamId, formValue).subscribe((result: any) => {
+      result.subscribe((res: any) => {
+        this.route.navigateByUrl('/tvm/team/teamdetail/Employees/' + this.teamId);
+      });
     });
   }
 

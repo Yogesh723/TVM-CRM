@@ -1,0 +1,9 @@
+<app-side-nav-bar 
+    [selectedMenuItem]="selectedMenuItem"
+    [subSideNav]="subSideNav"
+    (goToPath)="sideNavClick($event)"
+    (sideNavToggleStatus)="sideNavToggleStatus($event)"
+></app-side-nav-bar>
+<section class="home-section" [ngClass]="sideNavStatus ? 'open' : ''">
+    <router-outlet></router-outlet>
+</section>

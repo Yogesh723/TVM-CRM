@@ -1,245 +1,65 @@
 {
-  "edit": [
-    {
-      "id": "0",
-      "formFields": {
-        "General": [
-          {
-            "label": "Team Name",
-            "name": "TeamName",
-            "type": "String"
-          },
-          {
-            "label": "Lead Name",
-            "name": "LeadName",
-            "type": "String"
-          },
-          {
-            "label": "Team Size",
-            "name": "TeamSize",
-            "type": "Numeric"
-          }
-        ]
-      }
-    },
-    {
-      "id": "20bc",
-      "formFields": {
-        "General": [
-          {
-            "label": "Team Name",
-            "name": "TeamName",
-            "value": "Team A",
-            "type": "String"
-          },
-          {
-            "label": "Lead Name",
-            "name": "LeadName",
-            "value": "Thobica",
-            "type": "String"
-          },
-          {
-            "label": "Team Size",
-            "name": "TeamSize",
-            "value": "5",
-            "type": "Numeric"
-          }
-        ]
-      }
-    },
-    {
-      "id": "fd35",
-      "formFields": {
-        "General": [
-          {
-            "label": "Team Name",
-            "name": "TeamName",
-            "value": "Team F",
-            "type": "String"
-          },
-          {
-            "label": "Lead Name",
-            "name": "LeadName",
-            "value": "Arun",
-            "type": "String"
-          },
-          {
-            "label": "Team Size",
-            "name": "TeamSize",
-            "value": "6",
-            "type": "Numeric"
-          }
-        ]
-      }
-    },
-    {
-      "id": "189c",
-      "formFields": {
-        "General": [
-          {
-            "label": "Team Name",
-            "name": "TeamName",
-            "value": "Team C",
-            "type": "String"
-          },
-          {
-            "label": "Lead Name",
-            "name": "LeadName",
-            "value": "Arun",
-            "type": "String"
-          },
-          {
-            "label": "Team Size",
-            "name": "TeamSize",
-            "value": "43",
-            "type": "Numeric"
-          }
-        ]
-      }
-    },
-    {
-      "id": "00d0",
-      "formFields": {
-        "General": [
-          {
-            "label": "Team Name",
-            "name": "TeamName",
-            "value": "678",
-            "type": "String"
-          },
-          {
-            "label": "Lead Name",
-            "name": "LeadName",
-            "value": "67890",
-            "type": "String"
-          },
-          {
-            "label": "Team Size",
-            "name": "TeamSize",
-            "value": "56789op",
-            "type": "Numeric"
-          }
-        ]
-      }
-    }
-  ],
   "teamdetails": [
     {
       "id": "20bc",
       "TeamName": "Team A",
       "LeadName": "Thobica",
       "TeamSize": "5"
-    },
-    {
-      "id": "189c",
-      "TeamName": "Team C",
-      "LeadName": "Arun",
-      "TeamSize": "43"
-    },
-    {
-      "id": "1e6a",
-      "TeamName": "Team D",
-      "LeadName": "also",
-      "TeamSize": "5"
     }
   ],
   "assetdetails": [
     {
-      "id": "2",
-      "profileName": "Thobica",
-      "charger": "Asus",
-      "laptop": "Asus"
-    },
-    {
-      "id": "7ecd",
-      "profileName": "Anitha",
-      "laptop": "Dell",
-      "charger": "dell"
-    },
-    {
-      "id": "f88c",
-      "profileName": "RathiPriya",
-      "laptop": "Dell",
-      "charger": "Dell"
-    },
-    {
-      "id": "104e",
-      "profileName": "indu",
-      "laptop": "mac",
-      "charger": "65"
+      "id": "20bc",
+      "assets": [
+        {
+          "id": "yw71",
+          "profileName": "Thobica",
+          "charger": "Asus",
+          "laptop": "Asus"
+        }
+      ]
     }
   ],
   "projectdetails": [
     {
-      "id": "55ac",
-      "profile": "Yogesh",
-      "voice": "Yogesh",
-      "developer": "Yogesh",
-      "state": true,
-      "parent": "Google",
-      "client": "Google",
-      "mail": "yogi@google.com",
-      "password": "123455678",
-      "manager": "Sundar Pichai",
-      "contact": "9999999999",
-      "joining": "2023-05-14T18:30:00.000Z",
-      "relieving": null
-    },
-    {
-      "id": "69be",
-      "profile": "Thobica",
-      "voice": "Thobica",
-      "developer": "Thobica",
-      "state": true,
-      "parent": "Thobica infotech",
-      "client": "Thobica infotech",
-      "mail": "thobi@thobica.com",
-      "password": "1234567890",
-      "manager": "No one",
-      "contact": "2333232323",
-      "joining": "2024-02-03T18:30:00.000Z",
-      "relieving": null
+      "id": "20bc",
+      "projects": [
+        {
+          "id": "68yt",
+          "profile": "Yogesh",
+          "voice": "Yogesh",
+          "developer": "Yogesh",
+          "state": true,
+          "parent": "Google",
+          "client": "Google",
+          "mail": "yogi@google.com",
+          "password": "123455678",
+          "manager": "Sundar Pichai",
+          "contact": "9999999999",
+          "joining": "2023-05-14T18:30:00.000Z",
+          "relieving": null
+        }
+      ]
     }
   ],
   "employeedetails": [
     {
-      "Employee": "Yogesh",
-      "Experienceyear": "1",
-      "Specifications": "Angular",
-      "Qualifications": "BE",
-      "Emergency contacts": "9897787998",
-      "Job information": "Developer",
-      "Contact number": "8898989888",
-      "Email address": "yogiyogesh@gmail.com",
-      "joining": "05/23/2022",
-      "Home address": "Ariyalur",
-      "id": "e848"
-    },
-    {
-      "id": "9639",
-      "Employee": "Hari",
-      "Experienceyear": "2",
-      "Specifications": "Angular",
-      "Qualifications": "BE",
-      "Emergency contacts": "7788989888",
-      "Job information": "Developer",
-      "Contact number": "7373368847",
-      "Email address": "harideveloper@gmail.com",
-      "joining": "2022-05-22T18:30:00.000Z",
-      "Home address": "Coimbatore"
-    },
-    {
-      "Employee": "Arun",
-      "Experienceyear": "1",
-      "Specifications": "Angular",
-      "Qualifications": "FE",
-      "Emergency contacts": "9897787998",
-      "Job information": "Developer",
-      "Contact number": "8898989888",
-      "Email address": "yogiyogesh@gmail.com",
-      "joining": "05/28/2023",
-      "Home address": "Pudukkottai",
-      "id": "3a45"
+      "id": "20bc",
+      "employees": [
+        {
+          "id": "48by",
+          "Employee": "Yogesh",
+          "Experienceyear": "1",
+          "Specifications": "Angular",
+          "Qualifications": "BE",
+          "Emergency contacts": "9897787998",
+          "Job information": "Developer",
+          "Contact number": "8898989888",
+          "Email address": "yogiyogesh@gmail.com",
+          "joining": "05/23/2022",
+          "Home address": "Ariyalur"
+        }
+      ]
     }
   ]
 }

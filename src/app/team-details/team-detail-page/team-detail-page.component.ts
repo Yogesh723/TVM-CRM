@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamDetailServiceService } from '../team-detail-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommunicationService } from 'src/app/common/communication.service';
 
 @Component({
   selector: 'app-team-detail-page',
@@ -12,48 +13,21 @@ export class TeamDetailPageComponent implements OnInit {
 
   formObject: any = {};
   activeId: any = 0;
-  sideNav: any = [
 
-  ];
   teamName: string = '';
   appForm!: FormGroup;
-  selectedMenuItem: string = '';
-  subSideNav: any = [];
-  sideNavStatus: boolean = true;
 
   constructor(
     private detailService: TeamDetailServiceService,
+    private communicationService: CommunicationService,
     private activeRoute: ActivatedRoute,
     private formbuilder: FormBuilder,
     private route: Router
   ) {}
 
   ngOnInit() {
-    this.activeId = this.activeRoute.snapshot.paramMap.get('id');
-
-    this.subSideNav = [
-      {
-        section: 'Asset',
-        name: 'asset',
-        label: 'Assets',
-        iconClass: 'fas fa-info-circle details',
-        tooltip: 'Assets'
-      },
-      {
-        section: 'Projects',
-        name: 'projects',
-        label: 'Projects',
-        iconClass: 'fas fa-briefcase projectiocn',
-        tooltip: 'Projects'
-      },
-      {
-        section: 'Employees',
-        name: 'employee',
-        label: 'Employees',
-        iconClass: 'fas fa-user employeedetails',
-        tooltip: 'Employees'
-      }
-    ];
+    this.activeId = this.activeRoute.children.length > 0 ? this.activeRoute.children[0].snapshot.paramMap.get('teamId') : this.activeRoute.snapshot.paramMap.get('id');
+    this.communicationService.confirmActiveId(this.activeId);
     this.formObject = {
       General: [
         {
@@ -76,21 +50,18 @@ export class TeamDetailPageComponent implements OnInit {
   }
 
   saveForm(formValue: any) {
-    this.detailService.save(formValue).subscribe((result: any) => {
-      this.route.navigateByUrl('tvm/team');
+    this.detailService.save(formValue).subscribe((listResult: any) => {debugger
+      this.detailService.saveAssetDetails({ id: listResult.id, assets: [] }).subscribe((assetResult: any) => {
+        this.detailService.saveProjectDetails({ id: listResult.id, projects: [] }).subscribe((projectResult: any) => {
+          this.detailService.saveEmployeeDetails({ id: listResult.id, employees: [] }).subscribe((employeeResult: any) => {
+            this.route.navigateByUrl('tvm/team/teamlist');
+          });
+        });
+      });
     });
   }
 
   clear() {
     this.appForm.reset();
-  }
-
-  sideNavToggleStatus(event: any) {
-    this.sideNavStatus = event;
-  }
-
-  sideNavClick(event: any) {
-    this.selectedMenuItem = event.section;
-    this.route.navigateByUrl('tvm/team/teamdetail/'+this.activeId+'/'+this.selectedMenuItem);
   }
 }

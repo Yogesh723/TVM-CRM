@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { TeamDetailServiceService } from '../../team-detail-service.service';
 import { CommunicationService } from 'src/app/common/communication.service';
@@ -16,17 +16,21 @@ export class AssetDetailsComponent implements OnInit{
   listColumns: any = []
   listInfo: any = [];
   listObservable: any;
+  activeId: any = '';
 
   constructor(
     private communicationService: CommunicationService,
     private teamService: TeamDetailServiceService,
-    private route: Router,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private activeRoute: ActivatedRoute,
+    private route: Router
   ) {
 
   }
 
   ngOnInit(): void {
+    this.activeId = this.activeRoute.snapshot.paramMap.get('teamId');
+    this.communicationService.confirmActiveId(this.activeId);
     this.communicationService.confirmActiveSection('Asset');
     this.getAssets();
     this.listColumns = [
@@ -56,10 +60,10 @@ export class AssetDetailsComponent implements OnInit{
     ]);
   }
   getAssets() {
-    this.teamService.getAssetDetails().subscribe((result: any) => {
-      this.listInfo = result;
+    this.teamService.getAssetDetailById(this.activeId).subscribe((result: any) => {
+      this.listInfo = result.assets;
       this.listObservable = new BehaviorSubject(this.listInfo);
-    })
+    });
   }
 
   addNew(id: any) {
@@ -67,13 +71,15 @@ export class AssetDetailsComponent implements OnInit{
     this.route.navigateByUrl(path+'/'+id);
     this.communicationService.goBackClick(false);
   }
+
   rowClicked(id: any) {
     this.addNew(id);
   }
- delete(id: any) {
-    this.teamService.deleteAssets(id).subscribe((res: any) => {
+
+  delete(id: any) {
+    this.teamService.deleteAsset(this.activeId, id).subscribe((res: any) => {
       this.getAssets();
-    })
+    });
   }
   exportToExcel() {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.listInfo);
