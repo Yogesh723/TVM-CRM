@@ -11,6 +11,7 @@ import { EditEmployeeDetailsComponent } from './team-detail-page/employees-detai
 import { MaintenanceComponent } from '../maintenance/maintenance.component';
 import { JiraPageComponent } from '../jira-page/jira-page.component';
 import { TeamDetailsMaintenanceComponent } from './team-detail-page/team-details-maintenance/team-details-maintenance.component';
+import { AddRowComponent } from 'src/add-row/add-row.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,8 +31,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'jira',
+        path: 'jira-page',
         component:JiraPageComponent
+      },
+      { 
+        path: 'add-row', 
+        component: AddRowComponent
       }
     ]
   },

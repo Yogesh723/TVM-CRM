@@ -1,43 +1,95 @@
 <app-bread-crumb></app-bread-crumb>
 <h1>Office Status Daily Report</h1>
-<div class="col-1">
-  <button id="addBtn" class="btn btn-success add-create" type="submit" (click)="addRow()">
-    <i class="fa-solid fa-plus"></i>
-     Add
-  </button>
-</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Team</th>
-        <th>Employee Name</th>
-        <th>Task Details</th>
-        <th>Status</th>
-        <th>9.30 AM to 11.30 AM</th>
-        <th>11.30 AM to 1.00 PM</th>
-        <th>2.00 PM to 4.00 PM</th>
-        <th>4.00 PM to 6.30 PM</th>
-        <th>Non Billable Hrs</th>
-        <th>Non Billable Status</th>
-        <th>Daily Score</th>
-        <th>Comments</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of rows; let i = index">
-        <td contenteditable="true">{{ row.team }}</td>
-        <td contenteditable="true">{{ row.employeeName }}</td>
-        <td contenteditable="true">{{ row.taskDetails }}</td>
-        <td contenteditable="true">{{ row.status }}</td>
-        <td contenteditable="true">{{ row.morningSession }}</td>
-        <td contenteditable="true">{{ row.middaySession }}</td>
-        <td contenteditable="true">{{ row.afternoonSession }}</td>
-        <td contenteditable="true">{{ row.eveningSession }}</td>
-        <td contenteditable="true">{{ row.nonBillableHrs }}</td>
-        <td contenteditable="true">{{ row.nonBillableStatus }}</td>
-        <td contenteditable="true">{{ row.dailyScore }}</td>
-        <td contenteditable="true" (keydown.enter)="addNewRow($event, i)">{{ row.comments }}</td>
+  <dx-data-grid
+    [dataSource]="rows"
+    (onEditorPreparing)="handleEditorPreparing($event)"
+    (onRowUpdated)="handleRowUpdated($event)"
+    [allowColumnResizing]="true"
+    [allowColumnReordering]="true"
+    [columnAutoWidth]="true"
+    [showBorders]="true"
+    [showRowLines]="true"
+    [showColumnLines]="true"
+    [columnHidingEnabled]="true"
+    [filterRow]="{ visible: true, applyFilter: 'auto' }"
+    [selection]="{ mode: 'single' }"
+    [editing]="{ mode: 'cell', allowUpdating: true, allowAdding: true, allowDeleting: true, texts: { confirmDeleteMessage: 'Are you sure you want to delete this record?' } }"
+    (onInitNewRow)="handleInitNewRow($event)"
+    (onRowRemoving)="handleRowRemoving($event)"
+    (onSaving)="handleSaving($event)"
+    (onSaved)="handleSaved($event)"
+    (onEditCanceled)="handleEditCanceled($event)"
+>
+    <dxo-filter-row [visible]="showFilterRow" [resetOperationText]="'Reset'">
+      <dxo-operation-descriptions
+          [contains]="'Contains'"
+          [notContains]="'DoesNotContain'"
+          [startsWith]="'StartsWith'"
+          [endsWith]="'EndsWith'"
+          [equal]="'Equals'"
+          [notEqual]="'DoesNotEqual'">
+      </dxo-operation-descriptions>
+    </dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]"></dxo-pager>
+    <dxo-sorting [mode]="'multiple'"></dxo-sorting>
+    <dxi-column dataField="sno" caption="S.No."></dxi-column>
+    <dxi-column
+  [dataField]="'year'"
+  [caption]="'Year'"
+  groupCellTemplate="customGroupColumn"
+  [groupIndex]="0"
+></dxi-column>
+<dxi-column
+  [dataField]="'month'"
+  [caption]="'Month'"
+  groupCellTemplate="customGroupColumn"
+  [groupIndex]="1"
+></dxi-column>
+<dxi-column
+  [dataField]="'date'"
+  [caption]="'Date'"
+  groupCellTemplate="customGroupColumn"
+  [groupIndex]="2"
+>
+  <dxo-format type="date" format="dd/MM/yyyy"></dxo-format>
+</dxi-column>
 
-      </tr>
-    </tbody>
-  </table>
+    <dxi-column dataField="team" caption="Team" headerCellTemplate="HeaderTemplate"></dxi-column>
+    <dxi-column dataField="employeeName" caption="Employee Name"></dxi-column>
+    <dxi-column dataField="taskDetails" caption="Task Details"></dxi-column>
+    <dxi-column dataField="status" caption="Status"></dxi-column>
+    <dxi-column dataField="scrumTiming" caption="Scrum with timing"></dxi-column>
+    <dxi-column dataField="morningSession" caption="9.30 AM to 11.30 AM"></dxi-column>
+    <dxi-column dataField="middaySession" caption="11.30 AM to 1.00 PM"></dxi-column>
+    <dxi-column dataField="afternoonSession" caption="2.00 PM to 4.00 PM"></dxi-column>
+    <dxi-column dataField="eveningSession" caption="4.00 PM to 6.30 PM"></dxi-column>
+    <dxi-column dataField="nonBillableHrs" caption="Non Billable Hrs"></dxi-column>
+    <dxi-column dataField="nonBillableStatus" caption="Non Billable Status"></dxi-column>
+    <dxi-column dataField="dailyScore" caption="Daily Score"></dxi-column>
+    <dxi-column dataField="comments" caption="Comments"></dxi-column>
+    <div *dxTemplate="let data of 'customGroupColumn'">
+      <div>{{multiGroupDisplay(data)}}</div>
+    </div>
+    <div *dxTemplate="let info of 'HeaderTemplate'">
+      <i class="fa fa-filter filter-icon pt-2 pr-2 pl-2 pb-2"
+      [ngClass]="{
+        'btn-blue-outline': showFilterRow == false,
+        'btn-danger-outline': showFilterRow === true
+      }"
+      (click)="saveIconFilterState()"
+      >
+      </i>
+      {{ info.column.caption }}
+    </div>
+    
+ 
+    
+</dx-data-grid>
+<dx-speed-dial-action
+  icon="add"
+  label="Add"
+  [index]="1"
+  (onClick)="navigateToAddRow()"
+>
+</dx-speed-dial-action>

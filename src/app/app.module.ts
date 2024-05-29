@@ -9,11 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { JiraPageComponent } from './jira-page/jira-page.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { DxButtonModule, DxDataGridModule,DxSpeedDialActionModule} from 'devextreme-angular';
+import { AddRowComponent } from 'src/add-row/add-row.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,JiraPageComponent
+    AppComponent,JiraPageComponent,AddRowComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,12 @@ import { JiraPageComponent } from './jira-page/jira-page.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    DxDataGridModule,
+    DxButtonModule,
+    DxSpeedDialActionModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()

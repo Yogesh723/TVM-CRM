@@ -24,7 +24,7 @@ export class MaintenanceComponent {
       label: 'Jira',
       iconClass: "fa-brands fa-jira",
       tooltip: 'Jira',
-      route: 'jira'
+      route: 'jira-page'
     },
   ];
   sideNavStatus: boolean = true;
