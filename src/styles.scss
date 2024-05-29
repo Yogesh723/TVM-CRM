@@ -154,4 +154,12 @@ input:checked+.slider:before {
   margin: 12px;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+span.error-message {
+  color: #ed4337;
+  position: absolute;
+  top: 100%;
+  font-size: 14px;
+  font-weight: 500;
+}

@@ -9,10 +9,6 @@ const routes: Routes = [
         component: InterstoreComponent,        
         children: [
             {
-                path: '',
-                component: WaterMarkPageComponent
-            },
-            {
                 path: 'team',
                 loadChildren: () => import('../team-details/team-details.module').then(m => m.TeamDetailsModule)
             }

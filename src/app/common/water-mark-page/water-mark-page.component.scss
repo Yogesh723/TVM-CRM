@@ -1,6 +1,63 @@
-.logo{
-    padding: 15px;
-    border-radius: 35px;
-    width: 200px;
-    height: 200px;
+.login-form {
+  position: absolute;
+  top: 20px;
+  left: 61%;
+  min-width: 350px;
+  max-width: 600px;
+  margin: auto;
+
+  .form-heading {
+    h2 {
+      font-weight: bold;
+      color: #1a1a1a;
+      margin-top: 15%;  
+    }
+
+    span {
+      color: #000;
+    }
+  }
+
+  .input-group {
+    height: 50px;
+    width: 50%;
+
+    .form-control {
+      border-left-width: 0;
+      padding-left: 0;
+      border-color: #9da7b6;
+
+      &.b-left {
+        border-right-width: 0;
+      }
+    }
+
+    .input-group-text {
+      background-color: transparent;
+      border-color: #9da7b6;
+
+      i {
+        color: #616161;
+      }
+
+      .hide {
+        display: none;
+      }
+    }
+  }
+
+  label.check {
+    color: #616161;
+  }
+
+  .login-btn {
+    background-color: #139d3a;
+    color: #fff;
+    width: 50%;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
 }
