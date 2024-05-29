@@ -9,41 +9,29 @@ import { Row } from '../../src/app/jira-page/jira-interface'
   styleUrls: ['./add-row.component.scss']
 })
 export class AddRowComponent {
-  newRow: Row = {
-
-    date: '',
-    team: '',
-    employeeName: '',
-    taskDetails: '',
-    status: '',
-    scrumTiming: '',
-    morningSession: '',
-    middaySession: '',
-    afternoonSession: '',
-    eveningSession: '',
-    nonBillableHrs: '',
-    nonBillableStatus: '',
-    dailyScore: '',
-    comments: '',
-    year: '',
-    month: ''
-  };
-  monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  Pageheader = 'Add New Asset';
+  newRow: Row;
+  currentDate = new Date();
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+  Pageheader = 'Fill Status Update';
   formObject = {
     General: [
       {
         name: "date",
-        label: "Date"
+        label: "Date",
+        value: this.currentDate.getDate()
       },
       {
         name: "month",
-        label: "Month"
+        label: "Month",
+        value: this.months[this.currentDate.getMonth()]
       },
       {
         name: "year",
-        label: "Year"
+        label: "Year",
+        value: this.currentDate.getFullYear()
       },
+
       {
         name: "team",
         label: "Team"
@@ -90,7 +78,8 @@ export class AddRowComponent {
       },
       {
         name: "dailyScore",
-        label: "Daily Score"
+        label: "Daily Score",
+        value:"*"
       },
       {
         name: "comments",
@@ -102,7 +91,26 @@ export class AddRowComponent {
     ]
   };
 
-  constructor(private router: Router,private jiradataservice:JiraDataService) {}
+  constructor(private router: Router,private jiradataservice:JiraDataService) {
+    this.newRow = {
+      date: '',
+      team: '',
+      employeeName: '',
+      taskDetails: '',
+      status: '',
+      scrumTiming: '',
+      morningSession: '',
+      middaySession: '',
+      afternoonSession: '',
+      eveningSession: '',
+      nonBillableHrs: '',
+      nonBillableStatus: '',
+      dailyScore: '',
+      comments: '',
+      year: '',
+      month: ''
+    };
+  }
 
   saveRow(formValue: any) {
     this.jiradataservice.addRow(formValue);

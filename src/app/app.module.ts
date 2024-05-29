@@ -10,9 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { JiraPageComponent } from './jira-page/jira-page.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
-import { DxButtonModule, DxDataGridModule,DxSpeedDialActionModule} from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule,DxSelectBoxModule,DxSpeedDialActionModule, DxTagBoxModule} from 'devextreme-angular';
 import { AddRowComponent } from 'src/add-row/add-row.component';
-
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,10 @@ import { AddRowComponent } from 'src/add-row/add-row.component';
     DxDataGridModule,
     DxButtonModule,
     DxSpeedDialActionModule,
-    FormsModule
+    FormsModule,
+    DxSelectBoxModule,
+    DxTagBoxModule,
+    MultiSelectModule
   ],
   providers: [
     provideAnimationsAsync()
