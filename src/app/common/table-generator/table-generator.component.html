@@ -5,13 +5,13 @@
     </div>
   </div>
       <div *ngIf="Showexportbutton">
-        <button type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
+        <button [title]="'Export'" type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
           <i class="fa-solid fa-upload"></i>
         </button>
       </div>
       
       <div *ngIf="Showexportbutton">
-        <button type="button" class="btn btn-secondary download" (click)="importFromExcel()">
+        <button [title]="'Import'" type="button" class="btn btn-secondary download" (click)="importFromExcel()">
           <i class="fa-solid fa-download"></i>
         </button>
       </div>
