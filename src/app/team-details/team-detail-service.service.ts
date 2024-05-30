@@ -12,7 +12,9 @@ export class TeamDetailServiceService {
   getTeamDetails() {
     return this.http.get('http://localhost:3000/teamdetails');
   }
-
+  getEmployeeDetails(){
+  return this.http.get('http://localhost:3000/employeedetails');
+  }
   edit(requestBody: any) {
     return this.http.get('http://localhost:3000/edit');
   }
