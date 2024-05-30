@@ -29,7 +29,14 @@ export class TeamDetailsMaintenanceComponent {
       label: 'Employees',
       iconClass: 'fas fa-user employeedetails',
       tooltip: 'Employees'
-    }
+    },
+    {
+      section: 'time-sheet',
+      name: 'timesheet',
+      label: 'Attendance',
+      iconClass: "fa-solid fa-clock",
+      tooltip: 'Time Sheet'
+    },
   ];
   selectedMenuItem: string = '';
   sideNavStatus: boolean = true;

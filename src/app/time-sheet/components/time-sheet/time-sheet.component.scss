@@ -1,0 +1,62 @@
+
+#listTableHdr {
+    width: 100%;
+  }
+  
+  #listTableHdr th {
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+  }
+  
+  #listTableHdr td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  #listTableHdr tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+   .aligedelete{
+    cursor: pointer;
+  }
+  .add-create{
+      position: relative;
+      top: 9px;
+      left: 5px;
+      min-width: 90px;
+      max-width: 90px;
+      height: 40px;
+  }
+  .no-records-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 517px;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+        .upload{
+          position: relative;
+          float: inline-end;
+          top: 11px;
+          right: 155px;
+          width: 65px;
+      }
+      .download{
+      position: relative;
+      float: inline-end;  
+      top: 11px;
+      width: 65px;
+      right: 18px;
+    }
+  }

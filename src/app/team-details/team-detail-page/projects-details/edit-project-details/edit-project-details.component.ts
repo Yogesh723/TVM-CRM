@@ -36,7 +36,7 @@ export class EditProjectDetailsComponent implements OnInit {
         pickList: [ ]
       },
       {
-        name: "state",
+        name: "active",
         label: "Active/Inactive",
         type: "Toggle",
         value: false
@@ -84,7 +84,7 @@ export class EditProjectDetailsComponent implements OnInit {
         label: "Relieving date",
         type: "Date",
         readonly: false
-      },
+      }
     ]
   };
   activeId: any = 0;
@@ -154,7 +154,7 @@ export class EditProjectDetailsComponent implements OnInit {
   }
 
   formGenerated(event: any) {
-    this.formGenerationComponent.appForm.controls['state'].valueChanges.subscribe((res: any) => {
+    this.formGenerationComponent.appForm.controls['active'].valueChanges.subscribe((res: any) => {
       this.projectDetails.General.map((e: any) => {
         if(e.name == 'relieving') {
           if (res == true) {

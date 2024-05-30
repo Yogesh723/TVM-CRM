@@ -1,14 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
-import * as XLSX from 'xlsx';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject } from 'rxjs';
+import * as XLSX from 'xlsx';
 
 @Component({
-  selector: 'app-table-generator',
-  templateUrl: './table-generator.component.html',
-  styleUrl: './table-generator.component.scss'
+  selector: 'app-time-sheet',
+  templateUrl: './time-sheet.component.html',
+  styleUrl: './time-sheet.component.scss'
 })
-export class TableGeneratorComponent implements OnInit {
+export class TimeSheetComponent {
+  appForm!: FormGroup;
   selectedPrjct: any;
   prjctData: any = [];
   showCardView: boolean = true;
@@ -18,8 +20,76 @@ export class TableGeneratorComponent implements OnInit {
   sortedColumn = '';
   isCardView: boolean = false;
   searchDropDownItems: any = [];
-  @Input() _listInfo: any = [];
-  @Input() listColumns: any = [];
+  @Input() _listInfo: any = [
+    {
+      "empName": "Yogesh",
+      "sun": "",
+      "mon": "",
+      "tue": "",
+      "wed": "",
+      "thu": "",
+      "fri": "",
+      "sat": ""
+    }
+  ];
+  @Input() listColumns: any = [
+    {
+      name: "empName",
+      label: "Employee Name",
+      widthPct: 10,
+      hidden: false,
+      type: 'label'
+    },
+    {
+      name: "sun",
+      label: "sunday",
+      widthPct: 10,
+      hidden: false,
+      date: '26 May 2024'
+    },
+    {
+      name: "mon",
+      label: "monday",
+      widthPct: 10,
+      hidden: false,
+      date: '27 May 2024'
+    },
+    {
+      name: "tue",
+      label: "tuesday",
+      widthPct: 10,
+      hidden: false,
+      date: '28 May 2024'
+    },
+    {
+      name: "wed",
+      label: "wednesday",
+      widthPct: 10,
+      hidden: false,
+      date: '29 May 2024'
+    },
+    {
+      name: "thu",
+      label: "thursday",
+      widthPct: 10,
+      hidden: false,
+      date: '30 May 2024'
+    },
+    {
+      name: "fri",
+      label: "friday",
+      widthPct: 10,
+      hidden: false,
+      date: '31 May 2024'
+    },
+    {
+      name: "sat",
+      label: "saturday",
+      widthPct: 10,
+      hidden: false,
+      date: '01 June 2024'
+    }
+  ];;
   @Input() Pageheader: any = '';
   @Input() showHeader: boolean = true;
   @Input() dynamcicImport: boolean = false;
@@ -31,7 +101,7 @@ export class TableGeneratorComponent implements OnInit {
   @Output() addNew = new EventEmitter();
   @Output() deleteclicked = new EventEmitter();
   @Output() importSave = new EventEmitter();
-
+  
   listInfo: any = [];
 
 
@@ -143,7 +213,8 @@ export class TableGeneratorComponent implements OnInit {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   }
-  importFromExcel() {
+  
+  importFromExcel() {debugger
     const inputElement: HTMLInputElement = document.createElement('input');
     inputElement.type = 'file';
     inputElement.accept = '.xlsx';
@@ -198,4 +269,59 @@ export class TableGeneratorComponent implements OnInit {
 
     inputElement.click();
   }
+
+  importExcelDynamic() {
+    const inputElement: HTMLInputElement = document.createElement('input');
+    inputElement.type = 'file';
+    inputElement.accept = '.xlsx';
+  
+    // Define the expected headers
+    const expectedHeaders = this.listColumns.map((e: any) => e.name);
+  
+    inputElement.addEventListener('change', (event: any) => {
+      const file: File = event.target.files[0];
+      const reader: FileReader = new FileReader();
+
+      reader.onload = (e: any) => {
+        const data: string = e.target.result;
+        const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
+        const worksheetName: string = workbook.SheetNames[0];
+        const worksheet: XLSX.WorkSheet = workbook.Sheets[worksheetName];
+        const importedData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        
+        const importedHeaders = importedData[0];
+        const hasAtLeastOneExpectedHeader = expectedHeaders.some((header: any) => importedHeaders.includes(header));
+
+        if (!hasAtLeastOneExpectedHeader) {
+          alert('Error: The imported file does not have any of the required columns.');
+          return;
+        }
+
+        // Assign the imported data to _listInfo
+        let tempArr: any = [];
+        importedData.forEach((element, index) => {
+          if (index > 0 ) {
+            let obj: any = {};
+            let i = 0;
+            for (const section of importedData[0]) {
+              if (expectedHeaders.includes(section) || section == 'id') {
+                obj[section] = element[i];
+                i += 1;
+              }
+            }
+            tempArr.push(obj);
+          }
+        });
+        this._listInfo = [...tempArr]; // Skip header row if it exists
+        // Emit the updated data through the observable
+        this.importSave.emit(this._listInfo);
+        this.listObservable.next(this._listInfo);
+      };
+
+      reader.readAsBinaryString(file);
+    });
+
+    inputElement.click();
+  }
+
 }

@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CommunicationService } from 'src/app/common/communication.service';
 import { BreadcrumbService } from 'src/app/bread-crumb/bread-crumb.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-projects-details',
@@ -23,6 +24,7 @@ export class ProjectsDetailsComponent {
     private route: Router,
     private breadcrumbService: BreadcrumbService,
     private activeRoute: ActivatedRoute,
+    private toastr:ToastrService
   ) {
 
   }
@@ -34,40 +36,76 @@ export class ProjectsDetailsComponent {
     this.getProjects();
     this.projectColumns = [
       {
-        "name": "profile",
-        "label": "Profile",
-        "widthPct": 10,
-        "hidden": false
+        name: "profile",
+        label: "Profile",
+        widthPct: 10,
+        hidden: false
       },
       {
-        "name": "voice",
-        "label": "Voice",
-        "widthPct": 10,
-        "hidden": false
+        name: "voice",
+        label: "Voice",
+        widthPct: 10,
+        hidden: false
       },
       {
-        "name": "developer",
-        "label": "Developer",
-        "widthPct": 10,
-        "hidden": false
+        name: "developer",
+        label: "Developer",
+        widthPct: 10,
+        hidden: false
       },
       {
-        "name": "state",
-        "label": "Active",
-        "widthPct": 10,
-        "hidden": false
+        name: "active",
+        label: "Active",
+        widthPct: 10,
+        hidden: false
       },
       {
-        "name": "joining",
-        "label": "Joining Date",
-        "widthPct": 10,
-        "hidden": false 
+        name: "parent",
+        label: "Parent Company",
+        widthPct: 10,
+        hidden: false
       },
       {
-        "name": "manager",
-        "label": "Reporting Manager",
-        "widthPct": 10,
-        "hidden": false 
+        name: "client",
+        label: "Client Company",
+        widthPct: 10,
+        hidden: false
+      },
+      {
+        name: "mail",
+        label: "Mail",
+        widthPct: 10,
+        hidden: false
+      },
+      {
+        name: "password",
+        label: "Password",
+        widthPct: 10,
+        hidden: false
+      },
+      {
+        name: "manager",
+        label: "Reporting Manager",
+        widthPct: 10,
+        hidden: false 
+      },
+      {
+        name: "contact",
+        label: "Contact Number",
+        widthPct: 10,
+        hidden: false
+      },
+      {
+        name: "joining",
+        label: "Joining Date",
+        widthPct: 10,
+        hidden: false 
+      },
+      {
+        name: "relieving",
+        label: "Relieving date",
+        widthPct: 10,
+        hidden: false
       }
     ];
     this.breadcrumbService.setBreadcrumbs([
@@ -81,7 +119,7 @@ export class ProjectsDetailsComponent {
     this.teamService.getProjectDetailById(this.activeId).subscribe((result: any) => {
       this.projectListInfo = result.projects;
       this.projectListInfo.forEach((element: any) => {
-        element.state = element.state == true ? 'Yes' : 'No';
+        element.active = element.active == true ? 'Yes' : 'No';
         element.joining = new DatePipe('en-US').transform(element.joining, 'MM/dd/yyyy');
       });
       this.listObservable = new BehaviorSubject(this.projectListInfo);
@@ -101,6 +139,7 @@ export class ProjectsDetailsComponent {
   saveImorteddetails(event: any) {
     this.teamService.addProject(this.activeId, event, 'importSave').subscribe((result: any) => {
       // this.route.navigateByUrl('/tvm/team/teamdetail/Employees/' + this.activeId);
+      this.toastr.success('Success: The files has imported successfully.');
     });
   }
 

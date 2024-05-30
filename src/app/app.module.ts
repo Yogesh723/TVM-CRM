@@ -12,6 +12,8 @@ import { JiraPageComponent } from './jira-page/jira-page.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { DxButtonModule, DxDataGridModule,DxSpeedDialActionModule} from 'devextreme-angular';
 import { AddRowComponent } from 'src/add-row/add-row.component';
+import { ToastrModule,provideToastr } from 'ngx-toastr';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -25,12 +27,21 @@ import { AddRowComponent } from 'src/add-row/add-row.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NgSelectModule,
     BrowserAnimationsModule,
     HttpClientModule,
     DxDataGridModule,
     DxButtonModule,
     DxSpeedDialActionModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+      closeButton : true,
+      timeOut:7000,
+      extendedTimeOut:7000,
+      progressBar:true,
+      positionClass: 'toast-top-right',
+      preventDuplicates:true
+    })
   ],
   providers: [
     provideAnimationsAsync()

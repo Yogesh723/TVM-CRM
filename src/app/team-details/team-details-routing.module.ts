@@ -57,6 +57,10 @@ const routes: Routes = [
         component: EmployeesDetailsComponent
       },
       {
+        path: 'time-sheet/:teamId',
+        loadChildren: () => import('../time-sheet/time-sheet.module').then(m => m.TimeSheetModule)
+      },
+      {
         path: 'Asset/:teamId/:aasetId',
         component: EditAssetComponent
       },
