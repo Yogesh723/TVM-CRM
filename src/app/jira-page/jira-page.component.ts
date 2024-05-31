@@ -51,7 +51,7 @@ export class JiraPageComponent implements OnInit {
       { label: 'JIRA Page', url: this.route.url }
     ]);
 
-    this.jiradataservice.rows$.subscribe(rows => {debugger
+    this.jiradataservice.rows$.subscribe(rows => {
       this.rows = rows;
     });
   }

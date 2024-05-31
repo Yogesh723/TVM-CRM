@@ -33,7 +33,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DxDataGridModule,
     DxButtonModule,
     DxSpeedDialActionModule,
-    FormsModule,
     ToastrModule.forRoot({
       closeButton : true,
       timeOut:7000,

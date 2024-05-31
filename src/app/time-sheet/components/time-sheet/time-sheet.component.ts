@@ -214,7 +214,7 @@ export class TimeSheetComponent {
     document.body.removeChild(downloadLink);
   }
   
-  importFromExcel() {debugger
+  importFromExcel() {
     const inputElement: HTMLInputElement = document.createElement('input');
     inputElement.type = 'file';
     inputElement.accept = '.xlsx';

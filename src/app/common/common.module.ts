@@ -16,41 +16,49 @@ import { UploadImagesComponent } from './upload-image/upload-image.component';
 import { FileUploadService } from '../Serviceimage/file-upload.Services';
 import { BreadcrumbComponent } from '../bread-crumb/bread-crumb.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatSelectModule } from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AppModule } from "../app.module";
 
 @NgModule({
-  declarations: [
-    WaterMarkPageComponent,
-    InterstoreComponent,
-    NavBarComponent,
-    SideNavBarComponent,
-    SearchComponent,
-    CardTableViewControllerComponent,
-    FormGeneratorComponent,
-    TableGeneratorComponent,
-    UploadImagesComponent,
-    BreadcrumbComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    CommonTvmRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    CalendarModule,
-    NgSelectModule
-  ],
-  exports: [
-    NavBarComponent,
-    SideNavBarComponent,
-    SearchComponent,
-    CardTableViewControllerComponent,
-    FormGeneratorComponent,
-    TableGeneratorComponent,
-    UploadImagesComponent,
-    BreadcrumbComponent
-  ],
-  providers: [
-    FileUploadService
-  ]
+    declarations: [
+        WaterMarkPageComponent,
+        InterstoreComponent,
+        NavBarComponent,
+        SideNavBarComponent,
+        SearchComponent,
+        CardTableViewControllerComponent,
+        FormGeneratorComponent,
+        TableGeneratorComponent,
+        UploadImagesComponent,
+        BreadcrumbComponent
+    ],
+    exports: [
+        NavBarComponent,
+        SideNavBarComponent,
+        SearchComponent,
+        CardTableViewControllerComponent,
+        FormGeneratorComponent,
+        TableGeneratorComponent,
+        UploadImagesComponent,
+        BreadcrumbComponent,
+    ],
+    providers: [
+        FileUploadService
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        CommonTvmRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CalendarModule,
+        NgSelectModule,
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        AppModule
+    ]
 })
 export class CommonTvmModule { }

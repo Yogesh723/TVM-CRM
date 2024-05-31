@@ -59,7 +59,7 @@ export class TeamDetailServiceService {
     return this.http.get(`${'http://localhost:3000/projectdetails'}/${id}`);
   }
 
-  getProjectsById(teamId: string, projectId: string) {debugger
+  getProjectsById(teamId: string, projectId: string) {
     return this.http.get(`${'http://localhost:3000/projectdetails'}/${teamId}`).pipe(
     map((result: any) => {
       return result.projects.filter((item: any) => item.id == projectId);
@@ -74,7 +74,7 @@ export class TeamDetailServiceService {
     return this.http.get(`${'http://localhost:3000/employeedetails'}/${id}`);
   }
 
-  getEmployeeById(teamId: string, empId: string) {debugger
+  getEmployeeById(teamId: string, empId: string) {
     return this.http.get(`${'http://localhost:3000/employeedetails'}/${teamId}`).pipe(
     map((result: any) => {
       return result.employees.filter((item: any) => item.id == empId);

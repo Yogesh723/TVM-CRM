@@ -130,7 +130,7 @@ export class EditProjectDetailsComponent implements OnInit {
   }
 
   getProjectDetail() {
-    this.teamService.getProjectsById(this.teamId, this.activeId).forEach((result: any) => {debugger
+    this.teamService.getProjectsById(this.teamId, this.activeId).forEach((result: any) => {
       // let res = result.filter((e: any) => e.id == this.activeId)[0];
       for (const section in result[0]) {
         if (section !== 'id')

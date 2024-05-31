@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { TeamDetailServiceService } from 'src/app/team-details/team-detail-service.service';
 import { SessionTimeoutService } from '../services/session-timeout.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth.service';
+
 @Component({
   selector: 'app-water-mark-page',
   templateUrl: './water-mark-page.component.html',
@@ -12,9 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 export class WaterMarkPageComponent {
   loginSuccess = false;
   formSubmitted = false;
-  
+
   public showPassword: boolean = false;
-  token: string | undefined;
   loginForm!: FormGroup;
   teamDetails: any = [];
   employeDetails: any = [];
@@ -22,15 +23,13 @@ export class WaterMarkPageComponent {
   @Output() loginSuccessEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private formb: FormBuilder, 
+    private formb: FormBuilder,
     private router: Router,
     private teamservice: TeamDetailServiceService,
     private sessionTimeoutService: SessionTimeoutService,
-    private toastr: ToastrService
-
-  ){
-    this.token = undefined;
-  }
+    private toastr: ToastrService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formb.group({
@@ -39,12 +38,10 @@ export class WaterMarkPageComponent {
     });
     this.teamservice.getTeamDetails().subscribe((result: any) => {
       this.teamDetails = result;
-      console.log(this.teamDetails);      
     });
     this.teamservice.getEmployeeDetails().subscribe((result: any) => {
-      this.employeDetails= result[0].employees;
-      console.log(this.employeDetails)
-    })
+      this.employeDetails = result[0].employees;
+    });
   }
 
   get f() {

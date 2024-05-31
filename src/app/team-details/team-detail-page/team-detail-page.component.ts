@@ -50,7 +50,7 @@ export class TeamDetailPageComponent implements OnInit {
   }
 
   saveForm(formValue: any) {
-    this.detailService.save(formValue).subscribe((listResult: any) => {debugger
+    this.detailService.save(formValue).subscribe((listResult: any) => {
       this.detailService.saveAssetDetails({ id: listResult.id, assets: [] }).subscribe((assetResult: any) => {
         this.detailService.saveProjectDetails({ id: listResult.id, projects: [] }).subscribe((projectResult: any) => {
           this.detailService.saveEmployeeDetails({ id: listResult.id, employees: [] }).subscribe((employeeResult: any) => {

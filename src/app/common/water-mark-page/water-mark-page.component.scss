@@ -1,7 +1,16 @@
+.login-bg {
+  background-image: url("../../../assets/loginBackground.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 93vh;
+  font-family: "Overpass", sans-serif;
+}
 .login-form {
   position: absolute;
-  top: 20px;
-  left: 67%;
+  top: 106px;
+  left: 7%;
   min-width: 350px;
   max-width: 500px;
   margin: auto;
@@ -10,7 +19,6 @@
     h2 {
       font-weight: bold;
       color: #1a1a1a;
-      margin-top: 15%;  
     }
 
     span {

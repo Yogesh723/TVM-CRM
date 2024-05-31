@@ -60,7 +60,7 @@ export class AssetDetailsComponent implements OnInit{
     ]);
   }
   getAssets() {
-    this.teamService.getAssetDetailById(this.activeId).subscribe((result: any) => {debugger
+    this.teamService.getAssetDetailById(this.activeId).subscribe((result: any) => {
       this.listInfo = result.assets;
       this.listObservable = new BehaviorSubject(this.listInfo);
     });
