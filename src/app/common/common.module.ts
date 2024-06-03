@@ -57,8 +57,7 @@ import { AppModule } from "../app.module";
         NgSelectModule,
         MatSelectModule,
         MatInputModule,
-        MatFormFieldModule,
-        AppModule
+        MatFormFieldModule
     ]
 })
 export class CommonTvmModule { }
