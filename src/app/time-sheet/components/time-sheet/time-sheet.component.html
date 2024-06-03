@@ -4,100 +4,87 @@
       <h3 id="itemHeading" class="d-inline" *ngIf="showHeader">{{Pageheader}}</h3>
     </div>
   </div>
-      <div *ngIf="Showexportbutton">
-        <button [title]="'Export'" type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
-          <i class="fa-solid fa-upload"></i>
-        </button>
-      </div>
-      
-      <div *ngIf="Showexportbutton">
-        <button [title]="'Import'" type="button" class="btn btn-secondary download" (click)="dynamcicImport ? importExcelDynamic() : importFromExcel()">
-          <i class="fa-solid fa-download"></i>
-        </button>
-      </div>
   <ng-container>
     <!-- Search bar Start -->
-    <div class="row" #searchBar>
-      <div class="col-9 my-2">
-        <app-search *ngIf="_listInfo.length > 0" id="listSearch" #listSearch (search)="filterTable($event)"
-          (searchByItemSelected)="filterTable($event)" placeHolder="{{placeHolder}}"
-          [searchDropDownItems]="searchDropDownItems"></app-search>
-      </div>
-      <div class="col-1">
-        <button id="addBtn" class="btn btn-success add-create" type="submit" (click)="createNew(0)">
-          <i class="fa-solid fa-plus"></i>
-           Add
-        </button>
-      </div>
-      <div *ngIf="showCardView == true" class="col-1">
-        <app-card-table-view-controller *ngIf="_listInfo.length > 0" [isCardView]="isCardView"
-          (cardView)="cardView($event)"></app-card-table-view-controller>
+    <div class="row" style="margin-top: 5%;margin-bottom: 5%;">
+      <div class="col-md-12">
+          <div class="form-group row">
+              <label id="creaedFrmDate_lbl" class="col-md-1 control-label"
+                style="text-align: center; margin-top: 0.65rem;">
+                  Date
+              </label>
+              <div class="col-md-4">
+                  <p-calendar id="createdFrmDate_calender" #createdFromDateComp [readonlyInput]='true'
+                      [inputStyle]="{'width':'100%'}" name="createdFrmDate" [showIcon]="true" 
+                      [(ngModel)]="createdFromDate" (onSelect)="onDateSelect($event)" [iconDisplay]="'input'" 
+                      [minDate]="minDate"  [maxDate]="maxDate" >
+                  </p-calendar>
+              </div>
+          </div>
       </div>
     </div>
     <!-- Search bar End -->
-    <!-- list view -->
-    <ng-container *ngIf="!isCardView || showCardView != true">
-      <div *ngIf="_listInfo?.length !== 0; else noRecords">
-        <table id="listTableHdr" class="table table-responsive">
-          <thead>
-            <tr>
-              <th *ngFor="let col of listColumns; index as j" id="col{{ col.name }}" [style.width.%]="col.widthPct">
-                <div>
-                  {{col.date}}
-                </div>
-                <div>
-                  {{ col.label }}
-                </div>
-              </th>
-              <th style="width: 4%;">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container>
-              <tr *ngFor="let info of _listInfo ; index as i" id="listObservable{{ i }}" class="table-expand-row">
-                <ng-container *ngFor="let col of listColumns; index as j">
-                  <td id="col{{ col.name }}{{ j }}{{ i }}" (click)="rowClick(info.id)">
-                    <ng-container *ngIf="col.type == 'label';else dropdown">
-                      {{info[col.name]}}
-                    </ng-container>  
-                    <ng-template #dropdown>
-                      <ng-select 
-                        clearAllText="Clear"
-                        dropdownPosition="auto"
-                        [items]="[{'label': 'WFO', 'value': 1}]"
-                        dropdownPosition="auto"
-                        [placeholder]="'select'"
-                        dropdownPosition="auto"
-                        id="select_{{ i }}"
-                      >
-                        <ng-template ng-option-tmp let-item="item" let-index="index">
-                          <div>
-                              {{ item.label }}
-                          </div>
-                        </ng-template>
-                      </ng-select>
-                    </ng-template>            
-                  </td>
-                </ng-container>
-                <ng-container>
-                  <td class="deleteRow">
-                    <button class="btn btn-danger aligedelete" (click)="deleteRow(info.id)">
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </td>
-                </ng-container>
+    <form *ngIf="_listInfo?.length !== 0" [formGroup]="appForm">
+      <!-- list view -->
+      <ng-container>
+        <div>
+          <table id="listTableHdr" class="table table-responsive">
+            <thead>
+              <tr>
+                <th *ngFor="let col of listColumns; index as j" id="col{{ col.name }}" [style.width.%]="col.widthPct" style="text-align: center;">
+                  <div *ngIf="col.date">
+                    {{col.date}}
+                  </div>
+                  <div [ngClass]="col.date ? '' : 'mb-3'">
+                    {{ col.label }}
+                  </div>
+                </th>
               </tr>
-            </ng-container>
-            <ng-content></ng-content>
-          </tbody>
-        </table>
-      </div>
-      <ng-template #noRecords>
-        <div class="no-records-container">
-          <p>No rows to show</p>
+            </thead>
+            <tbody>
+              <ng-container>
+                <tr *ngFor="let info of _listInfo ; index as i" id="listIfo{{ i }}" class="table-expand-row">
+                  <ng-container *ngFor="let col of listColumns; index as j">
+                    <td id="col{{ col.name }}{{ j }}{{ i }}" [ngStyle]="{'text-align': col.type == 'label' ? 'center': ''}">
+                      <ng-container *ngIf="col.type == 'label';else dropdown">
+                        {{info[col.name]}}
+                      </ng-container>  
+                      <ng-template #dropdown>
+                        <ng-select 
+                          clearAllText="Clear"
+                          dropdownPosition="auto"
+                          [bindLabel]="'label'"
+                          [bindValue]="'value'"
+                          [items]="[{'label': 'WFO', 'value': 1}]"
+                          dropdownPosition="auto"
+                          [placeholder]="'select'"
+                          dropdownPosition="auto"
+                          (change)="setSelectionToVariable(info,$event, col)"
+                          [formControlName]="getControlName(info, col)"
+                          id="select_{{ i }}"
+                        >
+                          <ng-template ng-option-tmp let-item="item" let-index="index">
+                            <div>
+                                {{ item.label }}
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                      </ng-template>            
+                    </td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+              <ng-content></ng-content>
+            </tbody>
+          </table>
         </div>
-      </ng-template>
-    </ng-container>
-    <!-- list view -->
+        <ng-template #noRecords>
+          <div class="no-records-container">
+            <p>No rows to show</p>
+          </div>
+        </ng-template>
+      </ng-container>
+      <!-- list view -->
+    </form>
   </ng-container>
 </div>
