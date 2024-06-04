@@ -14,9 +14,17 @@ import { DatePipe } from '@angular/common';
 })
 export class TimeSheetComponent {
   appForm!: FormGroup;
+  monthForm!: FormGroup;
   maxDate = new Date();
   minDate = new Date('01 May 2024');
+  pickList = [
+    {'label': 'WFO', 'value': 1},
+    {'label': 'WFH', 'value': 2},
+    {'label': 'L', 'value': 3},
+    {'label': 'H', 'value': 3}
+  ];
   _listInfo: any = [];
+  monthInfo: any = [];
   listColumns: any = [
     {
       name: "empName",
@@ -75,8 +83,10 @@ export class TimeSheetComponent {
       date: '01 June 2020'
     }
   ];
+  monthColumns: any = [];
   Pageheader: any = 'Time Sheet';
   showHeader: boolean = false;
+  isMonthView: boolean = false;
   createdFromDate: any = new Date();
   listInfo: any = [];
 
@@ -85,12 +95,63 @@ export class TimeSheetComponent {
     private communicationService: CommunicationService,
     private timesheetService: TimeSheetService,
     private formBuilder: FormBuilder
-  ) { 
+  ) {
+ 
   }
+
   ngOnInit() {
     this.communicationService.confirmActiveSection('time-sheet');
-    this.onDateSelect(this.createdFromDate);
+    this.isMonthView ? this.onMonthDateSelect(this.createdFromDate) : this.onDateSelect(this.createdFromDate);
+  }
+
+  viewChange(value: boolean) {
+    this.isMonthView = value;
+    this.isMonthView ? this.onMonthDateSelect(this.createdFromDate) : this.onDateSelect(this.createdFromDate);
+  }
+
+  onDateSelect(selectedDate: Date) {
+    const weekDates = this.getWeekDates(selectedDate);
+    this.listColumns.forEach((column: any, index: any) => {
+      if (index > 0) {
+        column.date = weekDates[index - 1];
+      }
+    });
     this.loadTimesheetData();
+  }
+
+  getWeekDates(date: Date): string[] {
+    const startDate = new Date(date);
+    const dayOfWeek = startDate.getDay(); 
+    const weekDates = [];
+    startDate.setDate(startDate.getDate() - dayOfWeek); 
+    for (let i = 0; i < 7; i++) {
+      const weekDate = new Date(startDate);
+      weekDates.push(this.formatDate(weekDate)); 
+      startDate.setDate(startDate.getDate() + 1);
+    }
+    return weekDates;
+  }
+
+  formatDate(date: Date): string {
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: '2-digit' };
+    return date.toLocaleDateString('en-GB', options);
+  }
+
+  loadTimesheetData() {
+    this.timesheetService.getTimesheetData().subscribe(
+      (data: any) => {
+        if (this.isMonthView) {
+          this.monthInfo = data;
+          this.monthinitForm();
+        } else {
+          this._listInfo = data;
+          this.initForm();
+        }
+      },
+      (error) => {
+        this.toastr.error('Failed to load timesheet data');
+      }
+    );
   }
 
   private initForm() {
@@ -110,15 +171,24 @@ export class TimeSheetComponent {
               let selDate = selMonth[0].date.filter((ele: any) => ele.id == date);
               if (selDate.length > 0) {
                 const controlValue = selDate[0].value || '';
-                formModel[controlName] = new FormControl(controlValue, Validators.required);
+                if (new Date() > new Date(items.date) && this.formatDate(new Date()) !== this.formatDate(new Date(items.date))) {
+                  formModel[controlName] = new FormControl(controlValue, Validators.required);
+                  items.readOnly = true;
+                } else {
+                  formModel[controlName] = new FormControl(controlValue, Validators.required);
+                  items.readOnly = false;
+                }
               } else {
                 formModel[controlName] = new FormControl(null, Validators.required);
+                items.readOnly = false;
               }
             } else {
               formModel[controlName] = new FormControl(null, Validators.required);
+              items.readOnly = false;
             }
           } else {
             formModel[controlName] = new FormControl(null, Validators.required);
+            items.readOnly = false;
           }
         }
     
@@ -129,6 +199,30 @@ export class TimeSheetComponent {
 
   getControlName(event: any, col: any) {
     return event.empId + '_' + col.name;
+  }
+
+  getValue(event: any, col: any) {
+    let result;
+   this.pickList.forEach((e: any) => {
+    if (
+    e.value == this.appForm.value[event.empId + '_' + col.name]
+    ) {
+      result = e.label;
+    }
+  });
+  return result;
+  }
+
+  getMonthFormValue(event: any, col: any) {
+    let result;
+   this.pickList.forEach((e: any) => {
+    if (
+    e.value == this.monthForm.value[event.empId + '_' + col.name]
+    ) {
+      result = e.label;
+    }
+  });
+  return result;
   }
 
   setSelectionToVariable(field: any, event: any, col: any) {
@@ -174,43 +268,133 @@ export class TimeSheetComponent {
     }
   }
 
-  loadTimesheetData() {
-    this.timesheetService.getTimesheetData().subscribe(
-      (data: any) => {
-        this._listInfo = data;
-        this.initForm();
-      },
-      (error) => {
-        this.toastr.error('Failed to load timesheet data');
-      }
-    );
+  monthView(event: any) {
+    if (event) {
+      this.isMonthView = event;
+    }
   }
 
-  onDateSelect(selectedDate: Date) {
-    const weekDates = this.getWeekDates(selectedDate);
-    this.listColumns.forEach((column: any, index: any) => {
-      if (index > 0) {
-        column.date = weekDates[index - 1];
-      }
-    });
+  
+  onMonthDateSelect(selectedDate: Date) {
+    const monthDates = this.getMonthDates(selectedDate);
+    this.monthColumns = this.generateMonthColumns(monthDates);
     this.loadTimesheetData();
   }
 
-  getWeekDates(date: Date): string[] {
-    const startDate = new Date(date);
-    const dayOfWeek = startDate.getDay(); 
-    const weekDates = [];
-    startDate.setDate(startDate.getDate() - dayOfWeek); 
-    for (let i = 0; i < 7; i++) {
-      const weekDate = new Date(startDate);
-      weekDates.push(this.formatDate(weekDate)); 
-      startDate.setDate(startDate.getDate() + 1);
+  getMonthDates(date: Date): string[] {
+    const monthDates = [];
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const lastDay = new Date(year, month + 1, 0).getDate();
+
+    for (let day = 1; day <= lastDay; day++) {
+      monthDates.push(new Date(year, month, day));
     }
-    return weekDates;
+
+    return monthDates.map(d => this.formatDate(d));
   }
 
-  formatDate(date: Date): string {
-    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
-    return date.toLocaleDateString('en-GB', options);
+  generateMonthColumns(dates: string[]): any[] {
+    return [
+      { name: "empName", label: "Employee Name", widthPct: 10, hidden: false, type: 'label' },
+      ...dates.map((date, index) => ({
+        name: `day${index + 1}`,
+        label: this.formatDayLabel(date),
+        widthPct: 10,
+        hidden: false,
+        date: date
+      }))
+    ];
+  }
+
+  formatDayLabel(date: string): string {
+    const options: Intl.DateTimeFormatOptions = { weekday: 'short' };
+    return new Date(date).toLocaleDateString('en-GB', options);
+  }
+
+  private monthinitForm() {
+    let formModel: any = {}; 
+    this.monthInfo.forEach((element: any) => {
+      this.monthColumns.forEach((items: any) => {
+        if (items.type !== 'label') {
+          let year = new Date(items.date).getFullYear();
+          let month = new Date (items.date).getMonth() + 1;
+          let date = new Date(items.date).getDate();
+  
+          let selYear = element.year.filter((e: any) => e.id == year);
+          const controlName = `${element.empId}_${items.name}`;
+          if (selYear.length > 0) {
+            let selMonth = selYear[0].month.filter((el: any) => el.id == month);
+            if (selMonth.length > 0) {
+              let selDate = selMonth[0].date.filter((ele: any) => ele.id == date);
+              if (selDate.length > 0) {
+                const controlValue = selDate[0].value || '';
+                if (new Date() > new Date(items.date) && this.formatDate(new Date()) !== this.formatDate(new Date(items.date))) {
+                  formModel[controlName] = new FormControl(controlValue, Validators.required);
+                  items.readOnly = true;
+                } else {
+                  formModel[controlName] = new FormControl(controlValue, Validators.required);
+                  items.readOnly = false;
+                }
+              } else {
+                formModel[controlName] = new FormControl(null, Validators.required);
+                items.readOnly = false;
+              }
+            } else {
+              formModel[controlName] = new FormControl(null, Validators.required);
+              items.readOnly = false;
+            }
+          } else {
+            formModel[controlName] = new FormControl(null, Validators.required);
+            items.readOnly = false;
+          }
+        }
+    
+      });
+    });
+    this.monthForm = this.formBuilder.group(formModel);
+  }
+
+  monthViewDrodwnChange(field: any, event: any, col: any) {
+    const selectedDate = new Date(col.date);
+    if (selectedDate <= this.createdFromDate) {
+      let year = selectedDate.getFullYear();
+      let month = selectedDate.getMonth() + 1;
+      let date = selectedDate.getDate();
+
+      let empTimesheet = this.monthInfo.find((e: any) => e.empId == field.empId);
+      if (empTimesheet) {
+        let selYear = empTimesheet.year.find((e: any) => e.id == year);
+        if (!selYear) {
+          selYear = { id: year, month: [] };
+          empTimesheet.year.push(selYear);
+        }
+    
+        let selMonth = selYear.month.find((el: any) => el.id == month);
+        if (!selMonth) {
+          selMonth = { id: month, date: [] };
+          selYear.month.push(selMonth);
+        }
+    
+        let selDate = selMonth.date.find((ele: any) => ele.id == date);
+        if (!selDate) {
+          selDate = { id: date, value: event.value };
+          selMonth.date.push(selDate);
+        } else {
+          selDate.value = event.value;
+        }
+        this.timesheetService.saveTimesheetData(empTimesheet, field.id).subscribe(
+          () => {
+            this.toastr.success('Timesheet saved successfully');
+          },
+          (error) => {
+            this.toastr.error('Failed to save timesheet');
+          }
+        );
+      }
+    } else {
+      this.toastr.error('Failed to save timesheet');
+      this.loadTimesheetData();
+    }
   }
 }

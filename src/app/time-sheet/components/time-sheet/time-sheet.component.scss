@@ -60,3 +60,9 @@
       right: 18px;
     }
   }
+
+  tr>th:first-child,tr>td:first-child {
+    z-index: 999;
+    position: sticky;
+    left: 0;
+  }

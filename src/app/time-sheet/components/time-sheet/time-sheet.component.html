@@ -7,7 +7,7 @@
   <ng-container>
     <!-- Search bar Start -->
     <div class="row" style="margin-top: 5%;margin-bottom: 5%;">
-      <div class="col-md-12">
+      <div class="col-md-8">
           <div class="form-group row">
               <label id="creaedFrmDate_lbl" class="col-md-1 control-label"
                 style="text-align: center; margin-top: 0.65rem;">
@@ -16,15 +16,21 @@
               <div class="col-md-4">
                   <p-calendar id="createdFrmDate_calender" #createdFromDateComp [readonlyInput]='true'
                       [inputStyle]="{'width':'100%'}" name="createdFrmDate" [showIcon]="true" 
-                      [(ngModel)]="createdFromDate" (onSelect)="onDateSelect($event)" [iconDisplay]="'input'" 
+                      [(ngModel)]="createdFromDate" (onSelect)="isMonthView ? onMonthDateSelect($event) : onDateSelect($event)" [iconDisplay]="'input'" 
                       [minDate]="minDate"  [maxDate]="maxDate" >
                   </p-calendar>
               </div>
           </div>
       </div>
+      <div class="col-md-4" style="text-align: center;">
+        <i class="fa-brands fa-weebly" style="cursor: pointer; font-size: xx-large; margin: 10px;"
+          title="Weekly View" [class.active]="!isMonthView" (click)="viewChange(false)"></i>
+        <i class="fa-brands fa-meetup" style="cursor: pointer; font-size: xx-large; margin: 10px;"
+          title="Monthly View" [class.active]="isMonthView" (click)="viewChange(true)"></i>
+      </div>
     </div>
     <!-- Search bar End -->
-    <form *ngIf="_listInfo?.length !== 0" [formGroup]="appForm">
+    <form *ngIf="!isMonthView && _listInfo?.length !== 0" [formGroup]="appForm">
       <!-- list view -->
       <ng-container>
         <div>
@@ -50,25 +56,36 @@
                         {{info[col.name]}}
                       </ng-container>  
                       <ng-template #dropdown>
-                        <ng-select 
-                          clearAllText="Clear"
-                          dropdownPosition="auto"
-                          [bindLabel]="'label'"
-                          [bindValue]="'value'"
-                          [items]="[{'label': 'WFO', 'value': 1}]"
-                          dropdownPosition="auto"
-                          [placeholder]="'select'"
-                          dropdownPosition="auto"
-                          (change)="setSelectionToVariable(info,$event, col)"
-                          [formControlName]="getControlName(info, col)"
-                          id="select_{{ i }}"
-                        >
-                          <ng-template ng-option-tmp let-item="item" let-index="index">
-                            <div>
-                                {{ item.label }}
-                            </div>
-                          </ng-template>
-                        </ng-select>
+                        <ng-container *ngIf="col.readOnly == false;else readOnly">
+                          <ng-select 
+                            clearAllText="Clear"
+                            dropdownPosition="auto"
+                            [bindLabel]="'label'"
+                            [bindValue]="'value'"
+                            [items]="pickList"
+                            dropdownPosition="auto"
+                            [placeholder]="'select'"
+                            dropdownPosition="auto"
+                            (change)="setSelectionToVariable(info,$event, col)"
+                            [formControlName]="getControlName(info, col)"
+                            id="select_{{ i }}"
+                          >
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              <div>
+                                  {{ item.label }}
+                              </div>
+                            </ng-template>
+                          </ng-select>
+                        </ng-container>
+                        <ng-template #readOnly>
+                          <input
+                          [value]="getValue(info, col)"
+                          disabled
+                          style=" padding: inherit;    background-color: white;
+                          border: none;
+                          text-align: center;"
+                          >
+                        </ng-template>
                       </ng-template>            
                     </td>
                   </ng-container>
@@ -83,6 +100,76 @@
             <p>No rows to show</p>
           </div>
         </ng-template>
+      </ng-container>
+      <!-- list view -->
+    </form>
+    <form *ngIf="isMonthView && monthInfo?.length !== 0" [formGroup]="monthForm">
+      <ng-container>
+        <div style="overflow-y: auto;">
+          <table id="listTableHdr" class="table table-responsive" >
+            <thead>
+              <tr>
+                <th *ngFor="let col of monthColumns; index as j" id="col{{ col.name }}" [style.width.%]="col.widthPct" style="text-align: center;"
+                >
+                  <div *ngIf="col.date">
+                    {{col.date}}
+                  </div>
+                  <div [ngClass]="col.date ? '' : 'mb-3'">
+                    {{ col.label }}
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container>
+                <tr *ngFor="let info of monthInfo ; index as i" id="monthIfo{{ i }}" class="table-expand-row">
+                  <ng-container *ngFor="let col of monthColumns; index as j">
+                    <td id="monthcol{{ col.name }}{{ j }}{{ i }}" [ngStyle]="{'text-align': col.type == 'label' ? 'center': ''}">
+                      <ng-container *ngIf="col.type == 'label';else dropdown">
+                        {{info[col.name]}}
+                      </ng-container>  
+                      <ng-template #dropdown>
+                        <ng-container *ngIf="col.readOnly == false;else readOnly">
+                          <ng-select 
+                            clearAllText="Clear"
+                            dropdownPosition="auto"
+                            [bindLabel]="'label'"
+                            [bindValue]="'value'"
+                            [items]="pickList"
+                            dropdownPosition="auto"
+                            [placeholder]="'select'"
+                            dropdownPosition="auto"
+                            [disabled]="true"
+                            [clearable]="false"
+                            (change)="monthViewDrodwnChange(info,$event, col)"
+                            [formControlName]="getControlName(info, col)"
+                            id="select_{{ i }}"
+                          >
+                            <ng-template ng-option-tmp let-item="item" let-index="index">
+                              <div>
+                                  {{ item.label }}
+                              </div>
+                            </ng-template>
+                          </ng-select>
+                        </ng-container>
+                        <ng-template #readOnly>
+                          <input
+                          [value]="getMonthFormValue(info, col)"
+                          disabled
+                          style=" padding: inherit;    background-color: white;
+                          border: none;
+                          text-align: center;"
+                          >
+                        </ng-template>
+                      </ng-template>            
+                    </td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+              <ng-content></ng-content>
+            </tbody>
+          </table>
+        </div>
       </ng-container>
       <!-- list view -->
     </form>
