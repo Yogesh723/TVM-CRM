@@ -1,0 +1,21 @@
+{
+    "jiradetails": [
+        {
+            "id": 1,
+            "sno": 1,
+            "team": "Team A",
+            "employeeName": "John Doe",
+            "taskDetails": "Task 1",
+            "status": "Completed",
+            "scrumTiming": "10:00 AM",
+            "morningSession": "Working",
+            "middaySession": "Meeting",
+            "afternoonSession": "Working",
+            "eveningSession": "Review",
+            "nonBillableHrs": "1",
+            "nonBillableStatus": "Training",
+            "dailyScore": "90",
+            "comments": "Good day"
+        }
+    ]
+}

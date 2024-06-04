@@ -13,10 +13,17 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { DxButtonModule, DxDataGridModule,DxSelectBoxModule,DxSpeedDialActionModule, DxTagBoxModule} from 'devextreme-angular';
 import { AddRowComponent } from 'src/add-row/add-row.component';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { JiraDataService } from 'src/assets/jira-data.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @NgModule({
   declarations: [
-    AppComponent,JiraPageComponent,AddRowComponent
+    AppComponent,JiraPageComponent,AddRowComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,9 +40,15 @@ import { MultiSelectModule } from 'primeng/multiselect';
     FormsModule,
     DxSelectBoxModule,
     DxTagBoxModule,
-    MultiSelectModule
+    MultiSelectModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
+
+
   ],
-  providers: [
+  providers: [JiraDataService,provideNativeDateAdapter(),
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

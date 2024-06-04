@@ -1,3 +1,14 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* styles.css or app.component.css */
+mat-form-field {
+  width: fit-content;
+}
+/* app.component.css */
+.select-all-option {
+  font-weight: bold;
+}
+
+
 #grid {
   height: 500px;
 }
@@ -24,4 +35,26 @@
 .option > .dx-widget {
   display: inline-block;
   vertical-align: middle;
+}
+.Serach{
+  position: relative;
+  left: 2rem;
+  color: white;
+  background: #2121a9;
+  width: 8rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+.search:hover {
+  background-color: #5f9fe4;
+  cursor: pointer;
+}
+h1{
+  
+  font-size: larger;
+  font-size: xx-large;
+    text-align: center;
+    font-weight: 500;
 }

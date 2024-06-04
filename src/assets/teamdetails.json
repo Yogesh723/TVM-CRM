@@ -5,6 +5,18 @@
       "TeamName": "Team A",
       "LeadName": "Thobica",
       "TeamSize": "5"
+    },
+    {
+      "id": "79b5",
+      "TeamName": "Team B",
+      "LeadName": "Ragini",
+      "TeamSize": "4"
+    },
+    {
+      "id": "25e2",
+      "TeamName": "Team C",
+      "LeadName": "sharmila",
+      "TeamSize": "5"
     }
   ],
   "assetdetails": [
@@ -18,6 +30,14 @@
         }
       ],
       "id": "20bc"
+    },
+    {
+      "id": "79b5",
+      "assets": []
+    },
+    {
+      "id": "25e2",
+      "assets": []
     }
   ],
   "projectdetails": [
@@ -53,6 +73,14 @@
         }
       ],
       "id": "20bc"
+    },
+    {
+      "id": "79b5",
+      "projects": []
+    },
+    {
+      "id": "25e2",
+      "projects": []
     }
   ],
   "employeedetails": [
@@ -88,6 +116,130 @@
         }
       ],
       "id": "20bc"
+    },
+    {
+      "id": "79b5",
+      "employees": []
+    },
+    {
+      "id": "25e2",
+      "employees": []
+    }
+  ],
+  "jiradetails": [
+    {
+      "id": "ae25",
+      "date": 30,
+      "month": "May",
+      "year": 2024,
+      "team": "Team A",
+      "employeeName": "Bala",
+      "taskDetails": "Task",
+      "status": "Completed",
+      "scrumTiming": "9.00",
+      "morningSession": "Development",
+      "middaySession": "Meeting",
+      "afternoonSession": "Meeting",
+      "eveningSession": "Development",
+      "nonBillableHrs": "1.5",
+      "nonBillableStatus": "Completed",
+      "dailyScore": "5",
+      "comments": "Good"
+    },
+    {
+      "id": "5e8e",
+      "date": 30,
+      "month": "May",
+      "year": 2024,
+      "team": "Team B",
+      "employeeName": "Arun",
+      "taskDetails": "Task",
+      "status": "Completed",
+      "scrumTiming": "9.30",
+      "morningSession": "Development",
+      "middaySession": "Meeting",
+      "afternoonSession": "Development",
+      "eveningSession": "Meeting",
+      "nonBillableHrs": "1.5",
+      "nonBillableStatus": "Completed",
+      "dailyScore": "5",
+      "comments": "Great"
+    },
+    {
+      "id": "9541",
+      "date": 30,
+      "month": "May",
+      "year": 2024,
+      "team": "Team c",
+      "employeeName": "Karthi",
+      "taskDetails": "Task",
+      "status": "Completed",
+      "scrumTiming": "9.00",
+      "morningSession": "Development",
+      "middaySession": "Meeting",
+      "afternoonSession": "Design",
+      "eveningSession": "Meeting",
+      "nonBillableHrs": "1.2",
+      "nonBillableStatus": "Completed",
+      "dailyScore": "5",
+      "comments": "good"
+    },
+    {
+      "id": "2062",
+      "date": 30,
+      "month": "May",
+      "year": 2024,
+      "team": "Team D",
+      "employeeName": "varun",
+      "taskDetails": "Task",
+      "status": "Completed",
+      "scrumTiming": "9.30",
+      "morningSession": "Development",
+      "middaySession": "Meeting",
+      "afternoonSession": "Development",
+      "eveningSession": "Meeting",
+      "nonBillableHrs": "1.5",
+      "nonBillableStatus": "Progress",
+      "dailyScore": "5",
+      "comments": "Good"
+    },
+    {
+      "id": "36f6",
+      "date": "01",
+      "month": "Jun",
+      "year": 2024,
+      "team": "Team A",
+      "employeeName": "Balas",
+      "taskDetails": "task",
+      "status": "Progress",
+      "scrumTiming": "9.00",
+      "morningSession": "Development",
+      "middaySession": "Meeting",
+      "afternoonSession": "Development",
+      "eveningSession": "Meeting",
+      "nonBillableHrs": "1.8",
+      "nonBillableStatus": "Completed",
+      "dailyScore": "5",
+      "comments": "Great"
+    },
+    {
+      "id": "b5bf",
+      "date": 30,
+      "month": "May",
+      "year": 2024,
+      "team": "Team A",
+      "employeeName": "Varun",
+      "taskDetails": "Task",
+      "status": "Progress",
+      "scrumTiming": "9.00",
+      "morningSession": "Development",
+      "middaySession": "Meeting",
+      "afternoonSession": "Development",
+      "eveningSession": "Meeting",
+      "nonBillableHrs": "1.5",
+      "nonBillableStatus": "Completed",
+      "dailyScore": "5",
+      "comments": "Good"
     }
   ]
 }

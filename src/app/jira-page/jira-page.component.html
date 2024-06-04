@@ -1,7 +1,26 @@
 <app-bread-crumb></app-bread-crumb>
 <h1>Office Status Daily Report</h1>
+
+<mat-form-field appearance="fill" class="dropDown">
+  <mat-label>Select Options</mat-label>
+  <mat-select [(value)]="selectedValues" multiple>
+    <mat-option (click)="toggleSelectAll($event)" [value]="'selectAll'">
+      Select All
+    </mat-option>
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<label for="Workingdate">Date:</label>
+<input type="date" id="Workingdate" name="Workingdate">
+
+<button class="Serach" (click)="searchData()">Search</button>
+<!-- Conditionally display the data grid and other elements -->
+<div *ngIf="showGrid">
   <dx-data-grid
-    [dataSource]="rows"
+    [dataSource]="filteredRows"
     (onEditorPreparing)="handleEditorPreparing($event)"
     (onRowUpdated)="handleRowUpdated($event)"
     [allowColumnResizing]="true"
@@ -13,49 +32,51 @@
     [columnHidingEnabled]="true"
     [filterRow]="{ visible: true, applyFilter: 'auto' }"
     [selection]="{ mode: 'single' }"
-    [editing]="{ mode: 'cell', allowUpdating: true, allowAdding: true, allowDeleting: true, texts: { confirmDeleteMessage: 'Are you sure you want to delete this record?' } }"
-    (onInitNewRow)="handleInitNewRow($event)"
     (onRowRemoving)="handleRowRemoving($event)"
     (onSaving)="handleSaving($event)"
     (onSaved)="handleSaved($event)"
     (onEditCanceled)="handleEditCanceled($event)"
->
+    [editing]="{
+      mode: 'cell',
+      allowUpdating: false,
+      allowDeleting: true,
+      texts: { confirmDeleteMessage: 'Are you sure you want to delete this record?' }
+    }"
+  >
     <dxo-filter-row [visible]="showFilterRow" [resetOperationText]="'Reset'">
       <dxo-operation-descriptions
-          [contains]="'Contains'"
-          [notContains]="'DoesNotContain'"
-          [startsWith]="'StartsWith'"
-          [endsWith]="'EndsWith'"
-          [equal]="'Equals'"
-          [notEqual]="'DoesNotEqual'">
+        [contains]="'Contains'"
+        [notContains]="'DoesNotContain'"
+        [startsWith]="'StartsWith'"
+        [endsWith]="'EndsWith'"
+        [equal]="'Equals'"
+        [notEqual]="'DoesNotEqual'"
+      >
       </dxo-operation-descriptions>
     </dxo-filter-row>
-    <dxo-paging [pageSize]="10"></dxo-paging>
-    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]"></dxo-pager>
     <dxo-sorting [mode]="'multiple'"></dxo-sorting>
     <dxi-column dataField="sno" caption="S.No."></dxi-column>
     <dxi-column
-  [dataField]="'year'"
-  [caption]="'Year'"
-  groupCellTemplate="customGroupColumn"
-  [groupIndex]="0"
-></dxi-column>
-<dxi-column
-  [dataField]="'month'"
-  [caption]="'Month'"
-  groupCellTemplate="customGroupColumn"
-  [groupIndex]="1"
-></dxi-column>
-<dxi-column
-  [dataField]="'date'"
-  [caption]="'Date'"
-  groupCellTemplate="customGroupColumn"
-  [groupIndex]="2"
->
-  <dxo-format type="date" format="dd/MM/yyyy"></dxo-format>
-</dxi-column>
-
-    <dxi-column dataField="team" caption="Team" headerCellTemplate="HeaderTemplate"></dxi-column>
+      [dataField]="'year'"
+      [caption]="'Year'"
+      groupCellTemplate="customGroupColumn"
+      [groupIndex]="0"
+    ></dxi-column>
+    <dxi-column
+      [dataField]="'month'"
+      [caption]="'Month'"
+      groupCellTemplate="customGroupColumn"
+      [groupIndex]="1"
+    ></dxi-column>
+    <dxi-column
+      [dataField]="'date'"
+      [caption]="'Date'"
+      groupCellTemplate="customGroupColumn"
+      [groupIndex]="2"
+    >
+      <dxo-format type="date" format="dd/MM/yyyy"></dxo-format>
+    </dxi-column>
+    <dxi-column dataField="team" caption="Team"></dxi-column>
     <dxi-column dataField="employeeName" caption="Employee Name"></dxi-column>
     <dxi-column dataField="taskDetails" caption="Task Details"></dxi-column>
     <dxi-column dataField="status" caption="Status"></dxi-column>
@@ -64,7 +85,7 @@
     <dxi-column dataField="middaySession" caption="11.30 AM to 1.00 PM"></dxi-column>
     <dxi-column dataField="afternoonSession" caption="2.00 PM to 4.00 PM"></dxi-column>
     <dxi-column dataField="eveningSession" caption="4.00 PM to 6.30 PM"></dxi-column>
-    <dxi-column dataField="nonBillableHrs" caption="Non Billable Hrs"></dxi-column>
+    <dxi-column dataField="nonBillableHrs" caption="Non Billable"></dxi-column>
     <dxi-column dataField="nonBillableStatus" caption="Non Billable Status"></dxi-column>
     <dxi-column dataField="dailyScore" caption="Daily Score"></dxi-column>
     <dxi-column dataField="comments" caption="Comments"></dxi-column>
@@ -72,24 +93,24 @@
       <div>{{multiGroupDisplay(data)}}</div>
     </div>
     <div *dxTemplate="let info of 'HeaderTemplate'">
-      <i class="fa fa-filter filter-icon pt-2 pr-2 pl-2 pb-2"
-      [ngClass]="{
-        'btn-blue-outline': showFilterRow == false,
-        'btn-danger-outline': showFilterRow === true
-      }"
-      (click)="saveIconFilterState()"
+      <i
+        class="fa fa-filter filter-icon pt-2 pr-2 pl-2 pb-2"
+        [ngClass]="{
+          'btn-blue-outline': showFilterRow == false,
+          'btn-danger-outline': showFilterRow === true
+        }"
+        (click)="saveIconFilterState()"
       >
       </i>
       {{ info.column.caption }}
     </div>
-    
- 
-    
-</dx-data-grid>
-<dx-speed-dial-action
-  icon="add"
-  label="Add"
-  [index]="1"
-  (onClick)="navigateToAddRow()"
->
-</dx-speed-dial-action>
+  </dx-data-grid>
+
+  <dx-speed-dial-action
+    icon="add"
+    label="Add"
+    [index]="1"
+    (onClick)="navigateToAddRow()"
+  >
+  </dx-speed-dial-action>
+</div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JiraDataService } from 'src/assets/jira-data.service';
 import { Row } from '../../src/app/jira-page/jira-interface'
+import { TeamDetailServiceService } from 'src/app/team-details/team-detail-service.service';
 
 @Component({
   selector: 'app-add-row',
@@ -91,7 +92,9 @@ export class AddRowComponent {
     ]
   };
 
-  constructor(private router: Router,private jiradataservice:JiraDataService) {
+  constructor(private router: Router,private jiradataservice:JiraDataService, 
+    private teamdetailService: TeamDetailServiceService
+  ) {
     this.newRow = {
       date: '',
       team: '',
@@ -112,8 +115,10 @@ export class AddRowComponent {
     };
   }
 
-  saveRow(formValue: any) {
-    this.jiradataservice.addRow(formValue);
+  saveRow(formValue: any) { debugger
+    this.teamdetailService.saveJira(formValue).subscribe((res: any) => {
+      console.log(res);
+    });
     this.router.navigate(['tvm/team//jira-page']);
   }
   save(event: any) {
