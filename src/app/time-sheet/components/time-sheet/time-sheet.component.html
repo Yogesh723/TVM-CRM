@@ -23,10 +23,10 @@
           </div>
       </div>
       <div class="col-md-4" style="text-align: center;">
-        <i class="fa-brands fa-weebly" style="cursor: pointer; font-size: xx-large; margin: 10px;"
-          title="Weekly View" [class.active]="!isMonthView" (click)="viewChange(false)"></i>
-        <i class="fa-brands fa-meetup" style="cursor: pointer; font-size: xx-large; margin: 10px;"
-          title="Monthly View" [class.active]="isMonthView" (click)="viewChange(true)"></i>
+        <span style="cursor: pointer; font-size: medium; padding: 5px 10px 5px 10px; border: 1px solid;"
+        title="Weekly View" [class.active]="!isMonthView" (click)="viewChange(false)">Week</span>
+        <span style="cursor: pointer; font-size: medium; padding: 5px 10px 5px 10px; border: 1px solid;"
+        title="Monthly View" [class.active]="isMonthView" (click)="viewChange(true)">Month</span>
       </div>
     </div>
     <!-- Search bar End -->
