@@ -14,11 +14,14 @@
   min-width: 350px;
   max-width: 500px;
   margin: auto;
+  opacity: 0.7;
+  text-align: center;
 
   .form-heading {
     h2 {
       font-weight: bold;
-      color: #1a1a1a;
+      color: #04079e;
+
     }
 
     span {
@@ -45,7 +48,7 @@
       border-color: #9da7b6;
 
       i {
-        color: #616161;
+        color: #070f65;
       }
 
       .hide {
@@ -59,7 +62,7 @@
   }
 
   .login-btn {
-    background-color: #139d3a;
+    background-color: #1114a2;
     color: #fff;
     width: 50%;
   }
@@ -68,4 +71,8 @@
 .error-message {
   color: red;
   font-size: 12px;
+}
+.col-12{
+  position: relative;
+    left: 6.5rem;
 }

@@ -24,3 +24,24 @@
     margin-right: 12px;
     font-size: x-large;
 }
+
+/* logout.component.css */
+.logout-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-name {
+  margin-right: 10px;
+  // font-weight: bold;
+}
+
+i {
+  // font-size: 1.5em;
+  color: #ffffff;
+}
+
+i:hover {
+  color: #ff0000;
+}
