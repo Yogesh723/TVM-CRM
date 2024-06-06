@@ -21,7 +21,7 @@ export class TimeSheetComponent {
     {'label': 'WFO', 'value': 1},
     {'label': 'WFH', 'value': 2},
     {'label': 'L', 'value': 3},
-    {'label': 'H', 'value': 3}
+    {'label': 'H', 'value': 4}
   ];
   _listInfo: any = [];
   monthInfo: any = [];
@@ -162,7 +162,7 @@ export class TimeSheetComponent {
           let year = new Date(items.date).getFullYear();
           let month = new Date (items.date).getMonth() + 1;
           let date = new Date(items.date).getDate();
-  
+          let day = new Date(items.date).getDay();
           let selYear = element.year.filter((e: any) => e.id == year);
           const controlName = `${element.empId}_${items.name}`;
           if (selYear.length > 0) {
@@ -179,7 +179,11 @@ export class TimeSheetComponent {
                   items.readOnly = false;
                 }
               } else {
-                formModel[controlName] = new FormControl(null, Validators.required);
+                if (day == 6 || day == 0) {
+                  formModel[controlName] = new FormControl(4, Validators.required);
+                } else {
+                  formModel[controlName] = new FormControl(null, Validators.required);
+                }
                 items.readOnly = false;
               }
             } else {
@@ -320,7 +324,7 @@ export class TimeSheetComponent {
           let year = new Date(items.date).getFullYear();
           let month = new Date (items.date).getMonth() + 1;
           let date = new Date(items.date).getDate();
-  
+          let day = new Date(items.date).getDay(); 
           let selYear = element.year.filter((e: any) => e.id == year);
           const controlName = `${element.empId}_${items.name}`;
           if (selYear.length > 0) {
@@ -337,7 +341,11 @@ export class TimeSheetComponent {
                   items.readOnly = false;
                 }
               } else {
-                formModel[controlName] = new FormControl(null, Validators.required);
+                if (day == 6 || day == 0) {
+                  formModel[controlName] = new FormControl(4, Validators.required);
+                } else {
+                  formModel[controlName] = new FormControl(null, Validators.required);
+                }
                 items.readOnly = false;
               }
             } else {
@@ -396,5 +404,39 @@ export class TimeSheetComponent {
       this.toastr.error('Failed to save timesheet');
       this.loadTimesheetData();
     }
+  }
+
+  calculateWorkingDays(field: any): number {
+    return this.calculateDays(field, 1); // 1 corresponds to WFO
+  }
+
+  calculateLeaves(field: any): number {
+    return this.calculateDays(field, 3); // 3 corresponds to Leave
+  }
+
+  calculateWFH(field: any): number {
+    return this.calculateDays(field, 2); // 2 corresponds to WFH
+  }
+
+  calculateTotalLeaveDays(field: any): number {
+    // Assuming the _listInfo contains data for the current and previous month
+    const currentMonth = new Date().getMonth() + 1;
+    const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    return this.calculateDays(field, 3, [currentMonth, previousMonth]);
+  }
+
+  calculateDays(field: any, valueType: number, months?: number[]): number {
+    let totalDays = 0;
+    const timesheet = field.year.filter((e: any) => e.id == this.createdFromDate.getFullYear());
+    timesheet[0].month.forEach((month: any) => {
+      if (!months || months.includes(month.id)) {
+        month.date.forEach((date: any) => {
+          if (date.value == valueType && this.createdFromDate.getMonth()+1 == month.id) {
+            totalDays++;
+          }
+        });
+      }
+    });
+    return totalDays;
   }
 }

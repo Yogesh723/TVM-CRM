@@ -23,9 +23,11 @@
           </div>
       </div>
       <div class="col-md-4" style="text-align: center;">
-        <span style="cursor: pointer; font-size: medium; padding: 5px 10px 5px 10px; border: 1px solid;"
+        <span style="cursor: pointer; font-size: medium; padding: 5px 10px 5px 10px; border: 1px solid;
+        border-radius: 5px;"
         title="Weekly View" [class.active]="!isMonthView" (click)="viewChange(false)">Week</span>
-        <span style="cursor: pointer; font-size: medium; padding: 5px 10px 5px 10px; border: 1px solid;"
+        <span style="cursor: pointer; font-size: medium; padding: 5px 10px 5px 10px; border: 1px solid;
+        border-radius: 5px;"
         title="Monthly View" [class.active]="isMonthView" (click)="viewChange(true)">Month</span>
       </div>
     </div>
@@ -106,18 +108,24 @@
     <form *ngIf="isMonthView && monthInfo?.length !== 0" [formGroup]="monthForm">
       <ng-container>
         <div style="overflow-y: auto;">
+          <div class="vertical-line">
           <table id="listTableHdr" class="table table-responsive" >
             <thead>
               <tr>
                 <th *ngFor="let col of monthColumns; index as j" id="col{{ col.name }}" [style.width.%]="col.widthPct" style="text-align: center;"
                 >
-                  <div *ngIf="col.date">
+                  <div *ngIf="col.date" style="width: max-content;"  >
                     {{col.date}}
                   </div>
-                  <div [ngClass]="col.date ? '' : 'mb-3'">
+                  <div>
                     {{ col.label }}
                   </div>
                 </th>
+                <!-- <hr class="vertical-line"> -->
+                <th class="sticky-header" title="Number of Working Days">Working Days</th>
+                <th class="sticky-header" title="Number of Leave">Leave Days</th>
+                <th class="sticky-header" title="Number of WFH">WFH Days</th>
+                <th class="sticky-header" title="Total Leave Days for Last 2 Months">Leave for 2 months</th>
               </tr>
             </thead>
             <tbody>
@@ -153,16 +161,16 @@
                           </ng-select>
                         </ng-container>
                         <ng-template #readOnly>
-                          <input
-                          [value]="getMonthFormValue(info, col)"
-                          disabled
-                          style=" padding: inherit;    background-color: white;
-                          border: none;
-                          text-align: center;"
-                          >
+                         {{getMonthFormValue(info, col)}}
                         </ng-template>
                       </ng-template>            
                     </td>
+                  </ng-container>
+                  <ng-container>
+                    <td class="sticky-col">{{ calculateWorkingDays(info) }}</td>
+                    <td class="sticky-col">{{ calculateLeaves(info) }}</td>
+                    <td class="sticky-col">{{ calculateWFH(info) }}</td>
+                    <td class="sticky-col">{{ calculateTotalLeaveDays(info) }}</td>
                   </ng-container>
                 </tr>
               </ng-container>
@@ -170,6 +178,7 @@
             </tbody>
           </table>
         </div>
+      </div> 
       </ng-container>
       <!-- list view -->
     </form>
