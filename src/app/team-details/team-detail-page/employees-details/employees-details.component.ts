@@ -16,6 +16,8 @@ export class EmployeesDetailsComponent {
   employeeListInfo: any = [];
   listObservable: any;
   activeId: any = '';
+  listInfo: any = [];
+
 
   constructor(
     private communicationService: CommunicationService,
@@ -23,6 +25,7 @@ export class EmployeesDetailsComponent {
     private activeRoute: ActivatedRoute,
     private route: Router,
     private breadcrumbService: BreadcrumbService,
+    private detailService: TeamDetailServiceService,
   ) {
 
   }
@@ -64,6 +67,12 @@ export class EmployeesDetailsComponent {
       { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Employee Details', url: this.route.url }
     ]);
+  }
+  getEmployeeDetails() {
+    this.detailService.getTeamDetails().subscribe((result: any) => {
+      this.listInfo = result;
+      this.listObservable = new BehaviorSubject(this.listInfo);
+    });
   }
   getAssets() {
     this.teamService.getEmployeeDetailById(this.activeId).subscribe((result: any) => {

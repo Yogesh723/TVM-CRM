@@ -1,9 +1,55 @@
-<div>
-    <marquee direction="right" behavior="alternate" scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();" style="font-size:24px;">
-      Welcome to TVM Infotech
-    </marquee>
+<div class="tvm">
+        <img src="../../../assets/TVM.jfif" alt="TVM" style="width: 3%;
+        margin-left: 103px;"/>
+</div>
+<div class="login-bg">
+    <div class="login-form py-5 px-5 bg-white shadow rounded">
+        <form class="row g-4" (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="form-heading">
+            <h2>Log in to your Account</h2>
+        </div>
+        <div class="col-12">
+            <div class="input-group field-wrapper">
+                <div class="input-group-text">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" formControlName="username" />
+                <span class="error-message" *ngIf="formSubmitted && f['username'].errors?.['required']">
+                    Username is required
+                </span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="input-group field-wrapper">
+                <div class="input-group-text">
+                    <i class="fa-solid fa-key" aria-hidden="true"></i>
+                </div>
+                <input name="password" [type]="showPassword ? 'text' : 'password'" class="form-control b-left"
+                    placeholder="Password" formControlName="password" />
+                <span class="error-message" *ngIf="formSubmitted && f['password'].errors?.['required']">
+                    Password is required
+                </span>
+                <div class="input-group-text">
+                    <i alt="show" class="far fa-eye eye-show" (click)="showPassword = !showPassword"
+                        [class.hide]="showPassword"></i>
+                    <i alt="hide" class="far fa-eye-slash eye-hide" (click)="showPassword = !showPassword"
+                        [class.hide]="!showPassword"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-grid pb-4">
+                <button type="submit" class="btn login-btn">
+                    Sign In 
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </form>
   </div>
+</div>
+
 <div style="text-align: center;">
     <img class="logo" src="https://media.licdn.com/dms/image/C560BAQGLJut2ZXul_Q/company-logo_200_200/0/1655982267391?e=1724284800&v=beta&t=WYbEdalK5ouToCWcChf24Pd4d_NWBhlQuB5lI4226ps" 
-    alt="Company Logo" style="width: 200px; height: 200px;">f
-  </div>  
+    alt="Company Logo" style="width: 200px; height: 200px;">
+</div>  

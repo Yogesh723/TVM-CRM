@@ -124,7 +124,7 @@ export class FormGeneratorComponent implements OnInit {
     return this.appForm.get('Email address');
   }
   
-  onSelectChange(selectedValue: any) {debugger
+  onSelectChange(selectedValue: any) {
     this.singleSelectionChanged.emit(selectedValue)
   }
 }

@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./interstore.component.scss']
 })
 export class InterstoreComponent {
+  public isLogin: boolean = false;
   topNavMenu = [
     {
       code: 1,

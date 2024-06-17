@@ -18,46 +18,51 @@ import { BreadcrumbComponent } from '../bread-crumb/bread-crumb.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxStarsRatingModule } from 'ngx-stars-rating';
 import { IgcFormControlDirective, IgcFormsModule } from 'igniteui-angular';
+import { MatSelectModule } from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AppModule } from "../app.module";
 
 @NgModule({
-  declarations: [
-    WaterMarkPageComponent,
-    InterstoreComponent,
-    NavBarComponent,
-    SideNavBarComponent,
-    SearchComponent,
-    CardTableViewControllerComponent,
-    FormGeneratorComponent,
-    TableGeneratorComponent,
-    UploadImagesComponent,
-    BreadcrumbComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    CommonTvmRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    CalendarModule,
-    NgSelectModule,
-    NgxStarsRatingModule,
-    IgcFormsModule,
-    
-  ],
-  exports: [
-    NavBarComponent,
-    SideNavBarComponent,
-    SearchComponent,
-    CardTableViewControllerComponent,
-    FormGeneratorComponent,
-    TableGeneratorComponent,
-    UploadImagesComponent,
-    BreadcrumbComponent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    FileUploadService,
-    IgcFormControlDirective
-  ]
+    declarations: [
+        WaterMarkPageComponent,
+        InterstoreComponent,
+        NavBarComponent,
+        SideNavBarComponent,
+        SearchComponent,
+        CardTableViewControllerComponent,
+        FormGeneratorComponent,
+        TableGeneratorComponent,
+        UploadImagesComponent,
+        BreadcrumbComponent
+    ],
+    exports: [
+        NavBarComponent,
+        SideNavBarComponent,
+        SearchComponent,
+        CardTableViewControllerComponent,
+        FormGeneratorComponent,
+        TableGeneratorComponent,
+        UploadImagesComponent,
+        BreadcrumbComponent,
+    ],
+    providers: [
+        FileUploadService,
+        IgcFormControlDirective
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        CommonTvmRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CalendarModule,
+        NgSelectModule,
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        NgxStarsRatingModule,
+        IgcFormsModule,
+    ]
 })
 export class CommonTvmModule { }

@@ -45,6 +45,9 @@ export class JiraPageComponent implements OnInit {
     this.searchUserForm = this.fb.group({
       userType: new FormControl('')
     });
+    // this.jiradataservice.rows$.subscribe(rows => {
+    //   this.rows = rows;
+    // });
   }
 
   fetchOptionsAndRows(): void {

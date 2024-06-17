@@ -23,6 +23,9 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import { StarRatingModule } from 'angular-star-rating';
 import { NgxStarsRatingModule } from 'ngx-stars-rating';
 import { IgcFormsModule } from 'igniteui-angular';
+import { ToastrModule,provideToastr } from 'ngx-toastr';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { IgcFormsModule } from 'igniteui-angular';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NgSelectModule,
     BrowserAnimationsModule,
     HttpClientModule,
     DxDataGridModule,
@@ -51,6 +55,14 @@ import { IgcFormsModule } from 'igniteui-angular';
     NgxStarsRatingModule,
     IgcFormsModule,
 
+    ToastrModule.forRoot({
+      closeButton : true,
+      timeOut:7000,
+      extendedTimeOut:7000,
+      progressBar:true,
+      positionClass: 'toast-top-right',
+      preventDuplicates:true
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [JiraDataService,provideNativeDateAdapter(),

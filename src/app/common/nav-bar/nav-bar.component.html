@@ -16,6 +16,11 @@
             </ul>
         </nav>
     </div>
+    <!-- logout.component.html -->
+    <div class="logout-container">
+        <span class="user-name">{{ user.name }}</span>
+        <i class="fas fa-sign-out-alt" (click)="logout()" title="Logout"></i>
+    </div>    
     <div class="back-button">
         <a>
             <i class="fa-solid fa-person-walking-arrow-loop-left" style="color: aliceblue; cursor: pointer; position: relative;

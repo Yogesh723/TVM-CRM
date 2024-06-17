@@ -1,0 +1,117 @@
+
+#listTableHdr {
+    width: 100%;
+    border-collapse:separate;
+  }
+  
+  
+  #listTableHdr th {
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+  }
+  
+  #listTableHdr td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  #listTableHdr tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+   .aligedelete{
+    cursor: pointer;
+  }
+  .add-create{
+      position: relative;
+      top: 9px;
+      left: 5px;
+      min-width: 90px;
+      max-width: 90px;
+      height: 40px;
+  }
+  .no-records-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 517px;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+        .upload{
+          position: relative;
+          float: inline-end;
+          top: 11px;
+          right: 155px;
+          width: 65px;
+      }
+      .download{
+      position: relative;
+      float: inline-end;  
+      top: 11px;
+      width: 65px;
+      right: 18px;
+    }
+  }
+
+  tr>th:first-child,tr>td:first-child {
+    z-index: 999;
+    position: sticky;
+    left: 0px;
+    border-right: 1px solid rgb(7, 7, 7); 
+  }
+  tr>th:last-child(4),tr>td:last-child(4) {
+    z-index: 1;
+    position: sticky;
+    left: 0px;
+    border-left: 1px solid rgb(7, 7, 7);   
+  }
+
+
+.active {
+  color: white !important;
+  background-color: orange;
+}
+
+.sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+  right: 0;
+  background-color: #fff;
+  z-index: 3;
+}
+
+.sticky-col:nth-last-child(1) { right: 2px; }
+.sticky-col:nth-last-child(2) { right: 5%; }
+.sticky-col:nth-last-child(3) { right: 8.5%; }
+.sticky-col:nth-last-child(4) { right: 12%; border-left: 1px solid black; }
+
+.sticky-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 3;
+}
+
+.sticky-header:nth-last-child(1) { right: 2px; }
+.sticky-header:nth-last-child(2) { right: 5%; }
+.sticky-header:nth-last-child(3) { right: 8.5%; }
+.sticky-header:nth-last-child(4) { right: 12%; border-left: 1px solid black; }
+
+.vertical-line{
+   border: 0;
+   height: auto;
+   border-left: 1px solid black;
+   
+} 
+

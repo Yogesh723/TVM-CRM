@@ -36,7 +36,7 @@ export class EditProjectDetailsComponent implements OnInit {
         pickList: [ ]
       },
       {
-        name: "state",
+        name: "active",
         label: "Active/Inactive",
         type: "Toggle",
         value: false
@@ -84,7 +84,7 @@ export class EditProjectDetailsComponent implements OnInit {
         label: "Relieving date",
         type: "Date",
         readonly: false
-      },
+      }
     ]
   };
   activeId: any = 0;
@@ -130,7 +130,7 @@ export class EditProjectDetailsComponent implements OnInit {
   }
 
   getProjectDetail() {
-    this.teamService.getProjectsById(this.teamId, this.activeId).forEach((result: any) => {debugger
+    this.teamService.getProjectsById(this.teamId, this.activeId).forEach((result: any) => {
       // let res = result.filter((e: any) => e.id == this.activeId)[0];
       for (const section in result[0]) {
         if (section !== 'id')
@@ -154,7 +154,7 @@ export class EditProjectDetailsComponent implements OnInit {
   }
 
   formGenerated(event: any) {
-    this.formGenerationComponent.appForm.controls['state'].valueChanges.subscribe((res: any) => {
+    this.formGenerationComponent.appForm.controls['active'].valueChanges.subscribe((res: any) => {
       this.projectDetails.General.map((e: any) => {
         if(e.name == 'relieving') {
           if (res == true) {

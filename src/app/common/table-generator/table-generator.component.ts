@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-table-generator',
@@ -21,6 +22,7 @@ export class TableGeneratorComponent implements OnInit {
   @Input() listColumns: any = [];
   @Input() Pageheader: any = '';
   @Input() showHeader: boolean = true;
+  @Input() dynamcicImport: boolean = false;
   @Input() listObservable: any;
   @Input() filename: any = '';
   @Input() Showexportbutton: boolean =true;
@@ -33,7 +35,9 @@ export class TableGeneratorComponent implements OnInit {
   listInfo: any = [];
 
 
-  constructor() { 
+  constructor(
+    private toastr:ToastrService
+  ) { 
   }
 
   ngOnInit() {
@@ -139,11 +143,14 @@ export class TableGeneratorComponent implements OnInit {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   }
-  importFromExcel() {debugger
+  importFromExcel() {
     const inputElement: HTMLInputElement = document.createElement('input');
     inputElement.type = 'file';
     inputElement.accept = '.xlsx';
-    
+  
+    // Define the expected headers
+    const expectedHeaders = this.listColumns.map((e: any) => e.name);
+  
     inputElement.addEventListener('change', (event: any) => {
       const file: File = event.target.files[0];
       const reader: FileReader = new FileReader();
@@ -155,6 +162,18 @@ export class TableGeneratorComponent implements OnInit {
         const worksheet: XLSX.WorkSheet = workbook.Sheets[worksheetName];
         const importedData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
+        // Validate the headers
+        const importedHeaders = importedData[0].filter((e: any) => e !== 'id');
+        const headersMatch = expectedHeaders.every((header: any) => importedHeaders.includes(header)) &&
+                             importedHeaders.every((header: any) => expectedHeaders.includes(header));
+  
+        if (!headersMatch) {
+          this.toastr.error('Error: The imported file does not have the correct columns.');
+          // alert('Error: The imported file does not have the correct columns.');
+
+          return;
+        }
+  
         // Assign the imported data to _listInfo
         let tempArr: any = [];
         importedData.forEach((element, index) => {

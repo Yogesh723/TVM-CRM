@@ -1,6 +1,78 @@
-.logo{
-    padding: 15px;
-    border-radius: 35px;
-    width: 200px;
-    height: 200px;
+.login-bg {
+  background-image: url("../../../assets/loginBackground.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 93vh;
+  font-family: "Overpass", sans-serif;
+}
+.login-form {
+  position: absolute;
+  top: 106px;
+  left: 7%;
+  min-width: 350px;
+  max-width: 500px;
+  margin: auto;
+  opacity: 0.7;
+  text-align: center;
+
+  .form-heading {
+    h2 {
+      font-weight: bold;
+      color: #04079e;
+
+    }
+
+    span {
+      color: #000;
+    }
+  }
+
+  .input-group {
+    height: 50px;
+    width: 50%;
+
+    .form-control {
+      border-left-width: 0;
+      padding-left: 0;
+      border-color: #9da7b6;
+
+      &.b-left {
+        border-right-width: 0;
+      }
+    }
+
+    .input-group-text {
+      background-color: transparent;
+      border-color: #9da7b6;
+
+      i {
+        color: #070f65;
+      }
+
+      .hide {
+        display: none;
+      }
+    }
+  }
+
+  label.check {
+    color: #616161;
+  }
+
+  .login-btn {
+    background-color: #1114a2;
+    color: #fff;
+    width: 50%;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+.col-12{
+  position: relative;
+    left: 6.5rem;
 }
