@@ -9,10 +9,10 @@ export class TimeSheetService {
   constructor(private http: HttpClient) { }
 
   getTimesheetData() {
-    return this.http.get('http://localhost:3000/timesheet');
+    return this.http.get('http://localhost:4000/timesheet');
   }
 
-  saveTimesheetData(data: any, empId: any) {debugger
-    return this.http.put(`${'http://localhost:3000/timesheet'}/${empId}`, data);
+  saveTimesheetData(data: any, empId: any) {
+    return this.http.put(`${'http://localhost:4000/timesheet'}/${empId}`, data);
   }
 }
