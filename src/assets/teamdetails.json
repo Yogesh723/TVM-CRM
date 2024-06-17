@@ -113,133 +113,44 @@
           "joining": "05/15/2024",
           "Home address": "wertyghuj",
           "state": "No"
+        },
+        {
+          "Employee": "Bala",
+          "Experienceyear": "0.8",
+          "Specifications": "java developer",
+          "Qualifications": "B.E.CSE.,",
+          "Emergency contacts": "8778350948",
+          "Job information": "TVM ",
+          "Contact number": "8778350948",
+          "Email address": "bala2001@gmail.com",
+          "joining": "2023-11-14T18:30:00.000Z",
+          "Home address": "1st stret",
+          "id": "fi0h6zb6k"
         }
       ],
       "id": "20bc"
     },
     {
-      "id": "79b5",
-      "employees": []
+      "employees": [
+        {
+          "Employee": "Karthick",
+          "Experienceyear": "2",
+          "Specifications": "Angular",
+          "Qualifications": "B.E",
+          "Emergency contacts": "5673682389",
+          "Job information": "TVM",
+          "Contact number": "6783178746",
+          "Email address": "karth@gmail.com",
+          "joining": "2024-06-02T18:30:00.000Z",
+          "Home address": "2nd street",
+          "id": "lvmefi5g8"
+        }
+      ],
+      "id": "79b5"
     },
     {
       "id": "25e2",
       "employees": []
-    }
-  ],
-  "jiradetails": [
-    {
-      "id": "ae25",
-      "date": 30,
-      "month": "May",
-      "year": 2024,
-      "team": "Team A",
-      "employeeName": "Bala",
-      "taskDetails": "Task",
-      "status": "Completed",
-      "scrumTiming": "9.00",
-      "morningSession": "Development",
-      "middaySession": "Meeting",
-      "afternoonSession": "Meeting",
-      "eveningSession": "Development",
-      "nonBillableHrs": "1.5",
-      "nonBillableStatus": "Completed",
-      "dailyScore": "5",
-      "comments": "Good"
-    },
-    {
-      "id": "5e8e",
-      "date": 30,
-      "month": "May",
-      "year": 2024,
-      "team": "Team B",
-      "employeeName": "Arun",
-      "taskDetails": "Task",
-      "status": "Completed",
-      "scrumTiming": "9.30",
-      "morningSession": "Development",
-      "middaySession": "Meeting",
-      "afternoonSession": "Development",
-      "eveningSession": "Meeting",
-      "nonBillableHrs": "1.5",
-      "nonBillableStatus": "Completed",
-      "dailyScore": "5",
-      "comments": "Great"
-    },
-    {
-      "id": "9541",
-      "date": 30,
-      "month": "May",
-      "year": 2024,
-      "team": "Team c",
-      "employeeName": "Karthi",
-      "taskDetails": "Task",
-      "status": "Completed",
-      "scrumTiming": "9.00",
-      "morningSession": "Development",
-      "middaySession": "Meeting",
-      "afternoonSession": "Design",
-      "eveningSession": "Meeting",
-      "nonBillableHrs": "1.2",
-      "nonBillableStatus": "Completed",
-      "dailyScore": "5",
-      "comments": "good"
-    },
-    {
-      "id": "2062",
-      "date": 30,
-      "month": "May",
-      "year": 2024,
-      "team": "Team D",
-      "employeeName": "varun",
-      "taskDetails": "Task",
-      "status": "Completed",
-      "scrumTiming": "9.30",
-      "morningSession": "Development",
-      "middaySession": "Meeting",
-      "afternoonSession": "Development",
-      "eveningSession": "Meeting",
-      "nonBillableHrs": "1.5",
-      "nonBillableStatus": "Progress",
-      "dailyScore": "5",
-      "comments": "Good"
-    },
-    {
-      "id": "36f6",
-      "date": "01",
-      "month": "Jun",
-      "year": 2024,
-      "team": "Team A",
-      "employeeName": "Balas",
-      "taskDetails": "task",
-      "status": "Progress",
-      "scrumTiming": "9.00",
-      "morningSession": "Development",
-      "middaySession": "Meeting",
-      "afternoonSession": "Development",
-      "eveningSession": "Meeting",
-      "nonBillableHrs": "1.8",
-      "nonBillableStatus": "Completed",
-      "dailyScore": "5",
-      "comments": "Great"
-    },
-    {
-      "id": "b5bf",
-      "date": 30,
-      "month": "May",
-      "year": 2024,
-      "team": "Team A",
-      "employeeName": "Varun",
-      "taskDetails": "Task",
-      "status": "Progress",
-      "scrumTiming": "9.00",
-      "morningSession": "Development",
-      "middaySession": "Meeting",
-      "afternoonSession": "Development",
-      "eveningSession": "Meeting",
-      "nonBillableHrs": "1.5",
-      "nonBillableStatus": "Completed",
-      "dailyScore": "5",
-      "comments": "Good"
     }
   ]
 }

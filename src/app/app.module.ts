@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import { StarRatingModule } from 'angular-star-rating';
+import { NgxStarsRatingModule } from 'ngx-stars-rating';
+import { IgcFormsModule } from 'igniteui-angular';
 
 @NgModule({
   declarations: [
@@ -45,9 +48,11 @@ import {provideNativeDateAdapter} from '@angular/material/core';
     MatFormFieldModule,
     MatDatepickerModule,
     MatInputModule,
-
+    NgxStarsRatingModule,
+    IgcFormsModule,
 
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [JiraDataService,provideNativeDateAdapter(),
     provideAnimationsAsync()
   ],

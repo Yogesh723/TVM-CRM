@@ -1,23 +1,26 @@
 <app-bread-crumb></app-bread-crumb>
 <h1>Office Status Daily Report</h1>
-
-<mat-form-field appearance="fill" class="dropDown">
-  <mat-label>Select Options</mat-label>
-  <mat-select [(value)]="selectedValues" multiple>
-    <mat-option (click)="toggleSelectAll($event)" [value]="'selectAll'">
-      Select All
+<dx-button
+    icon="group">
+</dx-button>
+<form [formGroup]="searchUserForm" fxFlex fxLayout="column" autocomplete="off" style="margin: 30px">
+  <mat-select placeholder="Team Name" formControlName="userType" multiple (selectionChange)="onSelectionChange($event)" class="custom-select">
+    <mat-option *ngFor="let filters of options" [value]="filters.TeamName">
+      {{filters.TeamName}}
     </mat-option>
-    <mat-option *ngFor="let option of options" [value]="option">
-      {{ option }}
-    </mat-option>
+    <!-- <mat-option #allSelecteds (click)="toggleAllSelection()" [value]="'selectAll'">Select All</mat-option> -->
   </mat-select>
-</mat-form-field>
+</form>
+
 
 <label for="Workingdate">Date:</label>
-<input type="date" id="Workingdate" name="Workingdate">
+<input class="datefield" type="date" id="Workingdate" name="Workingdate" [(ngModel)]="selectedDate">
 
-<button class="Serach" (click)="searchData()">Search</button>
-<!-- Conditionally display the data grid and other elements -->
+<button class="Search" (click)="searchData()">Search</button>
+<div *ngIf="showDefaultText" class="defaulttext">
+  <pre> SEARCH THE DATA USING TEAM NAME OR DATE </pre>
+</div>
+
 <div *ngIf="showGrid">
   <dx-data-grid
     [dataSource]="filteredRows"
@@ -87,7 +90,9 @@
     <dxi-column dataField="eveningSession" caption="4.00 PM to 6.30 PM"></dxi-column>
     <dxi-column dataField="nonBillableHrs" caption="Non Billable"></dxi-column>
     <dxi-column dataField="nonBillableStatus" caption="Non Billable Status"></dxi-column>
-    <dxi-column dataField="dailyScore" caption="Daily Score"></dxi-column>
+    <dxi-column dataField="dailyScore" caption="Daily Score">
+    </dxi-column>
+    
     <dxi-column dataField="comments" caption="Comments"></dxi-column>
     <div *dxTemplate="let data of 'customGroupColumn'">
       <div>{{multiGroupDisplay(data)}}</div>
@@ -105,12 +110,11 @@
       {{ info.column.caption }}
     </div>
   </dx-data-grid>
-
-  <dx-speed-dial-action
+</div>
+<dx-speed-dial-action
     icon="add"
     label="Add"
     [index]="1"
     (onClick)="navigateToAddRow()"
   >
   </dx-speed-dial-action>
-</div>

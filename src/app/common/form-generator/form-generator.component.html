@@ -1,162 +1,123 @@
 <div class="mainDiv">
-    <div class="mb-4 mt-4" style="display: flex;justify-content: center; font-weight: 900;">{{Pageheader}}</div>
-    <div class="card" style="width: fit-content;display: flex;flex-direction: row;">
-        <div class="card-body" style="display: flex;align-items: center;flex-direction: column;">
-            <form [formGroup]="appForm" (ngSubmit)="saveForm(appForm.value)">
-                <ng-container *ngFor="let section of _formObject">
-                    <div [hidden]="activeSection != section.Name" class="fadeIn">
-                        <ng-container *ngFor="let row of section.FormFields; index as i">
-                            <div *ngIf="!row.hidden" class="inputDiv m-3">
-                                <label [innerHTML]="row.label" style="color: #333;padding-right: 8px;"></label>
-                                <ng-container *ngIf="row.type == 'Toggle';else dateInput">
-                                    <span>
-                                        <label
-                                          id="{{ row?.label }}"
-                                          class="switch"
-                                        >
-                                          <input
-                                            id="{{ row?.label }}"
-                                            class="checkBoxStyles"
-                                            type="checkbox"
-                                            [formControlName]="row.name"
-                                            [(ngModel)]="row.value"
-                                          />
-                                          <span
-                                            id="{{ row?.value }}"
-                                            class="slider round"
-                                          ></span>
-                                        </label>
-                                    </span>
-                                </ng-container>
-                                <ng-template #dateInput>
-                                    <ng-container *ngIf="row.type == 'Date';else numberInput">
-                                        <span
-                                            *ngIf="row.readonly === false"
-                                        >
-                                            <p-calendar
-                                                id="{{ i }}_{{
-                                                    row.name
-                                                }}"
-                                                [formControlName]="row.name"
-                                                #Date
-                                                [inputStyle]="inputStyle"
-                                                [maxDate]="row?.maxDate"
-                                                [minDate]="row?.minDate"
-                                                name="{{ row.name }}"
-                                                [locale]="enUS"
-                                                [style]="{
-                                                    position: 'relative',
-                                                    overflow: 'visible',
-                                                    'z-index': '999'
-                                                }"
-                                            >
-                                            </p-calendar>
-                                        </span>
-                                        <label
-                                            *ngIf="row.readonly === true"
-                                            [innerHTML]="row.value"
-                                        ></label>
-                                    </ng-container>
-                                    <ng-template #numberInput>
-                                      <ng-container *ngIf="row.type == 'number'; else emailInput">
-                                        <input
-                                          type="text"
-                                          [formControlName]="row.name"
-                                          (input)="validateMobileNumber()"
-                                          maxlength="10"
-                                          (keypress)="blockNonNumericalInput($event)"
-                                          autocomplete="off"
-                                        />
-                                      </ng-container >
-                                      <ng-template #emailInput>
-                                        <!-- <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else imageInput">
-                                            <input
-                                              type="email"
-                                              [formControlName]="row.name"
-                                              style="width: auto"
-                                              autocomplete="off"
-                                            />
-                                        </ng-container> -->
-                                        <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else imageInput">
-                                            <input
-                                              type="email"
-                                              [formControlName]="row.name"
-                                              style="width: auto"
-                                              autocomplete="off"
-                                            />
-                                            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-                                                <div *ngIf="email?.errors?.['required']">Email is required.</div>
-                                                <div *ngIf="email?.errors?.['email']">Please enter a valid email address.</div>
-                                              </div>
-                                          </ng-container>
-                                          
-                                        <ng-template #imageInput>
-                                            <ng-container *ngIf="row.type === 'image'; else dropdownSingleSelection">
-                                                <app-upload-images></app-upload-images>
-                                            </ng-container>
-                                            <ng-template #dropdownSingleSelection>
-                                                <ng-container *ngIf="row.type == 'singleSelect'; else normalInput">
-                                                    <ng-select 
-                                                        [ngStyle]="{'min-width': row.width ? row.width : '50%'}"
-                                                        clearAllText="Clear"
-                                                        [bindLabel]="
-                                                            row.bindLabel == undefined
-                                                            ? 'label'
-                                                            : row.bindLabel
-                                                        "
-                                                        dropdownPosition="auto"
-                                                        [bindValue]="
-                                                            row.bindValue == undefined
-                                                            ? 'label'
-                                                            : row.bindValue
-                                                        "
-                                                        [items]="row.pickList"
-                                                        dropdownPosition="auto"
-                                                        [placeholder]="'select'"
-                                                        dropdownPosition="auto"
-                                                        [formControlName]="row.name"
-                                                        (change)="onSelectChange($event)"
-                                                        id="select_{{ row.label }}"
-                                                    >
-                                                        <ng-template ng-option-tmp let-item="item" let-index="index">
-                                                            <div [ngClass]="{'add-new-option': item.value == -1}">
-                                                                {{ item.label }}
-                                                            </div>
-                                                        </ng-template>
-                                                    </ng-select>
-                                                </ng-container>
-                                                <ng-template #normalInput>
-                                                    <input class="col-6" [formControlName]="row.name" style="width: auto" autocomplete="off"/>
-                                                </ng-template>
-                                            </ng-template>
-                                        </ng-template>
-                                      </ng-template>
-                                    </ng-template>
-                                </ng-template>
-                            </div>
-                        </ng-container>
-                    </div>
+  <div class="mb-4 mt-4" style="display: flex; justify-content: center; font-weight: 900;">{{ Pageheader }}</div>
+  <div class="card" style="width: fit-content; display: flex; flex-direction: row;">
+    <div class="card-body" style="display: flex; align-items: center; flex-direction: column;">
+      <form [formGroup]="appForm" (ngSubmit)="saveForm(appForm.value)">
+        <ng-container *ngFor="let section of _formObject">
+          <div [hidden]="activeSection != section.Name" class="fadeIn">
+            <ng-container *ngFor="let row of section.FormFields; index as i">
+              <div *ngIf="!row.hidden" class="inputDiv m-3">
+                <label [innerHTML]="row.label" style="color: #333; padding-right: 8px;"></label>
+                <ng-container *ngIf="row.type == 'Toggle'; else dateInput">
+                  <span>
+                    <label id="{{ row?.label }}" class="switch">
+                      <input id="{{ row?.label }}" class="checkBoxStyles" type="checkbox" [formControlName]="row.name" [(ngModel)]="row.value" />
+                      <span id="{{ row?.value }}" class="slider round"></span>
+                    </label>
+                  </span>
                 </ng-container>
-                <div class="formBtn">
-                    <button
-                        type="submit"
-                        class="btn btn-success"
-                        title="Save changes"
-                        [disabled]="!appForm.valid || !appForm.dirty"
-                    >
-                        Save
-                    </button>
-                    <button
-                        type="button"
-                        (click)="clear()"
-                        class="btn btn-warning"
-                        title="Clear changes"
-                        [disabled]="!appForm.dirty"
-                    >
-                        Clear
-                    </button>
-                </div>
-            </form>
+                <ng-template #dateInput>
+                  <ng-container *ngIf="row.type == 'Date'; else numberInput">
+                    <span *ngIf="row.readonly === false">
+                      <p-calendar
+                        id="{{ i }}_{{ row.name }}"
+                        [formControlName]="row.name"
+                        #Date
+                        [inputStyle]="inputStyle"
+                        [maxDate]="row?.maxDate"
+                        [minDate]="row?.minDate"
+                        name="{{ row.name }}"
+                        [locale]="enUS"
+                        [style]="{ position: 'relative', overflow: 'visible', 'z-index': '999' }"
+                      ></p-calendar>
+                    </span>
+                    <label *ngIf="row.readonly === true" [innerHTML]="row.value"></label>
+                  </ng-container>
+                  <ng-template #numberInput>
+                    <ng-container *ngIf="row.type == 'number'; else emailInput">
+                      <input
+                        type="text"
+                        [formControlName]="row.name"
+                        (input)="validateMobileNumber()"
+                        maxlength="10"
+                        (keypress)="blockNonNumericalInput($event)"
+                        autocomplete="off"
+                      />
+                    </ng-container>
+                    <ng-template #emailInput>
+                      <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else imageInput">
+                        <input type="email" [formControlName]="row.name" style="width: auto" autocomplete="off" />
+                      </ng-container>
+                      <ng-template #imageInput>
+                        <ng-container *ngIf="row.type === 'image'; else dropdownSingleSelection">
+                          <app-upload-images></app-upload-images>
+                        </ng-container>
+                        <ng-template #dropdownSingleSelection>
+                          <ng-container *ngIf="row.type == 'singleSelect'; else ratingInput">
+                            <ng-select
+                              [ngStyle]="{ 'min-width': row.width ? row.width : '50%' }"
+                              clearAllText="Clear"
+                              [bindLabel]="row.bindLabel == undefined ? 'label' : row.bindLabel"
+                              dropdownPosition="auto"
+                              [bindValue]="row.bindValue == undefined ? 'label' : row.bindValue"
+                              [items]="row.pickList"
+                              dropdownPosition="auto"
+                              [placeholder]="'select'"
+                              dropdownPosition="auto"
+                              [formControlName]="row.name"
+                              (change)="onSelectChange($event);
+                               "
+                               id="select_{{ row.label }}"
+                                >
+                              <ng-template ng-option-tmp let-item="item" let-index="index">
+                                <div [ngClass]="{'add-new-option': item.value == -1}">
+                                  {{ item.label }}
+                                </div>
+                              </ng-template>
+                            </ng-select>
+                          </ng-container>
+                          <ng-template #ratingInput>
+                            <ng-container *ngIf="row.type == 'rating'; else textAreaInput">
+                              <igc-rating value="ratingVal" min="1" max="5"></igc-rating>
+                            </ng-container>
+                            <ng-template #textAreaInput>
+                              <ng-container *ngIf="row.type == 'textArea'; else normalInput">
+                                <input type="text" class="col-6" [formControlName]="row.name" style="width: auto" autocomplete="off"/>
+                              </ng-container>
+                              <ng-template #normalInput>
+                                <textarea class="col-6" [formControlName]="row.name" style="width: auto" autocomplete="off"></textarea>
+                              </ng-template>
+                            </ng-template>
+                          </ng-template>
+                        </ng-template>
+                      </ng-template>
+                    </ng-template>
+                  </ng-template>
+                </ng-template>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+        <div class="formBtn">
+          <button
+            type="submit"
+            class="btn btn-success"
+            title="Save changes"
+            [disabled]="!appForm.valid || !appForm.dirty"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            (click)="clear()"
+            class="btn btn-warning"
+            title="Clear changes"
+            [disabled]="!appForm.dirty"
+          >
+            Clear
+          </button>
         </div>
+      </form>
     </div>
+  </div>
 </div>

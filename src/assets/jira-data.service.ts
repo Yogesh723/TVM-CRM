@@ -8,14 +8,23 @@ import { Row } from 'devextreme/ui/data_grid';
   providedIn: 'root'
 })
 export class JiraDataService {
-  // private dataUrl = 'assets/jira-data.json';
-  // private rowsSubject = new BehaviorSubject<Row[]>([]);
+  private optionsUrl = 'http://localhost:3000/teamdetails';  
+  private jiraDetailsUrl = 'http://localhost:5402/jiradetails';
 
   // rows$ = this.rowsSubject.asObservable();
 
-  // constructor(private http: HttpClient) {
-  //   this.loadData();
-  // }
+  constructor(private http: HttpClient) { }
+  getOptions(): Observable<string[]> {
+    return this.http.get<string[]>(this.optionsUrl);
+  }
+
+  saveJira(req: any) {
+    return this.http.post('http://localhost:5402/jiradetails', req);
+  }
+
+  getJiradetails() {
+    return this.http.get<any[]>(this.jiraDetailsUrl);
+  }
 
   // private loadData() {
   //   this.http.get<Row[]>(this.dataUrl).subscribe(data => {

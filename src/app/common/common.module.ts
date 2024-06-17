@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WaterMarkPageComponent } from './water-mark-page/water-mark-page.component';
 import { InterstoreComponent } from './interstore/interstore.component';
@@ -16,6 +16,8 @@ import { UploadImagesComponent } from './upload-image/upload-image.component';
 import { FileUploadService } from '../Serviceimage/file-upload.Services';
 import { BreadcrumbComponent } from '../bread-crumb/bread-crumb.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxStarsRatingModule } from 'ngx-stars-rating';
+import { IgcFormControlDirective, IgcFormsModule } from 'igniteui-angular';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     FormsModule,
     CalendarModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxStarsRatingModule,
+    IgcFormsModule,
+    
   ],
   exports: [
     NavBarComponent,
@@ -49,8 +54,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
     UploadImagesComponent,
     BreadcrumbComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    FileUploadService
+    FileUploadService,
+    IgcFormControlDirective
   ]
 })
 export class CommonTvmModule { }

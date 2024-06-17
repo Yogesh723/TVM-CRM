@@ -1,7 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { BreadcrumbService } from '../bread-crumb/bread-crumb.service';
 import { Router } from '@angular/router';
 import { TeamDetailServiceService } from '../team-details/team-detail-service.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatOption } from '@angular/material/core';
+import { JiraDataService } from 'src/assets/jira-data.service';
 
 @Component({
   selector: 'app-jira-page',
@@ -10,20 +13,25 @@ import { TeamDetailServiceService } from '../team-details/team-detail-service.se
 })
 export class JiraPageComponent implements OnInit {
   selectedDate: Date | null = null;
-
+  searchUserForm!: FormGroup;
   selectedValues: string[] = [];
-  options: string[] = [];
+  options: any = [];
   allSelected: boolean = false;
   rows: any[] = [];
   filteredRows: any[] = [];
   showFilterRow!: boolean;
   showGrid: boolean = false;
+  showDefaultText: boolean = true;
+  userTypeFilters = [];
+  @ViewChild('allSelecteds') private allSelecteds!: MatOption;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private route: Router,
     private breadcrumbService: BreadcrumbService,
-    private teamdetailsservice: TeamDetailServiceService
+
+    private jirapageservice : JiraDataService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -33,19 +41,24 @@ export class JiraPageComponent implements OnInit {
       { label: 'JIRA', url: '/jira' },
       { label: 'JIRA Page', url: this.route.url }
     ]);
+
+    this.searchUserForm = this.fb.group({
+      userType: new FormControl('')
+    });
   }
 
   fetchOptionsAndRows(): void {
-    this.teamdetailsservice.getOptions().subscribe((options: any[]) => {
-      this.options = options.map((e: any) => e.TeamName);
+    this.jirapageservice.getOptions().subscribe((options: any[]) => {
+      this.options = options;
       this.cdr.detectChanges();
     });
 
-    this.teamdetailsservice.getJiradetails().subscribe((rows: any[]) => {
+    this.jirapageservice.getJiradetails().subscribe((rows: any[]) => {
       this.rows = rows;
       this.cdr.detectChanges();
     });
   }
+
   toggleSelectAll(event: any) {
     if (event.value === 'selectAll') {
         this.allSelected = event.source.selected;
@@ -67,41 +80,83 @@ export class JiraPageComponent implements OnInit {
             this.allSelected = false;
         }
     }
-    this.filterRows();
-}
+  }
 
-
-searchData() {
-  this.filterRows();
-}
   onSelectionChange(event: any) {
     if (event.value.includes('selectAll')) {
       this.toggleSelectAll(event);
     } else {
       this.selectedValues = event.value;
       this.allSelected = this.selectedValues.length === this.options.length;
-      this.filterRows();
     }
   }
 
+  tosslePerOne(all: any){ 
+    if (this.allSelecteds.selected) {  
+      this.allSelecteds.deselect();
+      this.allSelected = false;
+      return false;
+    }
+    if(this.searchUserForm.controls['userType'].value.length == this.userTypeFilters.length)
+      this.allSelecteds.select();
+    return true;
+  }
+
+  toggleAllSelection() {
+    if (this.allSelecteds.selected) {
+      this.searchUserForm.controls['userType']
+        .patchValue([...this.options.map((item: any) => item.TeamName), 0]);
+    } else {
+      this.searchUserForm.controls['userType'].patchValue([]);
+    }
+  }
+
+  searchData() {
+    this.filterRows();
+    this.showDefaultText = false;
+  }
+  
   filterRows() {
-    // Filter rows based on selected team name(s) and exact date match
     this.filteredRows = this.rows.filter(row => {
       const teamMatch = this.selectedValues.length === 0 || this.selectedValues.includes(row.team);
-      const dateMatch = !this.selectedDate || this.isSameDate(new Date(row.date), this.selectedDate);
+      const dateMatch = !this.selectedDate || this.isSameDate(new Date(row.year, this.getMonthNumber(row.month) - 1, row.date), this.selectedDate);
       return teamMatch && dateMatch;
     });
   
-    // Show the grid if data is found
     this.showGrid = this.filteredRows.length > 0;
   }
   
-  isSameDate(date1: Date, date2: Date): boolean {
+  isSameDate(date1: Date, date2: Date | string | null | undefined): boolean {
+    if (date2 instanceof Date === false && typeof date2 === 'string') {
+      date2 = new Date(date2);
+    }
+    if (!(date2 instanceof Date && !isNaN(date2.getTime()))) {
+      return false; 
+    }
+  
     return (
       date1.getDate() === date2.getDate() &&
       date1.getMonth() === date2.getMonth() &&
       date1.getFullYear() === date2.getFullYear()
     );
+  }
+  
+  
+  
+  getMonthNumber(monthName: string): number {
+    const months: { [key: string]: number } = {
+      'January': 1, 'February': 2, 'March': 3, 'April': 4, 'May': 5, 'Jun': 6,
+      'July': 7, 'August': 8, 'September': 9, 'October': 10, 'November': 11, 'December': 12
+    };
+    return months[monthName as keyof typeof months];
+  }
+  
+  
+  
+  
+  getMonthIndex(month: string): number {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return months.indexOf(month);
   }
   
 
@@ -188,5 +243,4 @@ searchData() {
   addRows() {
     this.route.navigate(['tvm/team/add-row']);
   }
-  
 }

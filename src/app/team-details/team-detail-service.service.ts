@@ -6,13 +6,8 @@ import { Observable, map, switchMap } from 'rxjs';
   providedIn: 'root'
 })
 export class TeamDetailServiceService {
-  private optionsUrl = 'http://localhost:3000/teamdetails';  // Replace with your API endpoint
-  private jiraDetailsUrl = 'http://localhost:3000/jiradetails';
 
   constructor(private http: HttpClient) { }
-  getOptions(): Observable<string[]> {
-    return this.http.get<string[]>(this.optionsUrl);
-  }
 
   getTeamDetails() {
     return this.http.get('http://localhost:3000/teamdetails');
@@ -173,14 +168,6 @@ export class TeamDetailServiceService {
         return this.http.put(`${'http://localhost:3000/assetdetails'}/${teamId}`, { assets });
       })
     );
-  }
-
-  saveJira(req: any) {
-    return this.http.post('http://localhost:3000/jiradetails', req);
-  }
-
-  getJiradetails() {
-    return this.http.get<any[]>(this.jiraDetailsUrl);
   }
 }
 

@@ -1,11 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IgcFormControlDirective } from 'igniteui-angular';
+import { defineComponents, IgcRatingComponent } from 'igniteui-webcomponents';
+defineComponents(IgcRatingComponent);
 
 @Component({
   selector: 'app-form-generator',
   templateUrl: './form-generator.component.html',
-  styleUrls: ['./form-generator.component.scss']
+  styleUrls: ['./form-generator.component.scss'],
 })
+
 export class FormGeneratorComponent implements OnInit {
   appForm!: FormGroup;
   _formObject: any = [];
