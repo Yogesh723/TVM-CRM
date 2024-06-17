@@ -5,6 +5,18 @@
       "TeamName": "Team A",
       "LeadName": "Thobica",
       "TeamSize": "5"
+    },
+    {
+      "id": "79b5",
+      "TeamName": "Team B",
+      "LeadName": "Ragini",
+      "TeamSize": "4"
+    },
+    {
+      "id": "25e2",
+      "TeamName": "Team C",
+      "LeadName": "sharmila",
+      "TeamSize": "5"
     }
   ],
   "assetdetails": [
@@ -18,6 +30,14 @@
         }
       ],
       "id": "20bc"
+    },
+    {
+      "id": "79b5",
+      "assets": []
+    },
+    {
+      "id": "25e2",
+      "assets": []
     }
   ],
   "projectdetails": [
@@ -53,6 +73,14 @@
         }
       ],
       "id": "20bc"
+    },
+    {
+      "id": "79b5",
+      "projects": []
+    },
+    {
+      "id": "25e2",
+      "projects": []
     }
   ],
   "employeedetails": [
@@ -113,6 +141,28 @@
         }
       ],
       "id": "20bc"
+    },
+    {
+      "employees": [
+        {
+          "Employee": "Karthick",
+          "Experienceyear": "2",
+          "Specifications": "Angular",
+          "Qualifications": "B.E",
+          "Emergency contacts": "5673682389",
+          "Job information": "TVM",
+          "Contact number": "6783178746",
+          "Email address": "karth@gmail.com",
+          "joining": "2024-06-02T18:30:00.000Z",
+          "Home address": "2nd street",
+          "id": "lvmefi5g8"
+        }
+      ],
+      "id": "79b5"
+    },
+    {
+      "id": "25e2",
+      "employees": []
     }
   ],
   "Crediantials": [
