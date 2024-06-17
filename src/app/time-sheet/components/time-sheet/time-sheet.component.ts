@@ -420,18 +420,29 @@ export class TimeSheetComponent {
 
   calculateTotalLeaveDays(field: any): number {
     // Assuming the _listInfo contains data for the current and previous month
-    const currentMonth = new Date().getMonth() + 1;
-    const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
-    return this.calculateDays(field, 3, [currentMonth, previousMonth]);
+    // const currentMonth = new Date().getMonth() + 1;
+    // const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    // return this.calculateDays(field, 3, [currentMonth, previousMonth], true);
+
+      // Get the current month
+  const currentMonth = new Date().getMonth() + 1;
+  // Calculate the next month, considering the wrap-around at the end of the year
+  const nextMonth = currentMonth%2 === 0 ? currentMonth + 1 : currentMonth - 1;
+
+  // Calculate the leave days for the current month and the next month
+  return this.calculateDays(field, 3, [currentMonth, nextMonth], true);
   }
 
-  calculateDays(field: any, valueType: number, months?: number[]): number {
+  calculateDays(field: any, valueType: number, months?: number[], twoMonthCheck: boolean = false): number {
     let totalDays = 0;
     const timesheet = field.year.filter((e: any) => e.id == this.createdFromDate.getFullYear());
     timesheet[0].month.forEach((month: any) => {
       if (!months || months.includes(month.id)) {
+        if (months && twoMonthCheck) {
+          twoMonthCheck = months.includes(month.id);
+        }
         month.date.forEach((date: any) => {
-          if (date.value == valueType && this.createdFromDate.getMonth()+1 == month.id) {
+          if (date.value == valueType && (this.createdFromDate.getMonth()+1 == month.id || twoMonthCheck)) {
             totalDays++;
           }
         });
