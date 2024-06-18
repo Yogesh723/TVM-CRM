@@ -4,13 +4,16 @@
       <h3 id="itemHeading" class="d-inline" *ngIf="showHeader">{{Pageheader}}</h3>
     </div>
   </div>
+  <div>
+    
+  </div>
       <div *ngIf="Showexportbutton">
         <button [title]="'Export'" type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
           <i class="fa-solid fa-upload"></i>
         </button>
       </div>
       
-      <div *ngIf="Showexportbutton">
+      <div *ngIf="Showexportbutton && isAdmin">
         <button [title]="'Import'" type="button" class="btn btn-secondary download" (click)="importFromExcel()">
           <i class="fa-solid fa-download"></i>
         </button>
@@ -23,7 +26,7 @@
           (searchByItemSelected)="filterTable($event)" placeHolder="{{placeHolder}}"
           [searchDropDownItems]="searchDropDownItems"></app-search>
       </div>
-      <div class="col-1">
+      <div class="col-1" *ngIf="provideAccess" >
         <button id="addBtn" class="btn btn-success add-create" type="submit" (click)="createNew(0)">
           <i class="fa-solid fa-plus"></i>
            Add
@@ -44,7 +47,7 @@
               <th *ngFor="let col of listColumns; index as j" id="col{{ col.name }}" [style.width.%]="col.widthPct">
                 {{ col.label }}
               </th>
-              <th style="width: 4%;">Actions</th>
+              <th *ngIf="isAdmin" style="width: 4%;">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +58,7 @@
                   </td>
                 </ng-container>
                 <ng-container>
-                  <td class="deleteRow">
+                  <td class="deleteRow" *ngIf="isAdmin">
                     <button class="btn btn-danger aligedelete" (click)="deleteRow(info.id)">
                       <i class="fa-solid fa-trash"></i>
                     </button>

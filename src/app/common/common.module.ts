@@ -19,6 +19,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AppModule } from "../app.module";
 
 @NgModule({
@@ -57,7 +58,8 @@ import { AppModule } from "../app.module";
         NgSelectModule,
         MatSelectModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatDialogModule
     ]
 })
 export class CommonTvmModule { }

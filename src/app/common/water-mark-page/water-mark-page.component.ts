@@ -14,7 +14,6 @@ import { AuthService } from 'src/app/auth.service';
 export class WaterMarkPageComponent {
   loginSuccess = false;
   formSubmitted = false;
-
   public showPassword: boolean = false;
   loginForm!: FormGroup;
   teamDetails: any = [];
@@ -55,14 +54,19 @@ export class WaterMarkPageComponent {
     }
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
-    let validuser = this.teamDetails.filter((e: { LeadName: any; }) =>  e.LeadName == this.loginForm.value.username );
-    validuser = this.employeDetails.filter ((e: { Employee: any; }) => e.Employee== this.loginForm.value.username);
-    if (this.loginForm.valid && (validuser.length == 1 || this.loginForm.value.username == 'Admin') && this.loginForm.value.password=='Admin') {
-      this.router.navigate(['/tvm/team/teamlist']);
-      sessionStorage.setItem('isLogin', 'Valid');
-      this.sessionTimeoutService.startTimeout();
-    } else{
-      this.toastr.error(`Error: Please enter valid credentials`);
-    }
+
+    this.teamservice.getCrentials().subscribe((credentials: any) => {
+      // localStorage.setItem('credentials', credentials);
+      const validCredentials = credentials.find((cred: any) => cred.UserName === username && cred.Password === password);
+      localStorage.setItem('credentials', JSON.stringify(validCredentials));
+
+      if (validCredentials) {
+        localStorage.setItem('username', username);
+        this.router.navigate(['/tvm/team/teamlist']);
+        sessionStorage.setItem('isLogin', 'Valid');
+      } else {
+        this.toastr.error(`Error: Please enter valid credentials`);
+      }
+    });
   }
 }

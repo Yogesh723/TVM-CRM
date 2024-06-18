@@ -1,13 +1,19 @@
 .breadcrumb a {
     text-decoration: none;
     color: inherit;
+    position: relative;
+    top: 6px;
   }
   
-  .breadcrumb a:hover {
-    text-decoration: underline; 
-  }
 .fa-angle-right{
   font-size:20px;
-  margin-top: 7px;
+  margin-top: 21px;
+  padding-left: 20px;
+  padding-right: 20px;
   color: orange;
 }
+
+.breadcrumb-item{
+  margin-top: 1rem;
+}
+

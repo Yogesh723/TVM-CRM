@@ -17,6 +17,7 @@ export class ProjectsDetailsComponent {
   projectListInfo: any = [];
   listObservable: any;
   activeId: any = '';
+  acceptRole: any =[];
 
   constructor(
     private communicationService: CommunicationService,
@@ -114,6 +115,15 @@ export class ProjectsDetailsComponent {
       { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Project Details', url: this.route.url }
     ]);
+    let data  : any= localStorage.getItem('credentials')
+    const userData = JSON.parse(data);
+      if(userData.Role == "A"){
+        this.acceptRole.push("A");
+      } else if(userData.Role == "L"){
+        this.acceptRole.push("L");
+      } else if(userData.Role == "E"){
+        this.acceptRole.push("");
+      }
   }
   getProjects() {
     this.teamService.getProjectDetailById(this.activeId).subscribe((result: any) => {

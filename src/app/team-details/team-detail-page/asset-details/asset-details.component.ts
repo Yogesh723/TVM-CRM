@@ -16,6 +16,7 @@ export class AssetDetailsComponent implements OnInit{
   listInfo: any = [];
   listObservable: any;
   activeId: any = '';
+  acceptRole: any = [];
 
   constructor(
     private communicationService: CommunicationService,
@@ -58,6 +59,15 @@ export class AssetDetailsComponent implements OnInit{
       { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Asset Details', url: this.route.url }
     ]);
+    let data  : any= localStorage.getItem('credentials')
+    const userData = JSON.parse(data);
+      if(userData.Role == "A"){
+        this.acceptRole.push("A");
+      } else if(userData.Role == "L"){
+        this.acceptRole.push("L");
+      } else {
+        this.acceptRole.push("");
+      }
   }
   getAssets() {
     this.teamService.getAssetDetailById(this.activeId).subscribe((result: any) => {

@@ -15,22 +15,53 @@
                 </li>
             </ul>
         </nav>
-    </div>
-    <!-- logout.component.html -->
-    <div class="logout-container">
-        <span class="user-name">{{ user.name }}</span>
-        <i class="fas fa-sign-out-alt" (click)="logout()" title="Logout"></i>
-    </div>    
+    </div> 
     <div class="back-button">
-        <a>
-            <i class="fa-solid fa-person-walking-arrow-loop-left" style="color: aliceblue; cursor: pointer; position: relative;
-            top: 0.6rem;"
-                title="goBack" (click)="goBack($event)"
-            >
-            </i>
-        </a>
+      <a>
+        <i class="fa-solid fa-person-walking-arrow-loop-left" style="
+                color: #fff;     
+                cursor: pointer;
+                position: relative;
+                top: 9px;
+                left: 50rem;" title="goBack" (click)="goBack($event)">
+        </i>
+      </a>
     </div>
+    <div class="addHeader_profileDetails">
+      <p class="header-label"><span class="addHeader_profileName">ADMIN</span></p>
+      <p class="header-label"><span class="addHeader_logTime">TVM Infotech Pvt Ltd</span></p>
+    </div>
+    
+    <div class="addHeader_profileAvatar">
+      <div class="dropdown">
+        <a class="dropdown-toggle d-block">
+          <i class="fa-regular fa-user" style="    
+                color: #fff;
+                position: relative;
+                right: 25px;
+                top: 7px;
+                font-size: 24px;"></i>
+        </a>
+        <ul class="dropdown-menu sb_dropdown">
+          <li><a class="dropdown-item" (click)="viewProfile()" style="font-weight: bold;">View Profile</a></li>
+          <li><a class="dropdown-item" (click)="logout()" style="font-weight: bold;">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+      
 </div>
 <div class="container-fluid">
     <router-outlet></router-outlet>
 </div>
+
+<ng-template #employeeDialog let-data>
+  <h1 mat-dialog-title>Profile Details</h1>
+  <div mat-dialog-content>
+    <p><strong>Name:</strong> {{ data.name }}</p>
+    <p><strong>Position:</strong> {{ data.position }}</p>
+    <p><strong>Department:</strong> {{ data.department }}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</ng-template>

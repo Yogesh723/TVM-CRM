@@ -22,6 +22,13 @@ export class TeamDetailServiceService {
   save(requestBody: any) {
     return this.http.post('http://localhost:3000/teamdetails', requestBody);
   }
+  saveCredentials(data: any): Observable<any> {
+    return this.http.post('http://localhost:3000/Crediantials', data);
+  }
+
+  getCrentials(){
+    return this.http.get('http://localhost:3000/Crediantials');
+  }
 
   saveForDetail(requestBody: any) {
     return this.http.post('http://localhost:3000/edit', requestBody);

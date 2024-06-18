@@ -45,3 +45,52 @@ i {
 i:hover {
   color: #ff0000;
 }
+
+.addHeader_profileDetails {
+  margin-bottom: 0;
+  text-align: right;
+  position: relative;
+  left: 24rem;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-label{
+  margin: 0px 0 2px !important;
+  color: #fff;
+  font-weight: bold;
+}
+
+.sb_dropdown {
+  border: 3px solid rgb(163, 160, 160);
+  overflow: hidden;
+  margin-left: 10px;
+  display: none; /* Hide by default */
+  right: 10px;
+  top: 30px;
+  position: absolute;
+}
+
+.sb_dropdown .dropdown-item {
+  font-size: 15px;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.sb_dropdown .dropdown-item:focus, 
+.sb_dropdown .dropdown-item:hover {
+  color: #fff;
+  background-color: #2c3294;
+  font-weight: bold;
+}
+
+.addHeader_profileAvatar .dropdown:hover .sb_dropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+.topBar_actionBtn .dropdown-toggle::after, 
+.addHeader_profileAvatar .dropdown-toggle::after {
+  display: none;
+}
