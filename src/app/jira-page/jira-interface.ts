@@ -1,9 +1,7 @@
 export interface Row {
   sno?: number;
-  date: string;
+  date:string;
   team: string;
-  year: string;
-  month: string;
   employeeName: string;
   taskDetails: string;
   status: string;
@@ -16,4 +14,6 @@ export interface Row {
   nonBillableStatus: string;
   dailyScore: string;
   comments: string;
+  year:string,
+  month:string
 }

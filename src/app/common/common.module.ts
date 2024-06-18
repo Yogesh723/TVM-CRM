@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WaterMarkPageComponent } from './water-mark-page/water-mark-page.component';
 import { InterstoreComponent } from './interstore/interstore.component';
@@ -20,6 +20,9 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppModule } from "../app.module";
+import { NgxStarsRatingModule } from 'ngx-stars-rating';
+import { IgcFormControlDirective, IgcFormsModule } from 'igniteui-angular';
+
 
 @NgModule({
     declarations: [
@@ -34,6 +37,20 @@ import { AppModule } from "../app.module";
         UploadImagesComponent,
         BreadcrumbComponent
     ],
+    imports: [
+      CommonModule,
+      RouterModule,
+      CommonTvmRoutingModule,
+      ReactiveFormsModule,
+      FormsModule,
+      CalendarModule,
+      NgSelectModule,
+      MatSelectModule,
+      MatInputModule,
+      MatFormFieldModule,
+      NgxStarsRatingModule,
+      IgcFormsModule,
+    ],
     exports: [
         NavBarComponent,
         SideNavBarComponent,
@@ -44,20 +61,10 @@ import { AppModule } from "../app.module";
         UploadImagesComponent,
         BreadcrumbComponent,
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
-        FileUploadService
+        FileUploadService,
+        IgcFormControlDirective
     ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        CommonTvmRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        CalendarModule,
-        NgSelectModule,
-        MatSelectModule,
-        MatInputModule,
-        MatFormFieldModule
-    ]
 })
 export class CommonTvmModule { }
