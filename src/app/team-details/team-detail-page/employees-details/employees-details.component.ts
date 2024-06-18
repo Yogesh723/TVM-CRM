@@ -17,7 +17,7 @@ export class EmployeesDetailsComponent {
   listObservable: any;
   activeId: any = '';
   listInfo: any = [];
-
+  acceptRole: any = []
 
   constructor(
     private communicationService: CommunicationService,
@@ -67,6 +67,15 @@ export class EmployeesDetailsComponent {
       { label: 'Team Details', url: '/tvm/team/teamlist' },
       { label: 'Employee Details', url: this.route.url }
     ]);
+    let data  : any= localStorage.getItem('credentials')
+    const userData = JSON.parse(data);
+      if(userData.Role == "A"){
+        this.acceptRole.push("A");
+      } else if(userData.Role == "L"){
+        this.acceptRole.push("L");
+      } else if(userData.Role == "E"){
+        this.acceptRole.push("");
+      }
   }
   getEmployeeDetails() {
     this.detailService.getTeamDetails().subscribe((result: any) => {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, input } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { ToastrService } from 'ngx-toastr';
@@ -31,8 +31,10 @@ export class TableGeneratorComponent implements OnInit {
   @Output() addNew = new EventEmitter();
   @Output() deleteclicked = new EventEmitter();
   @Output() importSave = new EventEmitter();
-
+  @Input() acceptRole: any;
   listInfo: any = [];
+  provideAccess:boolean = false;
+  isAdmin:boolean = false;
 
 
   constructor(
@@ -41,7 +43,22 @@ export class TableGeneratorComponent implements OnInit {
   }
 
   ngOnInit() {
+    // alert(this.acceptRole)
     this.searchDropDownItems = ['all'];
+
+    let data  : any= localStorage.getItem('credentials')
+    const userData = JSON.parse(data);
+    if(userData.Role == "A"){
+      this.isAdmin = true;
+    } else {
+      this.isAdmin = false;
+    }
+    this.acceptRole?.map((val:any) => {
+      if(userData.Role == val){
+        this.provideAccess = true;
+        console.log("User",userData.Role);
+      }
+    })
   }
 
   createNew(id: any) {

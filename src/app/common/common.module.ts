@@ -19,6 +19,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AppModule } from "../app.module";
 import { NgxStarsRatingModule } from 'ngx-stars-rating';
 import { IgcFormControlDirective, IgcFormsModule } from 'igniteui-angular';
@@ -63,8 +64,20 @@ import { IgcFormControlDirective, IgcFormsModule } from 'igniteui-angular';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
-        FileUploadService,
-        IgcFormControlDirective
+        FileUploadService
     ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        CommonTvmRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CalendarModule,
+        NgSelectModule,
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatDialogModule
+    ]
 })
 export class CommonTvmModule { }

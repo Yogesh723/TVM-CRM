@@ -38,6 +38,14 @@
     {
       "id": "25e2",
       "assets": []
+    },
+    {
+      "id": "69db",
+      "assets": []
+    },
+    {
+      "id": "e73f",
+      "assets": []
     }
   ],
   "projectdetails": [
@@ -70,6 +78,21 @@
           "manager": "dfghjk",
           "contact": 456789,
           "joining": "05/15/2023"
+        },
+        {
+          "profile": "Arun",
+          "voice": "Arun",
+          "developer": "Arun",
+          "active": false,
+          "parent": "Google",
+          "client": "Google",
+          "mail": "arun",
+          "password": 456789,
+          "manager": "dfghjk",
+          "contact": 456789,
+          "joining": "05/15/2023",
+          "relieving": "2024-06-18T18:30:00.000Z",
+          "id": "xy5r4gjiq"
         }
       ],
       "id": "20bc"
@@ -80,6 +103,14 @@
     },
     {
       "id": "25e2",
+      "projects": []
+    },
+    {
+      "id": "69db",
+      "projects": []
+    },
+    {
+      "id": "e73f",
       "projects": []
     }
   ],
@@ -143,34 +174,32 @@
       "id": "20bc"
     },
     {
-      "employees": [
-        {
-          "Employee": "Karthick",
-          "Experienceyear": "2",
-          "Specifications": "Angular",
-          "Qualifications": "B.E",
-          "Emergency contacts": "5673682389",
-          "Job information": "TVM",
-          "Contact number": "6783178746",
-          "Email address": "karth@gmail.com",
-          "joining": "2024-06-02T18:30:00.000Z",
-          "Home address": "2nd street",
-          "id": "lvmefi5g8"
-        }
-      ],
-      "id": "79b5"
+      "id": "69db",
+      "employees": []
     },
     {
-      "id": "25e2",
+      "id": "e73f",
       "employees": []
     }
   ],
   "Crediantials": [
     {
-      "employee name": [
-        {}
-      ],
-      "id": "8452"
+      "id": "69db",
+      "Role": "A",
+      "UserName": "Admin",
+      "Password": "Admin"
+    },
+    {
+      "id": "e73f",
+      "Role": "L",
+      "UserName": "lead",
+      "Password": "lead"
+    },
+    {
+      "id": "e73f",
+      "Role": "E",
+      "UserName": "emp",
+      "Password": "emp"
     }
   ]
 }

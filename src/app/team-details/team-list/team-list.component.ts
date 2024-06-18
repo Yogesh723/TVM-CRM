@@ -16,6 +16,7 @@ export class TeamListComponent implements OnInit {
   listInfo: any = [];
   listObservable: any;
   selectedMenuItem: string = 'Teams';
+  acceptRole: any = [];
   subSideNav: any = [];
 
   constructor(
@@ -26,7 +27,7 @@ export class TeamListComponent implements OnInit {
 
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {    
     this.getTeamdetails();
     this.listColumns = [
       {
@@ -53,6 +54,15 @@ export class TeamListComponent implements OnInit {
       { label: 'Home', url: '/' },
       { label: 'Team Details', url: this.route.url },
     ]);
+    let data  : any= localStorage.getItem('credentials')
+    const userData = JSON.parse(data);
+      if(userData.Role == "A"){
+        this.acceptRole.push("A");
+      } else  if(userData.Role == "L"){
+        this.acceptRole.push("");
+      } else  if(userData.Role == "E"){
+        this.acceptRole.push("");
+      }
   }
 
   getTeamdetails() {

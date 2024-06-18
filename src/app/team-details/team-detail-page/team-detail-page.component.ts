@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamDetailServiceService } from '../team-detail-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommunicationService } from 'src/app/common/communication.service';
 
 @Component({
@@ -44,17 +44,41 @@ export class TeamDetailPageComponent implements OnInit {
           label: "Team Size",
           name: "TeamSize",
           type: "Numeric"
+        },
+        {
+          label: "User Name",
+          name: "UserName",
+          type: "String"
+        },
+        {
+          label: "Password",
+          name: "Password",
+          type: "String"
         }
       ]
     };
+    
+    this.appForm = this.formbuilder.group({
+      TeamName: ['', Validators.required],
+      LeadName: ['', Validators.required],
+      TeamSize: ['', Validators.required],
+      UserName: ['', Validators.required],
+      Password: ['', Validators.required]
+    });
   }
 
   saveForm(formValue: any) {
-    this.detailService.save(formValue).subscribe((listResult: any) => {
-      this.detailService.saveAssetDetails({ id: listResult.id, assets: [] }).subscribe((assetResult: any) => {
-        this.detailService.saveProjectDetails({ id: listResult.id, projects: [] }).subscribe((projectResult: any) => {
-          this.detailService.saveEmployeeDetails({ id: listResult.id, employees: [] }).subscribe((employeeResult: any) => {
-            this.route.navigateByUrl('tvm/team/teamlist');
+    const { UserName, Password, ...teamDetails } = formValue;
+    
+    this.detailService.save(teamDetails).subscribe((listResult: any) => {
+      const credentialData = { id: listResult.id, UserName, Password };
+
+      this.detailService.saveCredentials(credentialData).subscribe(() => {
+        this.detailService.saveAssetDetails({ id: listResult.id, assets: [] }).subscribe(() => {
+          this.detailService.saveProjectDetails({ id: listResult.id, projects: [] }).subscribe(() => {
+            this.detailService.saveEmployeeDetails({ id: listResult.id, employees: [] }).subscribe(() => {
+              this.route.navigateByUrl('tvm/team/teamlist');
+            });
           });
         });
       });
