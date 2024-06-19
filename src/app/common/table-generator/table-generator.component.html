@@ -7,34 +7,32 @@
   <div>
     
   </div>
-      <div *ngIf="Showexportbutton">
-        <button [title]="'Export'" type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
-          <i class="fa-solid fa-upload"></i>
-        </button>
-      </div>
-      
-      <div *ngIf="Showexportbutton && isAdmin">
-        <button [title]="'Import'" type="button" class="btn btn-secondary download" (click)="importFromExcel()">
-          <i class="fa-solid fa-download"></i>
-        </button>
-      </div>
   <ng-container>
     <!-- Search bar Start -->
-    <div class="row" #searchBar>
+    <div class="row" #searchBar style="padding: 61px 12px 0px 4px;
+    margin-bottom: -2px !important;">
       <div class="col-9 my-2">
         <app-search *ngIf="_listInfo.length > 0" id="listSearch" #listSearch (search)="filterTable($event)"
           (searchByItemSelected)="filterTable($event)" placeHolder="{{placeHolder}}"
           [searchDropDownItems]="searchDropDownItems"></app-search>
       </div>
-      <div class="col-1" *ngIf="provideAccess" >
-        <button id="addBtn" class="btn btn-success add-create" type="submit" (click)="createNew(0)">
-          <i class="fa-solid fa-plus"></i>
-           Add
-        </button>
-      </div>
       <div *ngIf="showCardView == true" class="col-1">
         <app-card-table-view-controller *ngIf="_listInfo.length > 0" [isCardView]="isCardView"
           (cardView)="cardView($event)"></app-card-table-view-controller>
+      </div>
+      <div class="col-2">
+        <button [ngStyle]="{ 'right': isAdmin ? '110px' : '179px' }" *ngIf="!isAdmin || isAdmin"  [title]="'Export'" type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
+          <i class="fa-solid fa-upload"></i>
+        </button>
+        <button *ngIf="Showexportbutton && isAdmin" [title]="'Import'" type="button" class="btn btn-secondary download" (click)="importFromExcel()">
+          <i class="fa-solid fa-download"></i>
+        </button>
+      </div>
+      <div class="col-1" *ngIf="provideAccess" >
+        <button [ngStyle]="{ 'left': isAdmin ? '81rem' : '77rem' }" id="addBtn" class="btn btn-success add-create" type="submit" (click)="createNew(0)">
+          <i class="fa-solid fa-plus"></i>
+           Add
+        </button>
       </div>
     </div>
     <!-- Search bar End -->

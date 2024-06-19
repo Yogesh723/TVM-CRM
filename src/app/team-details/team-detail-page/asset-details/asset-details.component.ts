@@ -36,7 +36,7 @@ export class AssetDetailsComponent implements OnInit{
     this.listColumns = [
       {
         "name": "profileName",
-        "label": "Profile Name",
+        "label": "Name",
         "widthPct": 10,
         "hidden": false
       },

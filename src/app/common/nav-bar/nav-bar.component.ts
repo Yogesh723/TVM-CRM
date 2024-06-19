@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class NavBarComponent {
   @Input() topNavMenu: any = [];
+  userData:any;
+  profileType:any;
   @ViewChild('employeeDialog') employeeDialog!: TemplateRef<any>;
 
   employee = {
@@ -26,6 +28,17 @@ export class NavBarComponent {
 
   }
   ngOnInit(){    
+    let data  : any= localStorage.getItem('credentials')
+    this.userData = JSON.parse(data);
+    if(this.userData.Role == "A"){
+      this.profileType = "Admin"
+    } else if(this.userData.Role == "L"){
+      this.profileType = "Lead"
+    } else if(this.userData.Role == "E"){
+      this.profileType = "Employee"
+    } else {
+      this.profileType = "User"
+    }
   }
 
   goBack(event: any) {

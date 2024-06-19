@@ -1,58 +1,46 @@
-<div class="navBarDiv">
-    <div>
-        <nav class="navBar">
-            <ul id="id_topNavMenuItems" class="navbar-nav">
-                <li *ngFor="let menu of topNavMenu; index as i" id="id_topNavMenuItem_{{ menu.code }}"
-                class="nav-item">
-                    <a  
-                        *ngIf="menu.backbutton == undefined"
-                        id="id_topNavMenu_{{ menu.code }}" 
-                        class="nav-link"
-                        routerLink="{{ menu.routerLink }}"
-                        [innerHTML]="menu.name"
-                    >
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div> 
-    <div class="back-button">
-      <a>
-        <i class="fa-solid fa-person-walking-arrow-loop-left" style="
-                color: #fff;     
-                cursor: pointer;
-                position: relative;
-                top: 9px;
-                left: 50rem;" title="goBack" (click)="goBack($event)">
-        </i>
-      </a>
-    </div>
-    <div class="addHeader_profileDetails">
-      <p class="header-label"><span class="addHeader_profileName">ADMIN</span></p>
-      <p class="header-label"><span class="addHeader_logTime">TVM Infotech Pvt Ltd</span></p>
-    </div>
-    
-    <div class="addHeader_profileAvatar">
-      <div class="dropdown">
-        <a class="dropdown-toggle d-block">
-          <i class="fa-regular fa-user" style="    
-                color: #fff;
-                position: relative;
-                right: 25px;
-                top: 7px;
-                font-size: 24px;"></i>
-        </a>
-        <ul class="dropdown-menu sb_dropdown">
-          <li><a class="dropdown-item" (click)="viewProfile()" style="font-weight: bold;">View Profile</a></li>
-          <li><a class="dropdown-item" (click)="logout()" style="font-weight: bold;">Logout</a></li>
-        </ul>
+<header class="header">
+  <div class="navBarDiv">
+      <nav class="navBar">
+          <ul id="id_topNavMenuItems" class="navbar-nav">
+              <li *ngFor="let menu of topNavMenu; index as i" id="id_topNavMenuItem_{{ menu.code }}"
+                  class="nav-item">
+                  <a  
+                      *ngIf="menu.backbutton == undefined"
+                      id="id_topNavMenu_{{ menu.code }}" 
+                      class="nav-link"
+                      routerLink="{{ menu.routerLink }}"
+                      [innerHTML]="menu.name">
+                  </a>
+              </li>
+          </ul>
+      </nav>
+      <div class="back-button">
+          <a>
+              <i class="fa-solid fa-circle-chevron-left" style="color: #ffffff;" title="goBack" (click)="goBack($event)"></i>
+          </a>
       </div>
-    </div>
-      
+      <div class="addHeader_profileDetails">
+          <p class="header-label">LoggedIn User : &nbsp;&nbsp;<span class="addHeader_profileName">{{ profileType }}</span></p>
+          <p class="header-label"><span class="addHeader_logTime">TVM Infotech Pvt Ltd</span></p>
+      </div>
+      <div class="addHeader_profileAvatar">
+          <div class="dropdown">
+              <a class="dropdown-toggle d-block">
+                  <i class="fa-regular fa-user"></i>
+              </a>
+              <ul class="dropdown-menu sb_dropdown">
+                  <li><a class="dropdown-item" (click)="viewProfile()">View Profile</a></li>
+                  <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</header>
+
+<div class="container-fluid navigated-page">
+  <router-outlet></router-outlet>
 </div>
-<div class="container-fluid">
-    <router-outlet></router-outlet>
-</div>
+
 
 <ng-template #employeeDialog let-data>
   <h1 mat-dialog-title>Profile Details</h1>

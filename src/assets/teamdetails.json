@@ -186,8 +186,8 @@
     {
       "id": "69db",
       "Role": "A",
-      "UserName": "Admin",
-      "Password": "Admin"
+      "UserName": "admin",
+      "Password": "admin"
     },
     {
       "id": "e73f",

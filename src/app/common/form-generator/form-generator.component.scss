@@ -18,17 +18,23 @@ form {
 .formBtn {
     display: flex;
     justify-content: space-around;
+    padding-top: 20px;
 }
 
 .mainDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 83vh; /* Adjust as needed */
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .inputDiv {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .checkBoxStyles {
@@ -44,4 +50,22 @@ form {
 .ng-option.add-new-option {
     font-weight: bold;
     color: blue;
+}
+
+.clear-button{
+    padding: 0px 35px 2px 35px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+    background: darkslategray;
+}
+
+.save-button{
+    padding: 0px 35px 2px 35px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+    background: green;
 }

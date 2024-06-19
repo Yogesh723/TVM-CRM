@@ -31,10 +31,10 @@
 }
 .add-create{
     position: relative;
-    top: 9px;
-    left: 5px;
-    min-width: 90px;
-    max-width: 90px;
+    bottom: 60px;
+    left: 81rem;
+    margin-left: 0px;
+    width: 90px;
     height: 40px;
 }
 .no-records-container {
@@ -44,19 +44,33 @@
   height: 517px;
   text-align: center;
 }
+.download{
+  position: relative;
+  float: inline-end;  
+  top: 6px;
+  width: 65px;
+  right: 120px;
+}
+.upload{
+  position: relative;
+  float: inline-end;
+  top: 6px;
+  right: 110px;
+  width: 65px;
+}
 @media (min-width: 768px) {
-      .upload{
-        position: relative;
-        float: inline-end;
-        top: 11px;
-        right: 155px;
-        width: 65px;
-    }
-    .download{
-    position: relative;
-    float: inline-end;  
-    top: 11px;
-    width: 65px;
-    right: 18px;
-  }
+  //     .upload{
+  //       position: relative;
+  //       float: inline-end;
+  //       top: 11px;
+  //       right: 155px;
+  //       width: 65px;
+  //   }
+  //   .download{
+  //   position: relative;
+  //   float: inline-end;  
+  //   top: 11px;
+  //   width: 65px;
+  //   right: 18px;
+  // }
 }

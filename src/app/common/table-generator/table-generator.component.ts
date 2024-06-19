@@ -50,8 +50,10 @@ export class TableGeneratorComponent implements OnInit {
     const userData = JSON.parse(data);
     if(userData.Role == "A"){
       this.isAdmin = true;
+      this.Showexportbutton = true;
     } else {
       this.isAdmin = false;
+      this.Showexportbutton = false;
     }
     this.acceptRole?.map((val:any) => {
       if(userData.Role == val){

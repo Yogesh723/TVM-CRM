@@ -23,9 +23,6 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {provideNativeDateAdapter} from '@angular/material/core';
-import { StarRatingModule } from 'angular-star-rating';
-import { NgxStarsRatingModule } from 'ngx-stars-rating';
-import { IgcFormsModule } from 'igniteui-angular';
 
 @NgModule({
   declarations: [
@@ -52,8 +49,6 @@ import { IgcFormsModule } from 'igniteui-angular';
     MatFormFieldModule,
     MatDatepickerModule,
     MatInputModule,
-    NgxStarsRatingModule,
-    IgcFormsModule,
     ToastrModule.forRoot({
       closeButton : true,
       timeOut:7000,

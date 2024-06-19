@@ -21,9 +21,6 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppModule } from "../app.module";
-import { NgxStarsRatingModule } from 'ngx-stars-rating';
-import { IgcFormControlDirective, IgcFormsModule } from 'igniteui-angular';
-
 
 @NgModule({
     declarations: [
@@ -37,20 +34,6 @@ import { IgcFormControlDirective, IgcFormsModule } from 'igniteui-angular';
         TableGeneratorComponent,
         UploadImagesComponent,
         BreadcrumbComponent
-    ],
-    imports: [
-      CommonModule,
-      RouterModule,
-      CommonTvmRoutingModule,
-      ReactiveFormsModule,
-      FormsModule,
-      CalendarModule,
-      NgSelectModule,
-      MatSelectModule,
-      MatInputModule,
-      MatFormFieldModule,
-      NgxStarsRatingModule,
-      IgcFormsModule,
     ],
     exports: [
         NavBarComponent,

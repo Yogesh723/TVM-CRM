@@ -3,12 +3,19 @@
     position: relative;
     background: #f8f8f8;
     // min-height: 100vh;
-    left: 78px;
+    // left: 78px;
+    margin-left: -6px;
+    margin-top: -25px;
+
+    // left: 237px;
+    // bottom: 36px;
     width: calc(100% - 78px);
     transition: all 0.5s ease;
     z-index: 2;
     &.open {
-      left: 250px;
+      // left: 250px;
+      left: 244px;
+    top: 24px;
       width: calc(100% - 250px);
     }
 }

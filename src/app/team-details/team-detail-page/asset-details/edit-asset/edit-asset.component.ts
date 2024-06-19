@@ -13,7 +13,7 @@ export class EditAssetComponent implements OnInit {
     General: [
       {
         name: "profileName",
-        label: "Profile Name",
+        label: "Name",
         type: "singleSelect",
         width: '75%',
         pickList: [ ]

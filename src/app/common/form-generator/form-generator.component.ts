@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IgcFormControlDirective } from 'igniteui-angular';
-import { defineComponents, IgcRatingComponent } from 'igniteui-webcomponents';
-defineComponents(IgcRatingComponent);
 
 @Component({
   selector: 'app-form-generator',

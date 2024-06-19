@@ -7,11 +7,18 @@
           <div [hidden]="activeSection != section.Name" class="fadeIn">
             <ng-container *ngFor="let row of section.FormFields; index as i">
               <div *ngIf="!row.hidden" class="inputDiv m-3">
-                <label [innerHTML]="row.label" style="color: #333; padding-right: 8px;"></label>
+                <label [innerHTML]="row.label" 
+                    style="
+                    color: #333;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    font-weight: bolder;
+                    font-size: 16px;
+                    padding-right: 30px;"></label>
                 <ng-container *ngIf="row.type == 'Toggle'; else dateInput">
                   <span>
                     <label id="{{ row?.label }}" class="switch">
-                      <input id="{{ row?.label }}" class="checkBoxStyles" type="checkbox" [formControlName]="row.name" [(ngModel)]="row.value" />
+                      <input id="{{ row?.label }}" class="checkBoxStyles form-control" type="checkbox" [formControlName]="row.name" [(ngModel)]="row.value" />
                       <span id="{{ row?.value }}" class="slider round"></span>
                     </label>
                   </span>
@@ -42,11 +49,12 @@
                         maxlength="10"
                         (keypress)="blockNonNumericalInput($event)"
                         autocomplete="off"
+                        class="form-control"
                       />
                     </ng-container>
                     <ng-template #emailInput>
                       <ng-container *ngIf="row.type === 'String' && row.name === 'Email address'; else imageInput">
-                        <input type="email" [formControlName]="row.name" style="width: auto" autocomplete="off" />
+                        <input type="email" class="form-control" [formControlName]="row.name" style="width: auto" autocomplete="off" />
                       </ng-container>
                       <ng-template #imageInput>
                         <ng-container *ngIf="row.type === 'image'; else dropdownSingleSelection">
@@ -82,10 +90,10 @@
                             </ng-container>
                             <ng-template #textAreaInput>
                               <ng-container *ngIf="row.type == 'textArea'; else normalInput">
-                                <input type="text" class="col-6" [formControlName]="row.name" style="width: auto" autocomplete="off"/>
+                                <input type="text" class="col-6 form-control" [formControlName]="row.name" style="width: auto" autocomplete="off"/>
                               </ng-container>
                               <ng-template #normalInput>
-                                <textarea class="col-6" [formControlName]="row.name" style="width: auto" autocomplete="off"></textarea>
+                                <textarea class="col-6 form-control" [formControlName]="row.name" style="width: auto" autocomplete="off"></textarea>
                               </ng-template>
                             </ng-template>
                           </ng-template>
@@ -101,21 +109,21 @@
         <div class="formBtn">
           <button
             type="submit"
-            class="btn btn-success"
+            class="btn btn-success save-button form-control"
             title="Save changes"
             [disabled]="!appForm.valid || !appForm.dirty"
           >
             Save
           </button>
           <button
-            type="button"
-            (click)="clear()"
-            class="btn btn-warning"
-            title="Clear changes"
-            [disabled]="!appForm.dirty"
-          >
-            Clear
-          </button>
+          type="button"
+          (click)="clear()"
+          class="btn btn-warning clear-button form-control"
+          title="Clear changes"
+          [disabled]="!appForm.dirty"
+        >
+          Clear
+        </button>
         </div>
       </form>
     </div>
