@@ -161,6 +161,15 @@ input:checked+.slider:before {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  
+}
+:root::-webkit-scrollbar{
+  display: none;
+}
+
+:root {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 span.error-message {
   color: #ed4337;

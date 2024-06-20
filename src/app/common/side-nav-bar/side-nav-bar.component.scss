@@ -8,27 +8,16 @@ $color_4: #4361ee;
   display: contents;
 }
 .sidebar {
-  // position: absolute;
-  // left: 0;
-  // // height: 100%;
-  // // top: 2rem;
-  // height: 95%;
-  // top: 84px;
-  // width: 78px;  
-  // background: $color_3;
-  // padding: 6px 14px;
-  // z-index: 99;
-  // transition: all 0.5s ease;
-
-  position: absolute;
-    left: 0;
-    height: 681px;
-    top: 64px;
-    width: 78px;
-    background: #2c3294;
-    padding: 6px 14px;
-    z-index: 99;
-    transition: all 0.5s ease;
+  position: fixed;
+  left: 0;
+  height: 100%;
+  width: 78px;  
+  background: $color_3;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+  font-size: larger;
+  top: 4rem;
   .toggle-icon {
     height: 60px;
     display: flex;
