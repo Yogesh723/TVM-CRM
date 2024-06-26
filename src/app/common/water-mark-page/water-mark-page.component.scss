@@ -4,7 +4,7 @@
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
-  min-height: 93vh;
+  min-height: 100vh;
   font-family: "Overpass", sans-serif;
 }
 .login-form {
@@ -75,4 +75,57 @@
 .col-12{
   position: relative;
     left: 6.5rem;
+}
+
+.logo-align{
+  position: relative;
+  top: 1rem;
+  left: 91rem;
+  width: 15rem;
+}
+@media (max-width:1024px) and (min-width:768px){
+  .login-bg{
+    width: 221%;
+    min-height: 222vh;
+    
+  }
+  .login-form{
+    position: absolute;
+    top: 44rem;
+  }
+  .login-bg {
+  background-image: url("../../../assets/change-3.avif");
+  background-repeat: no-repeat;
+  }
+  
+}
+@media (max-width:1440px) and (min-width:1024px){
+  .login-bg{
+    width: 118%;
+    min-height: 118vh;
+    
+  }
+  .logo-align{
+    position: relative;
+    top: -3rem;
+    width: 12rem;
+    left: 81rem;
+  }
+}
+
+@media (max-width:1024px) and (min-width:1024px){
+  .login-bg{
+    width: 146%;
+    min-height: 146vh;
+    
+  }
+  .logo-align{
+    position: relative;
+    top: -3rem;
+    width: 12rem
+  }
+  .login-form{
+    position: absolute;
+    top: 27rem;
+  }
 }

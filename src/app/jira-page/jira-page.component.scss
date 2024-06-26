@@ -38,28 +38,42 @@ mat-form-field {
 }
 .Search{
   position: relative;
-  left: 53rem;
-  color: white;
-  background: #2121a9;
+  left: 45rem;
+  color: rgb(12, 16, 130);
+  background: #fdfdfe;
   width: 8rem;
   height: 3rem;
   font-size: 1.2rem;
   transition: background-color 0.3s;
   cursor: pointer;
-  bottom: 4rem; 
+  bottom: 14rem; 
   border-radius: 1rem;
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.test{
+  position: relative;
+  bottom: 9rem;
 }
 .custom-select {
-  width: 200px; /* Adjust the width as needed */
+  width: 16rem;
+    left: 20rem;
   position: relative;
-  left: 25rem;
-  border: 1px solid rgb(108, 106, 106);
+ // left: 25rem;
+  border: 1px solid rgb(230 232 255);
+  box-shadow: 0 4px 8px rgba(126 128 132);
+  bottom: 8rem;
+  height: 4rem;
+  
 }
 .defaulttext{
   font-size: 22px;
     color: lightgray;
     position: relative;
     text-align: center;
+    top: 5rem;
 }
 label{
   position: relative;
@@ -84,11 +98,14 @@ dx-datagrid-text-content dx-text-content-alignment-left{
 
 .datefield{
   position: relative;
-    bottom: 4rem;
-    left: 45rem;
-    width: 12rem;
+    bottom: 14rem;
+    left: 43rem;
+    width: 15rem;
     height: 2rem;
     color: darkgrey;
+    border: 1px solid #dad7d7;
+    box-shadow: 0 4px 8px rgba(126 128 132);
+    height: 4.2rem;
 }
 .search:hover {
   background-color: #5f9fe4;
@@ -96,8 +113,80 @@ dx-datagrid-text-content dx-text-content-alignment-left{
 }
 h1{
   
-  font-size: larger;
-  font-size: xx-large;
+  font-size: 3rem;;
     text-align: center;
     font-weight: 500;
+    color: #16147e;
+}
+.hint-text{
+  bottom: 7rem;
+    left: 33rem;
+    font-size: x-small;
+    color: #0f15a1;
+}
+hr{
+  position: relative;
+  bottom: 5rem;
+  color: gray;
+  width: 91rem;
+}
+@media (max-width:1024px) and (min-width:768px){
+  .defaulttext{
+    position: relative;
+    left: 25rem;
+  }
+
+  dx-data-grid{
+    width: 88rem;
+  }
+  hr{
+    width: 88rem;
+  }
+  h1{
+    width:88rem
+  }
+}
+
+@media (max-width:1440px) and (min-width:1024px){
+  .defaulttext{
+    position: relative;
+    left: 19rem;
+  }
+
+  dx-data-grid{
+    width: 89rem;
+  }
+
+.report-logo-align{
+  position: relative;
+  left: 54rem;
+}
+h1{
+  width: 87rem;
+}
+}
+.group-icon{
+  color: #080d7f;
+  position: relative;
+     bottom: 3.4rem;;
+    left: 19rem;
+    font-size: 27px;
+}
+
+.clock-icon{
+color: #080d7f;
+position: relative;
+    bottom: 13.9rem;
+    left: 42rem;
+    font-size: 1.5rem;
+}
+.search-icon{
+  color: #080d7f;
+}
+.report-logo-align{
+  position: relative;
+  width: 13rem;
+  height: 7rem;
+  left: 62rem;
+  bottom: 6rem;
 }

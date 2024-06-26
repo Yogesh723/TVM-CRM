@@ -21,7 +21,11 @@
 #listTableHdr tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+.add-create{
+  position: relative;
+  left: 81rem;
 
+}
 
 .table-responsive {
   overflow-x: auto;
@@ -32,7 +36,7 @@
 .add-create{
     position: relative;
     bottom: 60px;
-    left: 81rem;
+    // left: 81rem;
     margin-left: 0px;
     width: 90px;
     height: 40px;
@@ -58,7 +62,11 @@
   right: 110px;
   width: 65px;
 }
-@media (min-width: 768px) {
+
+.container{
+  background-color: red;
+}
+@media (max-width: 1024px) and (min-width:768) {
   //     .upload{
   //       position: relative;
   //       float: inline-end;
@@ -73,4 +81,27 @@
   //   width: 65px;
   //   right: 18px;
   // }
+
+  .container-fluid{
+    width: 88rem;
+  }
+
+  #listTableHdr{
+    width: 87rem;
+    color: red;
+  }
+
+  #listTableHdr th{
+    width: 87rem;}
+
+    .table-responsive{
+      color: red;
+    }
+}
+.title-align{
+  color: #0a0a97;
+    position: relative;
+    top: 11rem;
+    font-weight: bolder;
+    font-size: 1.5rem;
 }

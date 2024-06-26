@@ -1,7 +1,7 @@
 
 .home-section {
     position: relative;
-    background: #f8f8f8;
+    // background: #f8f8f8;
     // min-height: 100vh;
     // left: 78px;
     margin-left: -6px;
@@ -15,7 +15,7 @@
     &.open {
       // left: 250px;
       left: 244px;
-    top: 24px;
+      top: 24px;
       width: calc(100% - 250px);
     }
 }
@@ -23,3 +23,19 @@
 .carddiv {
     display: flex;
 }
+@media (max-width: 1024px) and (min-width:768px){
+  .home-section{
+    &.open {
+      width: 89.4rem ;
+    }
+  }
+}
+
+@media (max-width: 1440px) and (min-width:1024px){
+  .home-section{
+    &.open {
+      width: 89rem ;
+    }
+  }
+}
+

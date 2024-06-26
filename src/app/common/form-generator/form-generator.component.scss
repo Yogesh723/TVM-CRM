@@ -81,3 +81,10 @@ body::-webkit-scrollbar {
     color: white;
     background: green;
 }
+
+@media (max-width:1024px) and (min-width:768px){
+    .mainDiv{
+        position: relative;
+        left: 4rem;
+    }
+}

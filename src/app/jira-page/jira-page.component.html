@@ -1,8 +1,8 @@
 <app-bread-crumb></app-bread-crumb>
-<h1>Office Status Daily Report</h1>
-<dx-button
-    icon="group">
-</dx-button>
+<h1>OFFICE STATUS DAILY REPORT</h1>
+<img src="../../../assets/Document-logo-by-DEEMKA-STUDIO-2-removebg-preview.png" alt="TVM" class="report-logo-align"/>
+<hr>
+<i class="fa-solid fa-people-group group-icon"></i>
 <form [formGroup]="searchUserForm" fxFlex fxLayout="column" autocomplete="off" style="margin: 30px">
   <mat-select placeholder="Team Name" formControlName="userType" multiple (selectionChange)="onSelectionChange($event)" class="custom-select">
     <mat-option *ngFor="let filters of options" [value]="filters.TeamName">
@@ -11,9 +11,7 @@
     <!-- <mat-option #allSelecteds (click)="toggleAllSelection()" [value]="'selectAll'">Select All</mat-option> -->
   </mat-select>
 </form>
-
-
-<label for="Workingdate">Date:</label>
+<i class="fa-solid fa-calendar-days clock-icon"></i>
 <input class="datefield" type="date" id="Workingdate" name="Workingdate" [(ngModel)]="selectedDate">
 
 <button class="Search" (click)="searchData()">Search</button>
@@ -21,7 +19,7 @@
   <pre> SEARCH THE DATA USING TEAM NAME OR DATE </pre>
 </div>
 
-<div *ngIf="showGrid">
+<div *ngIf="showGrid" class="test">
   <dx-data-grid
     [dataSource]="filteredRows"
     (onEditorPreparing)="handleEditorPreparing($event)"

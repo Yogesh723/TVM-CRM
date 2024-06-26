@@ -1,7 +1,7 @@
 <div class="container-fluid" id="tableId">
   <div id="itemsmainrow" class="row">
     <div id="itemHeadingDiv" class="col-md-12 mt-2 mb-3 d-inline">
-      <h3 id="itemHeading" class="d-inline" *ngIf="showHeader">{{Pageheader}}</h3>
+      <h3 id="itemHeading" class="d-inline  title-align" *ngIf="showHeader">{{Pageheader}}</h3>
     </div>
   </div>
   <div>
@@ -21,7 +21,7 @@
           (cardView)="cardView($event)"></app-card-table-view-controller>
       </div>
       <div class="col-2">
-        <button [ngStyle]="{ 'right': isAdmin ? '110px' : '179px' }" *ngIf="!isAdmin || isAdmin"  [title]="'Export'" type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
+        <button *ngIf="!isAdmin || isAdmin"  [title]="'Export'" type="button" class="btn btn-secondary upload" (click)="exportToExcel()">
           <i class="fa-solid fa-upload"></i>
         </button>
         <button *ngIf="Showexportbutton && isAdmin" [title]="'Import'" type="button" class="btn btn-secondary download" (click)="importFromExcel()">
@@ -29,7 +29,7 @@
         </button>
       </div>
       <div class="col-1" *ngIf="provideAccess" >
-        <button [ngStyle]="{ 'left': isAdmin ? '81rem' : '77rem' }" id="addBtn" class="btn btn-success add-create" type="submit" (click)="createNew(0)">
+        <button  id="addBtn" class="btn btn-success add-create" type="submit" (click)="createNew(0)">
           <i class="fa-solid fa-plus"></i>
            Add
         </button>
@@ -37,7 +37,7 @@
     </div>
     <!-- Search bar End -->
     <!-- list view -->
-    <ng-container *ngIf="!isCardView || showCardView != true">
+    <ng-container *ngIf="!isCardView || showCardView != true" class="container">
       <div *ngIf="_listInfo?.length !== 0; else noRecords">
         <table id="listTableHdr" class="table table-responsive">
           <thead>
